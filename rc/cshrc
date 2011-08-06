@@ -1,0 +1,48 @@
+# if ( $TERM != emacs ) then
+#     stty sane   
+# endif
+
+setenv JAVA_HOME /opt/java
+setenv ANT_HOME /usr/local/ant
+setenv MVN_HOME /usr/local/maven
+
+#setenv TOMCAT_HOME /opt/tomcat
+#setenv HADOOP_HOME /opt/hadoop
+#setenv HIVE_HOME /opt/hive
+
+#setenv GEM_HOME /var/lib/gems/1.8
+
+set path = ( \
+	~/bin \
+#	~/mad/bin \
+#	/usr/local/python/bin \
+	${JAVA_HOME}/bin \
+	${ANT_HOME}/bin \
+#	/usr/local/xiph/bin \
+#	${GEM_HOME}/bin \
+	/usr/local/bin \
+	/usr/bin \
+	/bin \
+	/usr/bin/X11 \
+	/sbin \
+	/usr/sbin \
+	${MVN_HOME}/bin \
+	${HADOOP_HOME}/bin \
+	${HIVE_HOME}/bin \
+	.)
+
+set prompt = "`whoami`@`hostname -s`> "
+set shell = /bin/tcsh
+set notify
+set history = 20
+set filec
+set nobeep
+unset autologout
+setenv NAME "Eric Gustafson"
+alias ls "ls -F"
+alias pwd 'echo $cwd'
+alias . exit
+alias more less
+unalias vi
+umask 022
+limit coredumpsize 0
