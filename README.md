@@ -32,8 +32,10 @@ sbin
 * Scripts "internal" to this project that acomplish automation.
 
 
-
-## Local Variables:
-## mode: markdown
-## comment-column: 80
-## End:
+----
+<pre>
+  Local Variables:
+  mode: markdown
+  comment-column: 80
+  End:
+</pre>
