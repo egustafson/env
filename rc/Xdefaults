@@ -1,0 +1,27 @@
+emacs.Geometry: 140x57
+emacs.font: 8x13
+emacs.background: grey15
+emacs.foreground: white
+emacs.cursorColor: white
+emacs.pointerColor: white
+# xterm*Font: 9x15
+xterm*Font: 8x13
+xterm*Geometry: 80x25
+xterm*background: grey15
+xterm*foreground: white
+xterm*cursorColor: white
+xterm*pointerColor: white
+xterm*pointerColorBackground: grey15
+XLess*textFont: -adobe-new century schoolbook-medium-r-normal--17-120-100-100-p-91-*-*
+Oleo*Font:-adobe-courier-medium-r-*-*-14-100-100-100-m-90-iso8859-1
+*customization: -color
+XBiff*background:		Goldenrod
+XLess*Geometry:			45x24
+Mosaic.defaultHeight:		865
+Mosaic.defaultWidth:		940
+Mosaic.homeDocument:		html/favorites.html
+magic.window:   900x700
+Ghostview.magstep: -1
+xload*Geometry:         95x89
+xmem*Geometry:         95x89
+XMcd*Geometry: -0-59

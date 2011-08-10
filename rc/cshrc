@@ -27,8 +27,8 @@ set path = ( \
 	/sbin \
 	/usr/sbin \
 	${MVN_HOME}/bin \
-	${HADOOP_HOME}/bin \
-	${HIVE_HOME}/bin \
+#	${HADOOP_HOME}/bin \
+#	${HIVE_HOME}/bin \
 	.)
 
 set prompt = "`whoami`@`hostname -s`> "
