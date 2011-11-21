@@ -16,7 +16,7 @@
 (or (getenv "GNU_SECURE")
     (setenv "GNU_SECURE" (concat (getenv "HOME") "/.gnusecure")))
 
-(load-library (expand-file-name "~/elisp/vc-svn.el"))
+;(load-library (expand-file-name "~/elisp/vc-svn.el"))
 
 (setq default-major-mode 'text-mode)
 (setq make-backup-files nil)
