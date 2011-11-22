@@ -46,3 +46,11 @@ alias more less
 unalias vi
 umask 022
 limit coredumpsize 0
+
+if ( -e ~/.cshrc-local ) then
+    source ~/.cshrc-local
+endif
+
+## Local Variables: 
+## mode: shell-script
+## End:
