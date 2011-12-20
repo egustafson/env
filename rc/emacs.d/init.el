@@ -79,25 +79,25 @@
 ;;
 ;; Load Libraries
 ;;
-(cond (window-system
-       (setq hilit-mode-enable-list        '(c-mode 
-                                             c++-mode 
-                                             lisp-mode 
-                                             emacs-lisp-mode 
-                                             tex-mode 
-                                             modula-3-mode 
-                                             perl-mode 
-                                             python-mode
-                                             html-mode
-                                             php-mode)
-             hilit-quietly                 t
-             hilit-auto-highlight-maxout   500000 ;; files smaller than 500k 
-             hilit-background-mode         'dark
-             hilit-inhibit-hooks           nil
-             hilit-inhibit-rebinding       nil)
-       (load-library "hilit19")
-       (require 'paren)
-       ))
+;(cond (window-system
+;       (setq hilit-mode-enable-list        '(c-mode 
+;                                             c++-mode 
+;                                             lisp-mode 
+;                                             emacs-lisp-mode 
+;                                             tex-mode 
+;                                             modula-3-mode 
+;                                             perl-mode 
+;                                             python-mode
+;                                             html-mode
+;                                             php-mode)
+;             hilit-quietly                 t
+;             hilit-auto-highlight-maxout   500000 ;; files smaller than 500k 
+;             hilit-background-mode         'dark
+;             hilit-inhibit-hooks           nil
+;             hilit-inhibit-rebinding       nil)
+;       (load-library "hilit19")
+;       (require 'paren)
+;       ))
 
 ;(cond (window-system
 ;       (require 'font-lock)
@@ -181,7 +181,7 @@
 (autoload 'ispell-complete-word "ispell" "Look up word, try to complete it." t)
 (autoload 'ispell-change-dictionary "ispell" "Change ispell dictionary." t)
 (autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
-(autoload 'python-mode "python-mode" "Mode for editing Python scripts" t)
+;(autoload 'python-mode "python-mode" "Mode for editing Python scripts" t)
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
 (autoload 'php-mode "php-mode" "PHP editing mode" t)
