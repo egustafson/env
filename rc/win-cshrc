@@ -1,0 +1,23 @@
+
+set prompt = "`hostname`> "
+set shell = /bin/tcsh
+set notify
+set history = 20
+set filec
+set nobeep
+unset autologout
+setenv NAME "Eric Gustafson"
+alias ls "ls -F"
+alias pwd 'echo $cwd'
+alias . exit
+alias more less
+unalias vi
+
+if (`uname -o` == 'Cygwin') then
+    alias netstat /cygdrive/c/Windows/System32/NETSTAT.EXE
+    alias emacs emacs-nox
+    alias knife 'knife.bat'
+    setenv DISPLAY localhost:0.0
+endif
+
+alias lskeg 'ssh keg.dev.uswest.hpcloud.net info'

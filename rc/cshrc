@@ -31,7 +31,8 @@ set path = ( \
 #	${HIVE_HOME}/bin \
 	.)
 
-set prompt = "`whoami`@`hostname -s`> "
+#set prompt = "`whoami`@`hostname -s`> "
+set prompt = "`hostname`> "
 set shell = /bin/tcsh
 set notify
 set history = 20
