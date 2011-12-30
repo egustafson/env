@@ -1,37 +1,7 @@
-# if ( $TERM != emacs ) then
-#     stty sane   
-# endif
+# ########################################
+#
+#
 
-setenv JAVA_HOME /opt/java
-setenv ANT_HOME /usr/local/ant
-setenv MVN_HOME /usr/local/maven
-
-#setenv TOMCAT_HOME /opt/tomcat
-#setenv HADOOP_HOME /opt/hadoop
-#setenv HIVE_HOME /opt/hive
-
-#setenv GEM_HOME /var/lib/gems/1.8
-
-set path = ( \
-	~/bin \
-#	~/mad/bin \
-#	/usr/local/python/bin \
-	${JAVA_HOME}/bin \
-	${ANT_HOME}/bin \
-#	/usr/local/xiph/bin \
-#	${GEM_HOME}/bin \
-	/usr/local/bin \
-	/usr/bin \
-	/bin \
-	/usr/bin/X11 \
-	/sbin \
-	/usr/sbin \
-	${MVN_HOME}/bin \
-#	${HADOOP_HOME}/bin \
-#	${HIVE_HOME}/bin \
-	.)
-
-#set prompt = "`whoami`@`hostname -s`> "
 set prompt = "`hostname`> "
 set shell = /bin/tcsh
 set notify
@@ -45,8 +15,53 @@ alias pwd 'echo $cwd'
 alias . exit
 alias more less
 unalias vi
-umask 022
-limit coredumpsize 0
+
+if (`uname -o` == 'Cygwin') then
+    #
+    # Cygwin
+    #
+    alias netstat /cygdrive/c/Windows/System32/NETSTAT.EXE
+    alias emacs emacs-nox
+    alias knife 'knife.bat'
+    setenv DISPLAY localhost:0.0
+else
+    #
+    # Unix   (aka non-Cygwin)
+    #
+    set prompt = "`whoami`@`hostname -s`> "
+    umask 022
+    limit coredumpsize 0
+
+    setenv JAVA_HOME /opt/java
+    setenv ANT_HOME /usr/local/ant
+    setenv MVN_HOME /usr/local/maven
+    
+    #setenv TOMCAT_HOME /opt/tomcat
+    #setenv HADOOP_HOME /opt/hadoop
+    #setenv HIVE_HOME /opt/hive
+    
+    #setenv GEM_HOME /var/lib/gems/1.8
+    set path = ( \
+        ~/bin \
+        ${JAVA_HOME}/bin \
+        ${ANT_HOME}/bin \
+    #	${GEM_HOME}/bin \
+        /usr/local/bin \
+        /usr/bin \
+        /bin \
+        /usr/bin/X11 \
+        /sbin \
+        /usr/sbin \
+        ${MVN_HOME}/bin \
+    #	${HADOOP_HOME}/bin \
+    #	${HIVE_HOME}/bin \
+        .)
+
+endif
+
+if (`hostname` == 'EGUSTAFSON5') then
+    alias lskeg 'ssh keg.dev.uswest.hpcloud.net info'
+endif
 
 if ( -e ~/.cshrc-local ) then
     source ~/.cshrc-local
