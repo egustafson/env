@@ -5,11 +5,13 @@
 set prompt = "`hostname`> "
 set shell = /bin/tcsh
 set notify
-set history = 20
+set history = 100
 set filec
 set nobeep
 unset autologout
 setenv NAME "Eric Gustafson"
+setenv EDITOR "emacs"
+
 alias ls "ls -F"
 alias pwd 'echo $cwd'
 alias . exit
