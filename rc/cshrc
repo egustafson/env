@@ -5,7 +5,7 @@
 set prompt = "`hostname`> "
 set shell = /bin/tcsh
 set notify
-set history = 100
+set history = 1000
 set filec
 set nobeep
 unset autologout
