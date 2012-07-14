@@ -26,5 +26,6 @@ xload*Geometry:         95x89
 xmem*Geometry:         95x89
 XMcd*Geometry: -0-59
 Rxvt.font: Lucida Console-14
+Rxvt.foreground: white
 Rxvt.background: grey15
 Rxvt.saveLines: 1000

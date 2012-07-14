@@ -4,7 +4,7 @@ import os, shutil
 import sys
 
 # here = os.path.abspath(".")
-home = os.path.abspath(os.environ['HOME'])
+home = os.path.abspath(os.path.realpath(os.environ['HOME']))
 envdir = os.path.abspath(os.path.dirname(sys.argv[0]))
 
 # print "Script Path: " + sys.argv[0]
