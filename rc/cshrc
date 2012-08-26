@@ -64,7 +64,7 @@ else
 endif
 
 set kc = `which keychain`  # Gentoo 'keychain'
-if (-x ${kc}) then
+if (-x "${kc}") then
     # timeout (720 min = 12h)
     ${kc} --timeout 720 -q `find ~/.ssh -name id_rsa`
     source ~/.keychain/${hostname}-csh
