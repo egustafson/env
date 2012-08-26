@@ -19,7 +19,7 @@ alias . exit
 alias more less
 unalias vi
 
-if (`uname -o` == 'Cygwin') then
+if (${OSTYPE} == 'cygwin') then
     #
     # Cygwin
     #
@@ -27,6 +27,7 @@ if (`uname -o` == 'Cygwin') then
     alias emacs emacs-nox
     alias knife 'knife.bat'
     setenv DISPLAY localhost:0.0
+    set path = ( /usr/bin /bin ${path} )
 else
     #
     # Unix   (aka non-Cygwin)
@@ -64,7 +65,8 @@ endif
 
 set kc = `which keychain`  # Gentoo 'keychain'
 if (-x ${kc}) then
-    ${kc} -q `find ~/.ssh -name id_rsa`
+    # timeout (720 min = 12h)
+    ${kc} --timeout 720 -q `find ~/.ssh -name id_rsa`
     source ~/.keychain/${hostname}-csh
 endif
 
