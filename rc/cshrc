@@ -2,7 +2,8 @@
 #
 #
 
-set prompt = "`hostname`> "
+set hostname = `hostname`
+set prompt = "${hostname}> "
 set shell = /bin/tcsh
 set notify
 set history = 1000
@@ -61,7 +62,13 @@ else
 
 endif
 
-if (`hostname` == 'EGUSTAFSON5') then
+set kc = `which keychain`  # Gentoo 'keychain'
+if (-x ${kc}) then
+    ${kc} -q `find ~/.ssh -name id_rsa`
+    source ~/.keychain/${hostname}-csh
+endif
+
+if (${hostname} == 'EGUSTAFSON5') then
     alias lskeg 'ssh keg.dev.uswest.hpcloud.net info'
 endif
 
