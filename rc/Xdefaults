@@ -4,14 +4,6 @@ emacs.background: grey15
 emacs.foreground: white
 emacs.cursorColor: white
 emacs.pointerColor: white
-# xterm*Font: 9x15
-xterm*Font: 8x13
-xterm*Geometry: 80x25
-xterm*background: grey15
-xterm*foreground: white
-xterm*cursorColor: white
-xterm*pointerColor: white
-xterm*pointerColorBackground: grey15
 XLess*textFont: -adobe-new century schoolbook-medium-r-normal--17-120-100-100-p-91-*-*
 Oleo*Font:-adobe-courier-medium-r-*-*-14-100-100-100-m-90-iso8859-1
 *customization: -color
@@ -29,3 +21,18 @@ Rxvt.font: Lucida Console-14
 Rxvt.foreground: white
 Rxvt.background: grey15
 Rxvt.saveLines: 1000
+#
+# xterm
+#
+xterm*Geometry: 80x25
+xterm*background: grey15
+xterm*foreground: white
+xterm*cursorColor: white
+xterm*pointerColor: white
+xterm*pointerColorBackground: grey15
+# -- xterm Font --
+xterm*Font: 8x13
+# Slightly enlarged font: '9x15'
+#xterm*Font: 9x15
+# Big font for demos: *-fixed-*-*-*-20-*
+#xterm*Font: *-fixed-*-*-*-20-*
