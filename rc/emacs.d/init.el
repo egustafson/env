@@ -31,11 +31,7 @@
 ;(setq-default compile-command "gmake")
 (setq-default compilation-read-command nil)
 
-(setq load-path (cons (expand-file-name "~/elisp") load-path))
-(setq load-path (cons (expand-file-name "~/elisp/site-lisp") load-path))
-(if 
-    (file-readable-p (expand-file-name "~/elisp/site-load-path.el"))
-    (load-library (expand-file-name "~/elisp/site-load-path.el")))
+(setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
 
 (cond (window-system
        (if (< 20 emacs-major-version)
@@ -164,7 +160,8 @@
                                 ("\\.html$" . html-mode)
                                 ("\\.rb$" . ruby-mode)
                                 ("\\.rhtml$" . ruby-mode)
-                                ("\\.sh$" . sh-mode))))
+                                ("\\.sh$" . sh-mode)
+                                ("\\.textile$" . textile-mode))))
 
 (autoload 'c++-mode "cc-mode" "C++ Editing Mode" t)
 (autoload 'c-mode "cc-mode" "C Editing Mode" t)
@@ -183,6 +180,7 @@
 (autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
 ;(autoload 'python-mode "python-mode" "Mode for editing Python scripts" t)
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
+(autoload 'textile-mode "textile-mode" "Major mode for editing textile." t)
 
 (autoload 'php-mode "php-mode" "PHP editing mode" t)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
