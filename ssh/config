@@ -1,0 +1,63 @@
+# .ssh/config
+#
+#ForwardX11 no
+KeepAlive yes
+HashKnownHosts no
+
+## Elfwerks
+##
+Host gitolite.elfwerks
+     User git
+
+Host git.elfwerks
+     User git
+
+Host git.elfwerks.org
+     User git
+     Port 1022
+
+Host *.elfwerks
+    User ericg
+    ForwardX11 yes
+    ForwardAgent yes
+
+Host *.elfwerks.net
+    User ericg
+    ForwardX11 yes
+    ForwardAgent yes
+
+## GitHub
+##
+Host github.com
+    User git
+
+## HPCS / HPCloud 
+##
+Host github.hpcloud.net
+    User git
+
+Host git.hpcloud.net
+    User git
+
+Host keg.dev.uswest.hpcloud.net
+    User git
+
+Host git.paas.hpcloud.net
+    User git
+
+# HPCS In-Cloud Gitolite
+Host 15.185.178.158
+    User git
+
+# HPCloud Nova instances
+Host 15.185.*
+    User ubuntu
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
+    ForwardAgent yes
+
+Host *.paas.hpcloud.net
+    User ubuntu
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
+
