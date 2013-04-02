@@ -1,18 +1,32 @@
 #!/usr/bin/env perl
 
-open(SSHCFG, "$ENV{'HOME'}/.ssh/config");
+$sshadd_inc = "$ENV{'HOME'}/.ssh/pem_include";
+$sshadd_exc = "$ENV{'HOME'}/.ssh/pem_exclude";
 
-while (<SSHCFG>) {
-    if ( /IdentityFile\s+(\S+)/ ) {
-        $filen = $1;
-        $filen =~ s/^~(.*)/$ENV{'HOME'}$1/;
-        if ( -e $filen ) {
-            $pemfiles{"$filen"} = 1 if sshperms($filen);
+if ( -r $sshadd_inc ) {
+    open(SSHADD_INC, $sshadd_inc);
+    @filelist = <SSHADD_INC>;
+} else {
+    open(FIND,"find $ENV{'HOME'}/.ssh -name '*.pem' -print|");
+    @filelist = <FIND>;
+    if ( -r $sshadd_exc ) {
+        open(SSHADD_EXC, $sshadd_exc);
+        while ($filen = <SSHADD_EXC>) {
+            chomp $filen;
+            $filen =~ s/^~(.*)/$ENV{'HOME'}$1/;
+            $excfiles{"$filen"} = 1;
         }
     }
 }
+foreach $filen (@filelist) {
+    chomp $filen;
+    $filen =~ s/^~(.*)/$ENV{'HOME'}$1/;
+    if ( !$excfiles{"$filen"} && -r $filen && sshperms($filen) ) {
+        push(@pemfiles, $filen);
+    }
+}
 
-print join("\n", keys(%pemfiles));
+print join("\n", @pemfiles);
 print "\n";
 
 ##### Subroutines #####
