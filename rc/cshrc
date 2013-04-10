@@ -36,19 +36,10 @@ else
     umask 022
     limit coredumpsize 0
 
-    setenv JAVA_HOME /opt/java
-    setenv ANT_HOME /usr/local/ant
-    setenv MVN_HOME /usr/local/maven
-    
-    #setenv TOMCAT_HOME /opt/tomcat
-    #setenv HADOOP_HOME /opt/hadoop
-    #setenv HIVE_HOME /opt/hive
-    
     #setenv GEM_HOME /var/lib/gems/1.8
+
     set path = ( \
         ~/bin \
-        ${JAVA_HOME}/bin \
-        ${ANT_HOME}/bin \
     #	${GEM_HOME}/bin \
         /usr/local/bin \
         /usr/bin \
@@ -56,9 +47,6 @@ else
         /usr/bin/X11 \
         /sbin \
         /usr/sbin \
-        ${MVN_HOME}/bin \
-    #	${HADOOP_HOME}/bin \
-    #	${HIVE_HOME}/bin \
         .)
 
 endif
