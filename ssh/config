@@ -45,6 +45,9 @@ Host keg.dev.uswest.hpcloud.net
 Host git.paas.hpcloud.net
     User git
 
+Host git.mon.hpcloud.net
+    User git
+
 # HPCS In-Cloud Gitolite
 Host 15.185.178.158
     User git
