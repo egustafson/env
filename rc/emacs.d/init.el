@@ -182,6 +182,9 @@
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 (autoload 'textile-mode "textile-mode" "Major mode for editing textile." t)
 
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 (autoload 'php-mode "php-mode" "PHP editing mode" t)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
