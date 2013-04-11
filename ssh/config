@@ -22,8 +22,7 @@ Host *.elfwerks
     ForwardAgent yes
 
 Host *.elfwerks.net
-    User ericg
-    ForwardX11 yes
+    User gustafer
     ForwardAgent yes
 
 ## GitHub
