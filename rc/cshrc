@@ -17,6 +17,7 @@ alias ls "ls -F"
 alias pwd 'echo $cwd'
 alias . exit
 alias more less
+alias tb 'echo -n "\033]0;${HOST}\007"'
 unalias vi
 
 if (${OSTYPE} == 'cygwin') then
