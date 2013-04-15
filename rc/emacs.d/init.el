@@ -1,7 +1,5 @@
 ;;; .emacs                                  I am -*- emacs-lisp -*- code
-;;;
-;;; $Id: dot-emacs.el 389 2010-09-02 17:13:14Z ericg $
-;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;
 ;;; C-h m  -- describe current editing mode
@@ -16,7 +14,6 @@
 (or (getenv "GNU_SECURE")
     (setenv "GNU_SECURE" (concat (getenv "HOME") "/.gnusecure")))
 
-;(load-library (expand-file-name "~/elisp/vc-svn.el"))
 
 (setq default-major-mode 'text-mode)
 (setq make-backup-files nil)
@@ -71,36 +68,21 @@
 
 ;(modify-frame-parameters (selected-frame) '((left . -1) (top . 23)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Load Libraries
-;;
-;(cond (window-system
-;       (setq hilit-mode-enable-list        '(c-mode 
-;                                             c++-mode 
-;                                             lisp-mode 
-;                                             emacs-lisp-mode 
-;                                             tex-mode 
-;                                             modula-3-mode 
-;                                             perl-mode 
-;                                             python-mode
-;                                             html-mode
-;                                             php-mode)
-;             hilit-quietly                 t
-;             hilit-auto-highlight-maxout   500000 ;; files smaller than 500k 
-;             hilit-background-mode         'dark
-;             hilit-inhibit-hooks           nil
-;             hilit-inhibit-rebinding       nil)
-;       (load-library "hilit19")
-;       (require 'paren)
-;       ))
-
 ;(cond (window-system
 ;       (require 'font-lock)
 ;       (setq font-lock-support-mode 'lazy-lock-mode)
 ;       (setq font-lock-maximum-decoration t)
 ;;       (global-font-lock-mode t)
 ;       ))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Load Libraries
+;;
+(load "~/.emacs.d/comment.el")
+(load "~/.emacs.d/vi-find-matching-paren.el")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -264,81 +246,17 @@
 
 ;;(load "ada-mode-load")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; vi-find-matching-paren
-;;; 
-;;; Author:  ??? (Jaimel Lujan)
-;;; Date:    ???
-;;;
-
-(defun vi-find-matching-paren ()
-  "Locate the matching paren.  It's a hack right now."
-  (interactive)
-  (cond ((looking-at "[[({]") (forward-sexp 1) (backward-char 1))
-		((looking-at "[])}]") (forward-char 1) (backward-sexp 1))
-        (t (ding))))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; comment.el
-;;; 
-;;; Author:  Eric Gustafson <egustafs@vlsia.uccs.edu>
-;;; Date:    27 April 1995
-;;;
-;;; (autoload 'comment-out-line "comment" "Comment out a line" t)
-;;; (autoload 'uncomment-line "comment" "Uncomment a line" t)
-;;;
-;;; comment-out-line will comment out the current line by placing a
-;;;  comment-start string at the beginning of the line and a 
-;;;  comment-end string at the end of the line. 
-;;;  __Be wary__ of languages which do not allow embedded comments!
-;;; 
-
-(defun comment-out-line ()
-  "Comment out the current line using the context sensative
-values 'comment-start' and 'comment-end'."
-  (interactive "*")
-  (if comment-start ()
-	(setq comment-start "# ")
-	(setq comment-end   ""))
-  (or comment-start (error "No comment syntax defined"))
-  (save-excursion
-    (beginning-of-line)
-    (insert comment-start)
-    (end-of-line)
-    (insert comment-end))
-  (forward-line)
-  )
-
-;;; end comment-out-line
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; uncomment-line will uncomment the current line given that the 
-;;;  first 'n' characters are the comment string comment-start and
-;;;  that the last 'n' characters are the comment-end string.  If
-;;;  this is not the case nothing happens.  (This makes the function 
-;;;  non-distructive if used on a non-commented out line)
-;;;
-(defun uncomment-line ()
-  "Uncomment the current line if it is commented out."
-  (interactive "*")
-  (or comment-start (error "No comment syntax defined"))
-  (save-excursion
-    (end-of-line)
-    (set-mark (point))
-    (beginning-of-line)
-    (or (re-search-forward (concat "^" (regexp-quote comment-start)) (mark) t) 
-		(error "Line does not start with a comment"))
-    (replace-match "")
-    (beginning-of-line)
-    (set-mark (point))
-    (end-of-line)
-    (or (re-search-backward (concat (regexp-quote comment-end) "$") (mark) t) 
-		(error "Line does not terminate with a comment"))
-    (replace-match ""))
-  (forward-line)
-  )
-
-;;; end uncomment-line
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; vi-find-matching-paren
+;;;; 
+;;;; Author:  ??? (Jaimel Lujan)
+;;;; Date:    ???
+;;;;
+;
+;(defun vi-find-matching-paren ()
+;  "Locate the matching paren.  It's a hack right now."
+;  (interactive)
+;  (cond ((looking-at "[[({]") (forward-sexp 1) (backward-char 1))
+;		((looking-at "[])}]") (forward-char 1) (backward-sexp 1))
+;        (t (ding))))
