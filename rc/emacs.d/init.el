@@ -176,6 +176,9 @@
 (autoload 'nxml-mode "nxml-mode" "Mode for editing XML documents" t)
 (setq nxml-syntax-highlight-flag t)
 
+(autoload 'conf-mode "conf-mode" "Major mode for editing config files." t)
+(add-to-list 'auto-mode-alist '("\\.conf$" . conf-mode))
+
 (setq auto-mode-alist
       (cons '("\\(GNUmakefile\\|Makefile\\|makefile\\)$" . makefile-mode)
             auto-mode-alist))
