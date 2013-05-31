@@ -47,6 +47,14 @@ Host git.paas.hpcloud.net
 Host git.mon.hpcloud.net
     User git
 
+Host gerrit.hpcloud.net
+    User gustafer
+    Port 29418
+
+Host *.mon.hpcloud.net
+    User gustafer
+    ForwardAgent yes
+
 # HPCS In-Cloud Gitolite
 Host 15.185.178.158
     User git
