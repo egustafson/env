@@ -2,3 +2,5 @@
 	lg = log --oneline --graph --decorate HEAD
 [color]
 	ui = true
+[push]
+	default = simple
