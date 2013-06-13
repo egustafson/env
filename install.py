@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
-import os, shutil
+import os 
+import os.path
+import shutil
 import sys
 
-# here = os.path.abspath(".")
+IGNFILENAME = ".ignore"
+
 home = os.path.abspath(os.path.realpath(os.environ['HOME']))
 envdir = os.path.abspath(os.path.dirname(sys.argv[0]))
 
@@ -13,9 +16,36 @@ envdir = os.path.abspath(os.path.dirname(sys.argv[0]))
 # print "Home Dir:    " + home
 # exit()
 
+## TODO - this method has not been tested, should replace batchlink
+def linkup(dirname, targetdir=None):
+    if not targetdir:
+        targetdir = dirname
+    envpath  = os.path.join(envdir, dirname)
+    homepath = os.path.join(home, targetdir)
+    filelist = os.listdir(envpath)
+    ignfiles = set(['README.md', IGNFILENAME])
+    if os.path.isfile(os.path.join(envpath, IGNFILENAME)):
+        with open(os.path.join(envpath,IGNFILENAME)) as ign:
+            for line in ign:
+                ignfiles.add( line.strip() )
+    if not os.path.exists(homepath):
+        os.mkdir(homepath, 0755)
+    for fn in filelist:
+        if fn not in ignfiles:
+            homelink = os.path.join( homepath, fn )
+            linkpath = os.path.relpath(os.path.join(envpath, fn), homepath)
+            if os.path.lexists(homelink):
+                if os.path.isfile(homelink) or os.path.islink(homelink):
+                    os.unlink(homelink)
+                else:
+                    shutil.rmtree(homelink)
+            os.symlink(linkpath, homelink)
+
 rcfiles = os.listdir(envdir + "/rc")
 
 ignfiles = set(['README.md'])
+
+#batchlink(rcfiles, ignfiles, envdir+"/rc/", "", "/.")
 
 for name in rcfiles:
     if name not in ignfiles:
@@ -28,9 +58,14 @@ for name in rcfiles:
                 shutil.rmtree(homelink)
         os.symlink(linkpath, homelink)
 
-if not os.path.exists(home+"/bin"):
-    os.symlink(os.path.relpath(envdir+"/bin", home), home+"/bin")
 
+## link bin into ~/bin
+##
+linkup("bin")
+
+## link ssh into ~/ssh
+##
+linkup("ssh", ".ssh")
 
 ## Local Variables:
 ## mode: python-mode
