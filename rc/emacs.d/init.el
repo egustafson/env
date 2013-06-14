@@ -28,7 +28,7 @@
 ;(setq-default compile-command "gmake")
 (setq-default compilation-read-command nil)
 
-(setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 
 (cond (window-system
        (if (< 20 emacs-major-version)
@@ -182,6 +182,16 @@
 (setq auto-mode-alist
       (cons '("\\(GNUmakefile\\|Makefile\\|makefile\\)$" . makefile-mode)
             auto-mode-alist))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; YAML  (conditional load)   <https://github.com/yoshiki/yaml-mode>
+;;
+(if (file-accessible-directory-p (expand-file-name "~/.elisp/yaml-mode"))
+    (progn
+      (add-to-list 'load-path (expand-file-name "~/.elisp/yaml-mode"))
+      (autoload 'yaml-mode "yaml-mode" "YAML editing mode" t)
+      (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
