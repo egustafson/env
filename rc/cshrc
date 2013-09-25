@@ -28,7 +28,7 @@ if (${OSTYPE} == 'cygwin') then
     alias emacs emacs-nox
     alias knife 'knife.bat'
     setenv DISPLAY localhost:0.0
-    set path = ( /usr/bin /bin ${path} )
+    set path = ( /usr/bin /bin ${path} ~/bin )
 else
     #
     # Unix   (aka non-Cygwin)

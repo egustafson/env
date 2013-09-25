@@ -25,6 +25,12 @@ Host *.elfwerks.net
     User gustafer
     ForwardAgent yes
 
+# elfwerks LAN
+Host 10.3.4.*
+    User ericg
+    ForwardX11 yes
+    ForwardAgent yes
+
 # VirtualBox Internal Host Network
 Host 10.4.4.*
     User ericg
