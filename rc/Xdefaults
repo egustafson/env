@@ -26,6 +26,7 @@ Rxvt.saveLines: 1000
 # xterm
 #
 xterm*Geometry: 80x25
+xterm*visualBell: true
 xterm*background: grey15
 xterm*foreground: white
 xterm*cursorColor: white
