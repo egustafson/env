@@ -21,8 +21,14 @@ Host *.elfwerks
     ForwardX11 yes
     ForwardAgent yes
 
+Host *.elfwerks.org
+    User ericg
+    ForwardX11 yes
+    ForwardAgent yes
+
 Host *.elfwerks.net
     User gustafer
+    ForwardX11 yes
     ForwardAgent yes
 
 # elfwerks LAN

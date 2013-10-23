@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import json
+import sys
+
+stdin = sys.stdin.read()
+try:
+    j = json.loads(stdin)
+    out = json.dumps(j, indent=2, separators=(',', ': '))
+except:
+    out = stdin
+
+sys.stdout.write(out)
