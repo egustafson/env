@@ -2,7 +2,7 @@
 
 sudo apt-get update
 sudo apt-get dist-upgrade -y
-sudo apt-get install -y git tcsh emacs24-nox emacs-goodies-el xterm
+sudo apt-get install -y git tcsh emacs24-nox emacs-goodies-el xterm xauth
 
 sudo adduser gustafer
 sudo adduser gustafer admin
