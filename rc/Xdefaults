@@ -5,7 +5,6 @@ emacs.foreground: white
 emacs.cursorColor: white
 emacs.pointerColor: white
 XLess*textFont: -adobe-new century schoolbook-medium-r-normal--17-120-100-100-p-91-*-*
-Oleo*Font:-adobe-courier-medium-r-*-*-14-100-100-100-m-90-iso8859-1
 *customization: -color
 XBiff*background:		Goldenrod
 XLess*Geometry:			45x24
@@ -17,11 +16,6 @@ Ghostview.magstep: -1
 xload*Geometry:         95x89
 xmem*Geometry:         95x89
 XMcd*Geometry: -0-59
-Rxvt.font: Lucida Console-14
-#Rxvt.font: Lucida Console-24
-Rxvt.foreground: white
-Rxvt.background: grey15
-Rxvt.saveLines: 1000
 #
 # xterm
 #
@@ -38,3 +32,56 @@ xterm*Font: 8x13
 #xterm*Font: 9x15
 # Big font for demos: *-fixed-*-*-*-20-*
 #xterm*Font: *-fixed-*-*-*-20-*
+#
+# Rxvt
+#
+Rxvt.font: Lucida Console-14
+!#Rxvt.font: Lucida Console-24
+!Rxvt.foreground: white
+!Rxvt.background: grey15
+Rxvt.saveLines: 1000
+
+
+!!!! Solarized Colors
+!!
+!!Source http://github.com/altercation/solarized
+
+*background: #002b36
+*foreground: #657b83
+!!*fading: 40
+*fadeColor: #002b36
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
+
+!! black dark/light
+*color0: #073642
+*color8: #002b36
+
+!! red dark/light
+*color1: #dc322f
+*color9: #cb4b16
+
+!! green dark/light
+*color2: #859900
+*color10: #586e75
+
+!! yellow dark/light
+*color3: #b58900
+*color11: #657b83
+
+!! blue dark/light
+*color4: #268bd2
+*color12: #839496
+
+!! magenta dark/light
+*color5: #d33682
+*color13: #6c71c4
+
+!! cyan dark/light
+*color6: #2aa198
+*color14: #93a1a1
+
+!! white dark/light
+*color7: #eee8d5
+*color15: #fdf6e3
