@@ -5,7 +5,6 @@ emacs.foreground: white
 emacs.cursorColor: white
 emacs.pointerColor: white
 XLess*textFont: -adobe-new century schoolbook-medium-r-normal--17-120-100-100-p-91-*-*
-*customization: -color
 XBiff*background:		Goldenrod
 XLess*Geometry:			45x24
 Mosaic.defaultHeight:		865
@@ -21,11 +20,14 @@ XMcd*Geometry: -0-59
 #
 xterm*Geometry: 80x25
 xterm*visualBell: true
-xterm*background: grey15
-xterm*foreground: white
-xterm*cursorColor: white
-xterm*pointerColor: white
-xterm*pointerColorBackground: grey15
+!
+!*customization: -color
+!xterm*background: grey15
+!xterm*foreground: white
+!xterm*cursorColor: white
+!xterm*pointerColor: white
+!xterm*pointerColorBackground: grey15
+!
 # -- xterm Font --
 xterm*Font: 8x13
 # Slightly enlarged font: '9x15'
