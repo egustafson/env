@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+
+import argparse
+import sys
+
+CMD = "lxc-start -d -n {}"
+
+CMDS = {
+    'start'  : "lxc-start -d -n {}",
+    'stop'   : "lxc-stop -n {}",
+    'clone'  : "lxc-clone -s -o {}1 -n {}",
+    'destroy': "btrfs subvolume delete /var/lib/lxc/{0}/rootfs; lxc-destroy -n {0}"
+}
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('mode', help='{start, stop, clone, destroy}')
+    parser.add_argument('-n', type=int, required=True,
+                        help='number of instances')
+    parser.add_argument('-t', type=str, required=True,
+                        help='hostname template')
+    parser.add_argument('-s', type=int,
+                        help='start at host number <S>')
+    return parser.parse_args()
+
+
+if __name__ == '__main__':
+
+    args = parse_args()
+
+    start = 1
+    if args.mode in {'clone', 'destory'}:
+        start = 2
+    if args.s:
+        start = args.s
+
+    clone_mode = False
+    templ = args.t
+    cmd = CMDS.get(args.mode, None)
+    if not cmd:
+        print("Mode ({}) is not supported.".format(args.mode))
+        sys.exit(1)
+    if args.mode in {'clone'}:
+        clone_mode=True
+
+    for ii in range(start, (args.n+1)):
+        hostname = "{}{}".format(args.t, ii)
+        if clone_mode:
+            print(cmd.format(args.t, hostname))
+        else:
+            print(cmd.format(hostname))
