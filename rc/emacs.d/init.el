@@ -118,35 +118,35 @@
 ;;
 
 (setq auto-mode-alist (mapcar 'purecopy
-                              '(("\\.c$" . c-mode)
-                                ("\\.h$" . c-mode)
-								("\\.H$" . c++-mode)
-								("\\.C$" . c++-mode)
-								("\\.hh$" . c++-mode)
-								("\\.cc$" . c++-mode)
-								("\\.cpp$" . c++-mode)
-								("\\.hpp$" . c++-mode)
-								("\\.cxx$" . c++-mode)
-								("\\.hxx$" . c++-mode)
-                                ("\\.idl$" . idl-mode)
-                                ("\\.tex$" . tex-mode)
-                                ("\\.el$" . emacs-lisp-mode)
-                                ("\\.a$" . c-mode)
-                                ("\\.p$" . pascal-mode)
-                                ("\\.pas$" . pascal-mode)
-                                ("\\.ig$" . modula-3-mode)
-                                ("\\.mg$" . modula-3-mode)
-                                ("\\.i3$" . modula-3-mode)
-                                ("\\.m3$" . modula-3-mode)
-                                ("\\.pl$" . perl-mode)
-                                ("\\.pm$" . perl-mode)
-                                ("\\.py$" . python-mode)
-                                ("\\.sql" . sql-mode)
-                                ("\\.html$" . html-mode)
-                                ("\\.rb$" . ruby-mode)
-                                ("\\.rhtml$" . ruby-mode)
-                                ("\\.sh$" . sh-mode)
-                                ("\\.textile$" . textile-mode))))
+                              '(("\\.c\\'" . c-mode)
+                                ("\\.h\\'" . c-mode)
+                                ("\\.H\\'" . c++-mode)
+                                ("\\.C\\'" . c++-mode)
+                                ("\\.hh\\'" . c++-mode)
+                                ("\\.cc\\'" . c++-mode)
+                                ("\\.cpp\\'" . c++-mode)
+                                ("\\.hpp\\'" . c++-mode)
+                                ("\\.cxx\\'" . c++-mode)
+                                ("\\.hxx\\'" . c++-mode)
+                                ("\\.idl\\'" . idl-mode)
+                                ("\\.tex\\'" . tex-mode)
+                                ("\\.el\\'" . emacs-lisp-mode)
+                                ("\\.a\\'" . c-mode)
+                                ("\\.p\\'" . pascal-mode)
+                                ("\\.pas\\'" . pascal-mode)
+                                ("\\.ig\\'" . modula-3-mode)
+                                ("\\.mg\\'" . modula-3-mode)
+                                ("\\.i3\\'" . modula-3-mode)
+                                ("\\.m3\\'" . modula-3-mode)
+                                ("\\.pl\\'" . perl-mode)
+                                ("\\.pm\\'" . perl-mode)
+                                ("\\.py\\'" . python-mode)
+                                ("\\.sql\\'" . sql-mode)
+                                ("\\.html\\'" . html-mode)
+                                ("\\.rb\\'" . ruby-mode)
+                                ("\\.rhtml\\'" . ruby-mode)
+                                ("\\.sh\\'" . sh-mode))))
+
 
 (autoload 'c++-mode "cc-mode" "C++ Editing Mode" t)
 (autoload 'c-mode "cc-mode" "C Editing Mode" t)
@@ -163,12 +163,8 @@
 (autoload 'ispell-complete-word "ispell" "Look up word, try to complete it." t)
 (autoload 'ispell-change-dictionary "ispell" "Change ispell dictionary." t)
 (autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
-;(autoload 'python-mode "python-mode" "Mode for editing Python scripts" t)
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
-(autoload 'textile-mode "textile-mode" "Major mode for editing textile." t)
 
-(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (autoload 'php-mode "php-mode" "PHP editing mode" t)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
@@ -180,11 +176,23 @@
 (setq nxml-syntax-highlight-flag t)
 
 (autoload 'conf-mode "conf-mode" "Major mode for editing config files." t)
-(add-to-list 'auto-mode-alist '("\\.conf$" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
 
 (setq auto-mode-alist
-      (cons '("\\(GNUmakefile\\|Makefile\\|makefile\\)$" . makefile-mode)
+      (cons '("\\(GNUmakefile\\|Makefile\\|makefile\\)\\'" . makefile-mode)
             auto-mode-alist))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Text Markup Modes (Markdown, Textile, reStructuredText, ...)
+;;
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+
+(autoload 'textile-mode "textile-mode" "Major mode for editing textile." t)
+(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
+
+(add-to-list 'auto-mode-alist '("\\.rst\\'" . rst-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -194,7 +202,7 @@
     (progn
       (add-to-list 'load-path (expand-file-name "~/.elisp/yaml-mode"))
       (autoload 'yaml-mode "yaml-mode" "YAML editing mode" t)
-      (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))))
+      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
