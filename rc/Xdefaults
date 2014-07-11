@@ -37,6 +37,7 @@ xterm*Font: 8x13
 #
 # Rxvt
 #
+URxvt.font: 8x13
 Rxvt.font: Lucida Console-14
 !#Rxvt.font: Lucida Console-24
 !Rxvt.foreground: white

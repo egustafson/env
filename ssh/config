@@ -47,6 +47,21 @@ Host 10.4.4.*
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
 
+# VirtualBox Internal Host Network (alternate)
+Host 10.4.5.*
+    User gustafer
+    ForwardX11 yes
+    ForwardAgent yes
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
+
+##  (port forward for virtual-box)
+Host localhost
+    ForwardX11 yes
+    ForwardAgent yes
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
+
 ## GitHub
 ##
 Host github.com
@@ -77,10 +92,6 @@ Host *.mon.hpcloud.net
     User gustafer
     ForwardAgent yes
 
-# HPCS In-Cloud Gitolite
-Host 15.185.178.158
-    User git
-
 # HPCloud Nova instances AW2
 Host 15.185.*
     User ubuntu
@@ -95,7 +106,7 @@ Host 15.126.*
     StrictHostKeyChecking no
     ForwardAgent yes
 
-# HPCloud Nova instances AW2-2 (region-a.geo-1)
+# HPCloud Nova instances AE1-2 (region-b.geo-1)
 Host 15.125.*
     User ubuntu
     UserKnownHostsFile /dev/null
