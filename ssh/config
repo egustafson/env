@@ -3,6 +3,7 @@
 #ForwardX11 no
 KeepAlive yes
 HashKnownHosts no
+SendEnv LC_AUTH_*
 
 ## Elfwerks
 ##
