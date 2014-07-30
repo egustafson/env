@@ -13,6 +13,10 @@ Host gitolite.elfwerks
 Host git.elfwerks
      User git
 
+Host portal.elfwerks.org
+     User ericg
+     Port 1022
+
 Host git.elfwerks.org
      User git
      Port 1022
@@ -20,6 +24,7 @@ Host git.elfwerks.org
 Host *.elfwerks
     User ericg
     ForwardX11 yes
+    ForwardX11Trusted yes
     ForwardAgent yes
 
 Host *.elfwerks.org
