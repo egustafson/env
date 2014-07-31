@@ -212,6 +212,10 @@
 ;; Mode Specific setup
 ;;
 
+;; Disable all version control hooks
+;;
+(setq vc-handled-backends nil)
+
 ;;(add-hook 'c-mode-hook 
 ;;  (function (lambda ()
 ;;              (define-key c-mode-map [return] 'newline-and-indent))))
