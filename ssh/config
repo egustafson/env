@@ -1,16 +1,12 @@
 # .ssh/config
 #
-#ForwardX11 no
 KeepAlive yes
 HashKnownHosts no
-SendEnv LC_AUTH_*
+# SendEnv LC_AUTH_*
 
 ## Elfwerks
 ##
-Host gitolite.elfwerks
-     User git
-
-Host git.elfwerks
+Host git.elfwerks gitolite.elfwerks
      User git
 
 Host portal.elfwerks.org
@@ -21,7 +17,7 @@ Host git.elfwerks.org
      User git
      Port 1022
 
-Host *.elfwerks
+Host *.elfwerks 10.3.4.*
     User ericg
     ForwardX11 yes
     ForwardX11Trusted yes
@@ -39,11 +35,22 @@ Host *.elfwerks.net
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
 
-# elfwerks LAN
-Host 10.3.4.*
-    User ericg
+# elfcloud (HP dev on local LAN)
+Host *elfcloud 10.3.7.*
+    User gustafer
     ForwardX11 yes
+    ForwardX11Trusted yes
     ForwardAgent yes
+
+
+## GitHub
+##
+Host github.com
+    User git
+
+
+## Local Environments
+##
 
 # VirtualBox Internal Host Network
 Host 10.4.4.*
@@ -68,26 +75,9 @@ Host localhost
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
 
-## GitHub
-##
-Host github.com
-    User git
-
 ## HPCS / HPCloud 
 ##
-Host github.hpcloud.net
-    User git
-
-Host git.hpcloud.net
-    User git
-
-Host keg.dev.uswest.hpcloud.net
-    User git
-
-Host git.paas.hpcloud.net
-    User git
-
-Host git.mon.hpcloud.net
+Host git*.hpcloud.net keg.*.hpcloud.net
     User git
 
 Host gerrit.hpcloud.net
@@ -98,23 +88,28 @@ Host *.mon.hpcloud.net
     User gustafer
     ForwardAgent yes
 
-# HPCloud Nova instances AW2
-Host 15.185.*
+# HPCloud Nova instances (AE12, AW22, AW2)
+Host 15.125.* 15.126.* 15.185.*
     User ubuntu
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
     ForwardAgent yes
 
-# HPCloud Nova instances AW2-2 (region-a.geo-1)
-Host 15.126.*
-    User ubuntu
-    UserKnownHostsFile /dev/null
-    StrictHostKeyChecking no
-    ForwardAgent yes
+## Attic
+##
+# Host git.hpcloud.net
+#     User git
+#
+# Host keg.dev.uswest.hpcloud.net
+#     User git
+#
+# Host git.paas.hpcloud.net
+#     User git
+#
+# Host git.mon.hpcloud.net
+#     User git
 
-# HPCloud Nova instances AE1-2 (region-b.geo-1)
-Host 15.125.*
-    User ubuntu
-    UserKnownHostsFile /dev/null
-    StrictHostKeyChecking no
-    ForwardAgent yes
+
+## Local Variables:
+## comment-start: "# "
+## End:
