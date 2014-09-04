@@ -36,6 +36,10 @@ Host *.elfwerks.net
     StrictHostKeyChecking no
 
 # elfcloud (HP dev on local LAN)
+Host git.elfcloud
+    ForwardX11 no 
+    User git
+
 Host *elfcloud 10.3.7.*
     User gustafer
     ForwardX11 yes
