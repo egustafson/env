@@ -33,7 +33,7 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-merge-split-window-function 'split-window-horizontally)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
 
 (cond (window-system
        (if (< 20 emacs-major-version)
@@ -232,6 +232,7 @@
 
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+(setq fill-column 80)
 
 (add-hook 'text-mode-hook
   (function (lambda ()
