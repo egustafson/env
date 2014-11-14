@@ -45,6 +45,8 @@ Host *elfcloud 10.3.7.*
     ForwardX11 yes
     ForwardX11Trusted yes
     ForwardAgent yes
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
 
 
 ## GitHub
