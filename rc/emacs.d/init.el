@@ -87,6 +87,7 @@
 ;;
 (load "~/.emacs.d/comment.el")
 (load "~/.emacs.d/vi-find-matching-paren.el")
+(autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -144,9 +145,7 @@
                                 ("\\.pm\\'" . perl-mode)
                                 ("\\.py\\'" . python-mode)
                                 ("\\.sql\\'" . sql-mode)
-                                ("\\.html\\'" . html-mode)
                                 ("\\.rb\\'" . ruby-mode)
-                                ("\\.rhtml\\'" . ruby-mode)
                                 ("\\.sh\\'" . sh-mode))))
 
 
@@ -158,28 +157,51 @@
 (autoload 'plain-tex-mode "tex-mode" "Mode for Plain TeX" t)
 (autoload 'latex-mode "tex-mode" "Mode for LaTeX" t)
 (autoload 'LaTeX-math-mode    "tex-math"      "Math mode for TeX." t)
-(autoload 'html-mode "html-mode" "HTML major mode." t)
 (autoload 'ispell-word "ispell" "Check the spelling of word in buffer." t)
 (autoload 'ispell-region "ispell" "Check the spelling of region." t)
 (autoload 'ispell-buffer "ispell" "Check the spelling of buffer." t)
 (autoload 'ispell-complete-word "ispell" "Look up word, try to complete it." t)
 (autoload 'ispell-change-dictionary "ispell" "Change ispell dictionary." t)
-(autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
+;; web-mode -- http://web-mode.org
+;;
+;; add 'eval: (web-mode-set-engine "django")'
+;; to the Local Variables to force the engine.  
+;;   TODO:
+;;     Modify web-mode to look at Local Variables as well as
+;;     the prop (first) line "-*-"
+;;
+(autoload 'web-mode "web-mode" "Web editing mode" t)
+(setq web-mode-enable-auto-closing t)
+(setq web-mode-enable-engine-detection t)
 
-(autoload 'php-mode "php-mode" "PHP editing mode" t)
-(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
+;; Generic HTML / CSS / JS
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+;; Django Template Langage (.dtl) using web-mode
+(add-to-list 'auto-mode-alist '("\\.dtl\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+;; PHP using web-mode
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+;; Ruby / ERB
+(add-to-list 'auto-mode-alist '("\\.rhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
+
+;; XML derivatives are easier in nXML (not web-mode)
+(autoload 'nxml-mode "nxml-mode" "Mode for editing XML documents" t)
+(setq nxml-syntax-highlight-flag t)
 (setq auto-mode-alist
       (cons '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode)
             auto-mode-alist))
-(autoload 'nxml-mode "nxml-mode" "Mode for editing XML documents" t)
-(setq nxml-syntax-highlight-flag t)
 
+;; Conf mode
 (autoload 'conf-mode "conf-mode" "Major mode for editing config files." t)
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
 
+;; Makefile mode
 (setq auto-mode-alist
       (cons '("\\(GNUmakefile\\|Makefile\\|makefile\\)\\'" . makefile-mode)
             auto-mode-alist))
