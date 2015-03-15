@@ -226,7 +226,8 @@
     (progn
       (add-to-list 'load-path (expand-file-name "~/.elisp/yaml-mode"))
       (autoload 'yaml-mode "yaml-mode" "YAML editing mode" t)
-      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))))
+      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+      (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
