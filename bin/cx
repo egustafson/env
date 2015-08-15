@@ -2,8 +2,10 @@
 
 if [ ${OSTYPE} == 'cygwin' ]; then
     setsid ssh $1 xterm -n $1 -T $1 &
+    #setsid ssh -f $1 xterm -n $1 -T $1
     #ssh -f $1 xterm -n $1 -T $1
+elif [ ${OSTYPE} == 'darwin' ]; then
+    ssh -f $1 xterm -n $1 -T $1
 else
     echo "Cygwin only script."
 fi
-
