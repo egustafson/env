@@ -1,1 +1,7 @@
-clear
+if ( -x `which clear` ) then
+   clear
+endif
+
+## Local Variables:
+## mode: shell-script
+## End:

@@ -24,6 +24,9 @@ if (${OSTYPE} == 'cygwin') then
     #
     # Cygwin
     #
+    # clean up paths with spaces early, in case cshrc needs the fix.
+    setenv PATH `~/bin/cyg_fixpath.py`
+    #
     alias netstat /cygdrive/c/Windows/System32/NETSTAT.EXE
     alias emacs emacs-nox
     alias knife 'knife.bat'
@@ -52,20 +55,25 @@ else
 
 endif
 
+## Setup SSH agent forwarding.
+##
 set kc = `which keychain`  # Gentoo 'keychain'
 if (-x "${kc}") then
     # timeout (720 min = 12h)
-#    ${kc} --timeout 720 -q `find ~/.ssh -name id_rsa`
     ${kc} --timeout 720 -q `~/bin/find-ssh-keyfiles.pl`
     source ~/.keychain/${hostname}-csh
 endif
 
-if (${hostname} == 'EGUSTAFSON5') then
-    alias lskeg 'ssh keg.dev.uswest.hpcloud.net info'
-endif
-
+## Run any LOcAL rc initialization needed.
+##
 if ( -e ~/.cshrc-local ) then
     source ~/.cshrc-local
+endif
+
+## Fix-up paths at the very end -- be defensive
+##
+if (${OSTYPE} == 'cygwin') then
+    setenv PATH `~/bin/cyg_fixpath.py`
 endif
 
 ## Local Variables: 
