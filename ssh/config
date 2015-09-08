@@ -81,8 +81,11 @@ Host localhost
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
 
-## HPCS / HPCloud 
+## HPE / HPCS / HPCloud
 ##
+Host github-sc-p.corp.hp.com
+    User git
+
 Host git*.hpcloud.net keg.*.hpcloud.net
     User git
 
