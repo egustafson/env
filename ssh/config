@@ -2,6 +2,7 @@
 #
 KeepAlive yes
 HashKnownHosts no
+LogLevel ERROR
 # SendEnv LC_AUTH_*
 
 ## Elfwerks
