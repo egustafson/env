@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 ## #######################################################################
 #
 #  cyg_fixpath - Fix Windows mangled $PATH and output to stdout.
