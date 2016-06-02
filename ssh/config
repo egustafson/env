@@ -82,18 +82,18 @@ Host localhost
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
 
+Host 10.3.*
+    ForwardX11 yes
+    ForwardX11Trusted yes
+    ForwardAgent yes
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
+
 
 ## HPE / HPCS / HPCloud
 ##
 Host git*.hpcloud.net keg.*.hpcloud.net
     User git
-
-# HPCloud Nova instances (AE12, AW22, AW2)
-Host 15.125.* 15.126.* 15.185.*
-    User ubuntu
-    UserKnownHostsFile /dev/null
-    StrictHostKeyChecking no
-    ForwardAgent yes
 
 
 ## HPE / Picasso Project
@@ -105,6 +105,9 @@ Host 16.71.81.*
     User gustafer
     ForwardAgent yes
 
+Host cgit-pro.austin.hpecorp.net
+    User gustafson
+    Port 29418
 
 
 ## Local Variables:
