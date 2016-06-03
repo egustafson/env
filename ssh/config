@@ -27,11 +27,13 @@ Host *.elfwerks 10.3.4.*
 Host *.elfwerks.org
     User ericg
     ForwardX11 yes
+    ForwardX11Trusted yes
     ForwardAgent yes
 
 Host *.elfwerks.net
     User gustafer
     ForwardX11 yes
+    ForwardX11Trusted yes
     ForwardAgent yes
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
@@ -63,6 +65,7 @@ Host github.com
 Host 10.4.4.*
     User ericg
     ForwardX11 yes
+    ForwardX11Trusted yes
     ForwardAgent yes
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
@@ -71,6 +74,7 @@ Host 10.4.4.*
 Host 10.4.5.*
     User gustafer
     ForwardX11 yes
+    ForwardX11Trusted yes
     ForwardAgent yes
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
@@ -78,6 +82,7 @@ Host 10.4.5.*
 ##  (port forward for virtual-box)
 Host localhost
     ForwardX11 yes
+    ForwardX11Trusted yes
     ForwardAgent yes
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
