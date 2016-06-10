@@ -1,8 +1,6 @@
 ;;; .emacs.d/init.el
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; C-h m  -- describe current editing mode
-;;;
 
 (cond ((file-exists-p "~/.emacs-local.d/pre-init.el")
        (load "~/.emacs-local.d/pre-init.el")))
@@ -35,15 +33,6 @@
 
 ;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
 
-(cond (window-system
-       (if (< 20 emacs-major-version)
-           (tool-bar-mode -1))
-       (set-foreground-color "White")
-       (set-background-color "grey15")
-       (set-cursor-color "White")
-       (set-mouse-color "White")
-))
-
 ;;
 ;; Turn off the menu bar if we're on a terminal or xterm.
 ;;
@@ -57,7 +46,13 @@
 ;;   under NetBSD's XFree.  Futzing with it may be necessary)
 ;; 
 (cond (window-system
-
+       (if (< 20 emacs-major-version)
+           (tool-bar-mode -1))
+       (set-foreground-color "White")
+       (set-background-color "grey15")
+       (set-cursor-color "White")
+       (set-mouse-color "White")
+       ;;
        (set-frame-width (selected-frame)
                          (/ (* 93 (/ (x-display-pixel-width) 100)) 
                             (frame-char-width)))
@@ -70,15 +65,31 @@
        (modify-frame-parameters (selected-frame) '((left . 4)
                                                    (top . 23)))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Key Mappings
+;;
+(global-set-key "\C-x\C-g" 'goto-line)
+(global-set-key "\C-\\" 'vi-find-matching-paren)
+(global-set-key "\C-z" 'scroll-down)
+(global-set-key "\C-ct" 'tags-search)
+;;(cond (not window-system
+;;           (global-set-key "\C-h" 'backward-delete-char-untabify)))
+; (global-set-key [return] 'newline-and-indent)
 
-;(modify-frame-parameters (selected-frame) '((left . -1) (top . 23)))
+(global-set-key [f2] 'comment-out-line)
+(global-set-key [f3] 'uncomment-line)
+(global-set-key [f5] 'next-error)
+(global-set-key [f6] 'previous-error)
+(global-set-key [f7] 'kill-compilation)
+(global-set-key [f8] 'compile)
+(global-set-key [f9] 'shell)
+(global-set-key [f10] 'delete-other-windows)
+(global-set-key [f11] 'enlarge-window)
+(global-set-key [f12] 'enlarge-window-horizontally)
 
-;(cond (window-system
-;       (require 'font-lock)
-;       (setq font-lock-support-mode 'lazy-lock-mode)
-;       (setq font-lock-maximum-decoration t)
-;;       (global-font-lock-mode t)
-;       ))
+(define-key esc-map "$" 'ispell-word)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -113,31 +124,6 @@
 (load "~/.emacs.d/vi-find-matching-paren.el")
 (autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Key Mappings
-;;
-(global-set-key "\C-x\C-g" 'goto-line)
-(global-set-key "\C-\\" 'vi-find-matching-paren)
-(global-set-key "\C-z" 'scroll-down)
-(global-set-key "\C-ct" 'tags-search)
-;;(cond (not window-system
-;;           (global-set-key "\C-h" 'backward-delete-char-untabify)))
-; (global-set-key [return] 'newline-and-indent)
-
-(global-set-key [f2] 'comment-out-line)
-(global-set-key [f3] 'uncomment-line)
-(global-set-key [f5] 'next-error)
-(global-set-key [f6] 'previous-error)
-(global-set-key [f7] 'kill-compilation)
-(global-set-key [f8] 'compile)
-(global-set-key [f9] 'shell)
-(global-set-key [f10] 'delete-other-windows)
-(global-set-key [f11] 'enlarge-window)
-(global-set-key [f12] 'enlarge-window-horizontally)
-
-(define-key esc-map "$" 'ispell-word)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
