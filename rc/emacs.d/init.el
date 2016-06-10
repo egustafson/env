@@ -33,7 +33,7 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-merge-split-window-function 'split-window-horizontally)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
 
 (cond (window-system
        (if (< 20 emacs-major-version)
@@ -80,10 +80,34 @@
 ;;       (global-font-lock-mode t)
 ;       ))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; ELPA - Emacs Lisp Package Archive (http://ergoemacs.org/emacs/emacs_package_system.html)
+;;
+;;   M-x list-packages
+;;
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list
+   'package-archives
+   '("melpa" . "http://melpa.org/packages/")
+   t)
+  (package-initialize))
+
+;; Modes I depend on ELPA to install and update:
+;;
+;;  go-mode
+;;  js2-mode            (JavaScript)
+;;  json-mode
+;;  markdown-mode
+;;  textile-mode
+;;  web-mode
+;;  yaml-mode
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Load Libraries
+;; Load personal Libraries
 ;;
 (load "~/.emacs.d/comment.el")
 (load "~/.emacs.d/vi-find-matching-paren.el")
@@ -164,7 +188,11 @@
 (autoload 'ispell-change-dictionary "ispell" "Change ispell dictionary." t)
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
-;; web-mode -- http://web-mode.org
+
+;; Go mode  --  ELPA pkg
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+
+;; web-mode -- http://web-mode.org   --  ELPA pkg
 ;;
 ;; add 'eval: (web-mode-set-engine "django")'
 ;; to the Local Variables to force the engine.  
@@ -172,7 +200,6 @@
 ;;     Modify web-mode to look at Local Variables as well as
 ;;     the prop (first) line "-*-"
 ;;
-(autoload 'web-mode "web-mode" "Web editing mode" t)
 (setq web-mode-enable-auto-closing t)
 (setq web-mode-enable-engine-detection t)
 (setq web-mode-markup-indent-offset 2)
@@ -182,7 +209,7 @@
 ;; Generic HTML / CSS / JS
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))      ;; ELPA pkg
 ;; Django Template Langage (.dtl) using web-mode
 (add-to-list 'auto-mode-alist '("\\.dtl\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
@@ -200,6 +227,11 @@
       (cons '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode)
             auto-mode-alist))
 
+;; JSON / YAML  --  ELPA pkg's
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
 ;; Conf mode
 (autoload 'conf-mode "conf-mode" "Major mode for editing config files." t)
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
@@ -209,28 +241,11 @@
       (cons '("\\(GNUmakefile\\|Makefile\\|makefile\\)\\'" . makefile-mode)
             auto-mode-alist))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Text Markup Modes (Markdown, Textile, reStructuredText, ...)
-;;
-(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-
-(autoload 'textile-mode "textile-mode" "Major mode for editing textile." t)
-(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
-
-(add-to-list 'auto-mode-alist '("\\.rst\\'" . rst-mode))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; YAML  (conditional load)   <https://github.com/yoshiki/yaml-mode>
-;;
-(if (file-accessible-directory-p (expand-file-name "~/.elisp/yaml-mode"))
-    (progn
-      (add-to-list 'load-path (expand-file-name "~/.elisp/yaml-mode"))
-      (autoload 'yaml-mode "yaml-mode" "YAML editing mode" t)
-      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-      (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))         ;; ELPA pkg
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))   ;; ELPA pkg
+(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))     ;; ELPA pkg
+(add-to-list 'auto-mode-alist '("\\.rst\\'" . rst-mode))             ;; ELPA pkg
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -295,13 +310,6 @@
 (setq c++-empty-arglist-indent 4)
 (setq c++-friend-offset 0)
 (setq c++-comment-only-line-offset 0)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Load the Ada configuration
-;;;
-
-;;(load "ada-mode-load")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
