@@ -1,9 +1,6 @@
 # ########################################
 #
 #
-
-set debug_cshrc = "false"
-
 set hostname = `hostname`
 set prompt = "${hostname}> "
 set shell = /bin/tcsh
@@ -22,11 +19,6 @@ alias more less
 alias tb 'echo -n "\033]0;${HOST}\007"'
 unalias vi
 
-if (${debug_cshrc} == 'true') then
-    set ts = `date`
-    echo "1) ${ts}"
-endif
-
 if (${OSTYPE} == 'cygwin') then
     #
     # Cygwin
@@ -36,14 +28,8 @@ if (${OSTYPE} == 'cygwin') then
     #
     alias netstat /cygdrive/c/Windows/System32/NETSTAT.EXE
     alias emacs emacs-nox
-    alias knife 'knife.bat'
     setenv DISPLAY localhost:0.0
     set path = ( /usr/bin /bin ${path} ~/bin )
-
-    if (${debug_cshrc} == 'true') then
-        set ts = `date`
-        echo "2) ${ts}"
-    endif
 else
     #
     # Unix   (aka non-Cygwin)
@@ -52,11 +38,8 @@ else
     umask 022
     limit coredumpsize 0
 
-    #setenv GEM_HOME /var/lib/gems/1.8
-
     set path = ( \
         ~/bin \
-    #	${GEM_HOME}/bin \
         /usr/local/bin \
         /usr/bin \
         /bin \
@@ -64,10 +47,15 @@ else
         /sbin \
         /usr/sbin \
         .)
+endif
 
-    if (${debug_cshrc} == 'true') then
-        set ts = `date`
-        echo "x) ${ts}"
+if (${OSTYPE} == 'darwin') then
+    #
+    # Mac OS X  (Darwin)
+    #
+    set em = "/Applications/Emacs.app/Contents/MacOS/Emacs"
+    if (-x "${em}") then
+        alias emacs "${em} -nw"
     endif
 endif
 
@@ -80,31 +68,16 @@ if (-x "${kc}") then
     source ~/.keychain/${hostname}-csh
 endif
 
-if (${debug_cshrc} == 'true') then
-    set ts = `date`
-    echo "3) ${ts}"
-endif
-
-## Run any LOcAL rc initialization needed.
+## Run any LOCAL rc initialization needed.
 ##
 if ( -e ~/.cshrc-local ) then
     source ~/.cshrc-local
-endif
-
-if (${debug_cshrc} == 'true') then
-    set ts = `date`
-    echo "4) ${ts}"
 endif
 
 ## Fix-up paths at the very end -- be defensive
 ##
 if (${OSTYPE} == 'cygwin') then
     setenv PATH `~/bin/cyg_fixpath.py`
-endif
-
-if (${debug_cshrc} == 'true') then
-    set ts = `date`
-    echo "e) ${ts}"
 endif
 
 ## Local Variables: 
