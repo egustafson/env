@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "X${2}" = "X" ]; then
+    echo "USAGE: edif <FILE-1> <FILE-2>"
+else
+    emacs --eval "(ediff-files \"$1\" \"$2\")"
+fi
+
+## Local Variables:
+## mode: shell-script-mode
+##

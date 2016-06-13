@@ -28,6 +28,7 @@
 ;(setq-default compile-command "gmake")
 (setq-default compilation-read-command nil)
 
+(setq ediff-make-buffers-readonly-at-startup t)
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-merge-split-window-function 'split-window-horizontally)
 
