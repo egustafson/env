@@ -5,6 +5,43 @@
 (cond ((file-exists-p "~/.emacs-local.d/pre-init.el")
        (load "~/.emacs-local.d/pre-init.el")))
 
+(when (version< emacs-version "24")
+  (warn "This config needs Emacs 24 or greater, but this is %s." emacs-version))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; ELPA - Emacs Lisp Package Archive
+;;
+;;   M-x list-packages
+;;
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list
+   'package-archives
+   '("melpa" . "http://melpa.org/packages/")
+   t)
+  (package-initialize))
+
+;; Bootstrap 'use-package'  (required by this init.el)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(unless (package-installed-p 'use-package)
+  (warn "Package use-package is NOT loaded -- Danger Will Robinson"))
+
+;; Modes I depend on ELPA to install and update:
+;;
+;;  go-mode
+;;  js2-mode            (JavaScript)
+;;  json-mode
+;;  markdown-mode
+;;  textile-mode
+;;  web-mode
+;;  yaml-mode
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (setq-default background-mode 'dark)
 
 (autoload 'gnuserv-start "gnuserv-compat"
@@ -23,6 +60,8 @@
 (setq-default comment-column 50)
 (put 'eval-expression 'disabled nil)
 (line-number-mode 1)
+(setq-default show-trailing-whitespace t
+              require-final-newline t)
 
 (setq-default compile-command "/usr/bin/make")
 ;(setq-default compile-command "gmake")
@@ -45,7 +84,7 @@
 ;; Resize the window (frame) to take the whole window up.
 ;;  (note - the frame size computation is kinda hacked for 1600x1200
 ;;   under NetBSD's XFree.  Futzing with it may be necessary)
-;; 
+;;
 (cond (window-system
        (if (< 20 emacs-major-version)
            (tool-bar-mode -1))
@@ -55,11 +94,11 @@
        (set-mouse-color "White")
        ;;
        (set-frame-width (selected-frame)
-                         (/ (* 93 (/ (x-display-pixel-width) 100)) 
+                         (/ (* 93 (/ (x-display-pixel-width) 100))
                             (frame-char-width)))
        (set-frame-height (selected-frame)
                          (+ 3
-                          (/ (* 93 (/ (x-display-pixel-height) 100)) 
+                          (/ (* 93 (/ (x-display-pixel-height) 100))
                              (frame-char-height))))
 
        ;; Anchor window _after_ resizing.
@@ -92,29 +131,6 @@
 (define-key esc-map "$" 'ispell-word)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; ELPA - Emacs Lisp Package Archive (http://ergoemacs.org/emacs/emacs_package_system.html)
-;;
-;;   M-x list-packages
-;;
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
-  (package-initialize))
-
-;; Modes I depend on ELPA to install and update:
-;;
-;;  go-mode
-;;  js2-mode            (JavaScript)
-;;  json-mode
-;;  markdown-mode
-;;  textile-mode
-;;  web-mode
-;;  yaml-mode
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -244,7 +260,7 @@
 ;;
 (setq vc-handled-backends nil)
 
-;;(add-hook 'c-mode-hook 
+;;(add-hook 'c-mode-hook
 ;;  (function (lambda ()
 ;;              (define-key c-mode-map [return] 'newline-and-indent))))
 
@@ -265,10 +281,10 @@
 (add-hook 'text-mode-hook
   (function (lambda ()
 ;              ; this sets what the tab character displays as
-;              (setq tab-width 4)  
+;              (setq tab-width 4)
               ; this sets where hitting the [TAB] key will take the cursor
               (setq tab-stop-list '(4 8 12 16 24 32))
-              ; this makes [TAB] be a tab character 
+              ; this makes [TAB] be a tab character
               (if (or
                    (equal "Makefile" (buffer-name))
                    (equal "makefile" (buffer-name)))
