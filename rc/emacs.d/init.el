@@ -30,16 +30,6 @@
 (unless (package-installed-p 'use-package)
   (warn "Package use-package is NOT loaded -- Danger Will Robinson"))
 
-;; Modes I depend on ELPA to install and update:
-;;
-;;  go-mode
-;;  js2-mode            (JavaScript)
-;;  json-mode
-;;  markdown-mode
-;;  textile-mode
-;;  web-mode
-;;  yaml-mode
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq-default background-mode 'dark)
@@ -160,7 +150,6 @@
                                 ("\\.hxx\\'" . c++-mode)
                                 ("\\.idl\\'" . idl-mode)
                                 ("\\.tex\\'" . tex-mode)
-                                ("\\.el\\'" . emacs-lisp-mode)
                                 ("\\.a\\'" . c-mode)
                                 ("\\.p\\'" . pascal-mode)
                                 ("\\.pas\\'" . pascal-mode)
@@ -192,63 +181,77 @@
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
 
-;; Go mode  --  ELPA pkg
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+(use-package emacs-lisp-mode
+  :mode "\\.el\\'")
+
+(use-package go-mode
+  :ensure t
+  :mode "\\.go\\'")
 
 ;; web-mode -- http://web-mode.org   --  ELPA pkg
 ;;
 ;; add 'eval: (web-mode-set-engine "django")'
-;; to the Local Variables to force the engine.  
+;; to the Local Variables to force the engine.
 ;;   TODO:
 ;;     Modify web-mode to look at Local Variables as well as
 ;;     the prop (first) line "-*-"
 ;;
-(setq web-mode-enable-auto-closing t)
-(setq web-mode-enable-engine-detection t)
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
-(setq web-mode-code-indent-offset 2)
 
-;; Generic HTML / CSS / JS
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))      ;; ELPA pkg
-;; Django Template Langage (.dtl) using web-mode
-(add-to-list 'auto-mode-alist '("\\.dtl\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-;; PHP using web-mode
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-;; Ruby / ERB
-(add-to-list 'auto-mode-alist '("\\.rhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(use-package web-mode
+  :ensure t
+  :mode ("\\.html\\'" "\\.htm\\'" "\\.css\\'"
+         "\\dtl\\'" "\\.djhtml\\'"              ;; django
+         "\\.php\\'"                            ;; php
+         "\\.rhtml\\'" "\\.erb\\'")             ;; ruby
+  :init
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-engine-detection t)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
 
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'")
 
-;; XML derivatives are easier in nXML (not web-mode)
-(autoload 'nxml-mode "nxml-mode" "Mode for editing XML documents" t)
-(setq nxml-syntax-highlight-flag t)
-(setq auto-mode-alist
-      (cons '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode)
-            auto-mode-alist))
+(use-package nxml-mode
+  :mode ("\\.xml\\'" "\\.xsl\\'" "\\.rng\\'" "\\xhtml\\'")
+  :init (setq nxml-syntax-highlight-flag t
+              nxml-auto-insert-xml-declaration-flag t)
+  :config
+  (add-hook 'nxml-mode-hook
+            (function (lambda () (setq nxml-slash-auto-complete-flag 1)))))
 
-;; JSON / YAML  --  ELPA pkg's
-(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(use-package json-mode
+  :ensure t
+  :mode "\\.json\\'")
 
-;; Conf mode
-(autoload 'conf-mode "conf-mode" "Major mode for editing config files." t)
-(add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
+(use-package yaml-mode
+  :ensure t
+  :mode ("\\.yaml\\'"
+         "\\.yml\\'"))
 
-;; Makefile mode
-(setq auto-mode-alist
-      (cons '("\\(GNUmakefile\\|Makefile\\|makefile\\)\\'" . makefile-mode)
-            auto-mode-alist))
+(use-package conf-mode
+  :ensure t
+  :mode "\\.conf\\'")
 
-;; Text Markup Modes (Markdown, Textile, reStructuredText, ...)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))         ;; ELPA pkg
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))   ;; ELPA pkg
-(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))     ;; ELPA pkg
-(add-to-list 'auto-mode-alist '("\\.rst\\'" . rst-mode))             ;; ELPA pkg
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md\\'"
+         "\\.markdown\\'"))
+
+(use-package textile-mode
+  :ensure t
+  :mode "\\.textile\\'")
+
+(use-package rst
+  :ensure t
+  :mode ("\\.rst\\'" . rst-mode))
+
+(use-package makefile-mode
+  :mode ("\\makefile\\'"
+         "\\Makefile\\'"
+         "\\GNUmakefile\\'"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -293,12 +296,9 @@
 (add-hook 'makefile-mode-hook 'turn-on-font-lock)
 (add-hook 'python-mode-hook 'turn-on-font-lock)
 (add-hook 'ruby-mode-hook 'turn-on-font-lock)
-;(add-hook 'nxml-mode-hook 'turn-on-font-lock)
+
 (add-hook 'sh-mode-hook 'turn-on-font-lock)
 (add-hook 'idl-mode-hook 'turn-on-font-lock)
-
-(add-hook 'nxml-mode-hook
-   (function (lambda () (setq nxml-slash-auto-complete-flag 1))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
