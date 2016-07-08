@@ -188,6 +188,10 @@
   :ensure t
   :mode "\\.go\\'")
 
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs\\'")
+
 ;; web-mode -- http://web-mode.org   --  ELPA pkg
 ;;
 ;; add 'eval: (web-mode-set-engine "django")'
@@ -234,6 +238,10 @@
 (use-package conf-mode
   :ensure t
   :mode "\\.conf\\'")
+
+(use-package toml-mode
+  :ensure t
+  :mode "\\.toml\\'")
 
 (use-package markdown-mode
   :ensure t
