@@ -256,6 +256,10 @@
   :ensure t
   :mode ("\\.rst\\'" . rst-mode))
 
+(use-package dockerfile-mode
+  :ensure t
+  :mode "Dockerfile\\'")
+
 (use-package makefile-mode
   :mode ("\\makefile\\'"
          "\\Makefile\\'"
