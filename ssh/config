@@ -38,9 +38,12 @@ Host *.elfwerks.net
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
 
+Host thames-gw.ddns.net
+    CheckHostIP no
+
 # elfcloud (HP dev on local LAN)
 Host git.elfcloud
-    ForwardX11 no 
+    ForwardX11 no
     User git
 
 Host *elfcloud 10.3.7.*
