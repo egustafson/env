@@ -67,6 +67,11 @@ linkup("bin")
 ##
 linkup("ssh", ".ssh")
 
+## (pre)Fetch Emacs libraries
+##
+import subprocess
+subprocess.call("emacs --batch --eval '(load-file \"~/.emacs.d/init.el\")'", shell=True)
+
 ## Local Variables:
 ## mode: python-mode
 ## End:
