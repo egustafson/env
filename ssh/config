@@ -98,17 +98,14 @@ Host 10.3.*
     StrictHostKeyChecking no
 
 
-## HPE / HPCS / HPCloud
+## Hewlett Packard Enterprise
 ##
-Host git*.hpcloud.net keg.*.hpcloud.net
+Host github.hpe.com
     User git
 
 
 ## HPE / Picasso Project
 ##
-Host github-sc-p.corp.hp.com
-    User git
-
 Host 16.71.81.*
     User gustafer
     ForwardAgent yes
