@@ -70,7 +70,11 @@ endif
 
 ## Go language configuration
 ##
-setenv GOPATH ~/go
+if (${OSTYPE} == 'cygwin') then
+    setenv GOPATH "$USERPROFILE\CygwinHome\go"
+else
+    setenv GOPATH ~/go
+endif
 if (-d $GOPATH) then
     set path = ( $path $GOPATH/bin )
 endif
