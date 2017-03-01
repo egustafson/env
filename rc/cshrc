@@ -68,6 +68,13 @@ if (-x "${kc}") then
     source ~/.keychain/${hostname}-csh
 endif
 
+## Go language configuration
+##
+setenv GOPATH ~/go
+if (-d $GOPATH) then
+    set path = ( $path $GOPATH/bin )
+endif
+
 ## Run any LOCAL rc initialization needed.
 ##
 if ( -e ~/.cshrc-local ) then
