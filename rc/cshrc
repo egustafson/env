@@ -29,7 +29,9 @@ if (${OSTYPE} == 'cygwin') then
     alias netstat /cygdrive/c/Windows/System32/NETSTAT.EXE
     alias emacs emacs-nox
     setenv DISPLAY localhost:0.0
-    set path = ( /usr/bin /bin ${path} ~/bin )
+    set cyghome = ~
+    set winhome = "${USERPROFILE}\CygwinHome"
+    setenv PATH "${cyghome}/bin:${PATH}"
 else
     #
     # Unix   (aka non-Cygwin)
@@ -71,12 +73,15 @@ endif
 ## Go language configuration
 ##
 if (${OSTYPE} == 'cygwin') then
-    setenv GOPATH "$USERPROFILE\CygwinHome\go"
+    setenv GOPATH "${winhome}\go"
+    if (-d $GOPATH) then
+        setenv PATH "${PATH}:${cyghome}/go/bin"
+    endif
 else
     setenv GOPATH ~/go
-endif
-if (-d $GOPATH) then
-    set path = ( $path $GOPATH/bin )
+    if (-d $GOPATH) then
+        set path = ( $path $GOPATH/bin )
+    endif
 endif
 
 ## Run any LOCAL rc initialization needed.
@@ -91,6 +96,6 @@ if (${OSTYPE} == 'cygwin') then
     setenv PATH `~/bin/cyg_fixpath.py`
 endif
 
-## Local Variables: 
+## Local Variables:
 ## mode: shell-script
 ## End:
