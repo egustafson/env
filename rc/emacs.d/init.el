@@ -12,7 +12,8 @@
 ;;
 ;; ELPA - Emacs Lisp Package Archive
 ;;
-;;   M-x list-packages
+;;   help: http://ergoemacs.com/emacs/emacs_package_system.html
+;;   install packages:  M-x list-packages
 ;;
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -23,6 +24,9 @@
   (package-initialize))
 
 ;; Bootstrap 'use-package'  (required by this init.el)
+;;
+;;   help: https://github.com/jwiegley/use-package
+;;
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -182,12 +186,21 @@
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
 
+(use-package smart-compile
+  :ensure t
+  :init
+  (setq smart-compile-alist ()))
+
 (use-package emacs-lisp-mode
   :mode "\\.el\\'")
 
 (use-package go-mode
   :ensure t
-  :mode "\\.go\\'")
+  :mode "\\.go\\'"
+  :bind (:map go-mode-map
+              ([f8] . smart-compile))
+  :config
+  (add-to-list 'smart-compile-alist '("\\.go\\'" . "go build")))
 
 (use-package rust-mode
   :ensure t
