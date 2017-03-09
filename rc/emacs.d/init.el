@@ -200,7 +200,8 @@
   :bind (:map go-mode-map
               ([f8] . smart-compile))
   :config
-  (add-to-list 'smart-compile-alist '("\\.go\\'" . "go build")))
+  (add-to-list 'smart-compile-alist '("\\.go\\'" . "go build"))
+  (add-hook 'before-save-hook 'gofmt-before-save))
 
 (use-package rust-mode
   :ensure t
