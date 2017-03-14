@@ -55,6 +55,9 @@ if (${OSTYPE} == 'darwin') then
     #
     # Mac OS X  (Darwin)
     #
+    if (-x /usr/local/go/bin/go) then;
+        set path = ( $path /usr/local/go/bin )
+    endif
     set em = "/Applications/Emacs.app/Contents/MacOS/Emacs"
     if (-x "${em}") then
         alias emacs "${em} -nw"
