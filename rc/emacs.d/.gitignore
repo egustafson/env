@@ -2,3 +2,6 @@ auto-save-list
 
 # ELPA - Emacs Lisp Package Archive
 elpa
+
+# autocomplete-mode artifact
+ac-comphist.dat

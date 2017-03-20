@@ -186,10 +186,24 @@
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
 
-(use-package smart-compile
+(use-package auto-complete
   :ensure t
+  :commands auto-complete-mode
   :init
-  (setq smart-compile-alist ()))
+  (progn
+    (auto-complete-mode t))
+  :config
+  (progn
+    (use-package go-autocomplete
+      ;; requires:  'apt-get install gocode'
+      :ensure t)
+    (use-package auto-complete-config)
+    (ac-set-trigger-key "TAB")
+    (ac-config-default)
+    (setq ac-delay 0.4)))
+
+(use-package smart-compile
+  :ensure t)
 
 (use-package emacs-lisp-mode
   :mode "\\.el\\'")
@@ -201,6 +215,7 @@
               ([f8] . smart-compile))
   :config
   (add-to-list 'smart-compile-alist '("\\.go\\'" . "go build"))
+  (add-to-list 'smart-compile-alist '("_test\\.go\\'" . "go test"))
   (add-hook 'before-save-hook 'gofmt-before-save))
 
 (use-package rust-mode
