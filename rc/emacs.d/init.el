@@ -202,6 +202,13 @@
     (ac-config-default)
     (setq ac-delay 0.4)))
 
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-reload-all)
+  (use-package go-snippets
+    :ensure))
+
 (use-package smart-compile
   :ensure t)
 
@@ -213,6 +220,8 @@
   :mode "\\.go\\'"
   :bind (:map go-mode-map
               ([f8] . smart-compile))
+  :init
+  (add-hook 'go-mode-hook #'yas-minor-mode)
   :config
   (add-to-list 'smart-compile-alist '("\\.go\\'" . "go build"))
   (add-to-list 'smart-compile-alist '("_test\\.go\\'" . "go test"))
