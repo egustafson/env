@@ -171,6 +171,13 @@
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
 
+(use-package solarized-theme
+  :if window-system
+  :ensure t
+  :init
+  (load-theme 'solarized-dark t))
+
+
 (use-package auto-complete
   :ensure t
   :commands auto-complete-mode
