@@ -57,47 +57,32 @@
 (setq-default show-trailing-whitespace t
               require-final-newline t)
 
-(setq-default compile-command "/usr/bin/make")
-;(setq-default compile-command "gmake")
-(setq-default compilation-read-command nil)
+;(setq-default compile-command "/usr/bin/make")
+;;(setq-default compile-command "gmake")
+;(setq-default compilation-read-command nil)
 
 (setq ediff-make-buffers-readonly-at-startup t)
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-merge-split-window-function 'split-window-horizontally)
 
-;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
+;; Turn off the menu bar in all environments, windowed or not.
+;;
+(menu-bar-mode -1)
 
-;;
-;; Turn off the menu bar if we're on a terminal or xterm.
-;;
-(cond ((not window-system)
-       (menu-bar-mode -1)
-       ))
-
-;;
-;; Resize the window (frame) to take the whole window up.
-;;  (note - the frame size computation is kinda hacked for 1600x1200
-;;   under NetBSD's XFree.  Futzing with it may be necessary)
+;; Window'ed Configuration - regardless of OS
 ;;
 (cond (window-system
-       (if (< 20 emacs-major-version)
-           (tool-bar-mode -1))
-       (set-foreground-color "White")
-       (set-background-color "grey15")
-       (set-cursor-color "White")
-       (set-mouse-color "White")
-       ;;
-       (set-frame-width (selected-frame)
-                         (/ (* 93 (/ (x-display-pixel-width) 100))
-                            (frame-char-width)))
-       (set-frame-height (selected-frame)
-                         (+ 3
-                          (/ (* 93 (/ (x-display-pixel-height) 100))
-                             (frame-char-height))))
+       (menu-bar-mode -1)
+       (tool-bar-mode -1)
+       (toggle-scroll-bar -1)
+       (setq inhibit-startup-screen t)
 
-       ;; Anchor window _after_ resizing.
-       (modify-frame-parameters (selected-frame) '((left . 4)
-                                                   (top . 23)))))
+       (setq special-display-buffer-names
+             `(("*compilation*" . ((name . "*compilation*")
+                                   ,@default-frame-alist
+                                   (left . (- 1))
+                                   (top . 0)))))
+       ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
