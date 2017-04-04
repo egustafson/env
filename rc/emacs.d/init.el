@@ -37,6 +37,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq-default background-mode 'dark)
+(set-face-attribute 'default nil :height 130)
 
 (autoload 'gnuserv-start "gnuserv-compat"
           "Allow this Emacs process to be a server for lient processes."
@@ -59,7 +60,7 @@
 
 ;(setq-default compile-command "/usr/bin/make")
 ;;(setq-default compile-command "gmake")
-;(setq-default compilation-read-command nil)
+;(setq-default compilation-read-command nil)    ;; do not prompt before compile
 
 (setq ediff-make-buffers-readonly-at-startup t)
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -79,9 +80,22 @@
 
        (setq special-display-buffer-names
              `(("*compilation*" . ((name . "*compilation*")
-                                   ,@default-frame-alist
-                                   (left . (- 1))
-                                   (top . 0)))))
+                                   (vertical-scroll-bars . nil)
+                                   (width . 120)
+                                   (height . 20)
+                                   (top . (- 40))
+                                   (left . ,(frame-parameter (selected-frame) 'left))))))
+
+;       (add-to-list 'display-buffer-alist
+;                    `("*compilation*" .
+;                      ((display-buffer-pop-up-frame) .
+;                       ((inhibit-switch-frame . t)
+;                        (reusable-frames . visible)
+;                        (pop-up-frame-parameters .
+;                         ((height . 20)
+;                          (width . 120)
+;                          (left . ,(frame-parameter (selected-frame) 'left))
+;                          (top . (- -40))))))))
        ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -202,7 +216,9 @@
     :ensure))
 
 (use-package smart-compile
-  :ensure t)
+  :ensure t
+  :config
+  (setq compilation-read-command nil))  ;; don't prompt before compile
 
 (use-package emacs-lisp-mode
   :mode "\\.el\\'")

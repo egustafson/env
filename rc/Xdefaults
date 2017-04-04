@@ -1,7 +1,5 @@
 emacs.Geometry: 140x57
 emacs.font: 8x13
-emacs.background: grey15
-emacs.foreground: white
 emacs.cursorColor: white
 emacs.pointerColor: white
 XLess*textFont: -adobe-new century schoolbook-medium-r-normal--17-120-100-100-p-91-*-*
