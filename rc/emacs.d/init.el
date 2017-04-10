@@ -121,10 +121,6 @@
 (global-set-key [f11] 'enlarge-window)
 (global-set-key [f12] 'enlarge-window-horizontally)
 
-(define-key esc-map "$" 'ispell-word)
-
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -177,13 +173,11 @@
 (autoload 'plain-tex-mode "tex-mode" "Mode for Plain TeX" t)
 (autoload 'latex-mode "tex-mode" "Mode for LaTeX" t)
 (autoload 'LaTeX-math-mode    "tex-math"      "Math mode for TeX." t)
-(autoload 'ispell-word "ispell" "Check the spelling of word in buffer." t)
-(autoload 'ispell-region "ispell" "Check the spelling of region." t)
-(autoload 'ispell-buffer "ispell" "Check the spelling of buffer." t)
-(autoload 'ispell-complete-word "ispell" "Look up word, try to complete it." t)
-(autoload 'ispell-change-dictionary "ispell" "Change ispell dictionary." t)
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
+
+(use-package validate
+  :ensure t)
 
 (use-package solarized-theme
   :if window-system
@@ -227,7 +221,8 @@
   :ensure t
   :mode "\\.go\\'"
   :bind (:map go-mode-map
-              ([f8] . smart-compile))
+              ([f8] . smart-compile)
+              ("M-." . godef-jump))
   :init
   (add-hook 'go-mode-hook #'yas-minor-mode)
   :config
@@ -311,6 +306,29 @@
   :mode ("\\makefile\\'"
          "\\Makefile\\'"
          "\\GNUmakefile\\'"))
+
+(use-package go-dlv
+  :ensure t)
+
+(use-package ispell
+  :ensure t
+  :defer t
+  :bind
+  ("M-$" . ispell-word)
+  :config
+  (validate-setq
+   ispell-program-name (executable-find "hunspell")
+   ispell-dictionary "en_US"
+   ispell-silently-savep t
+   ispell-choices-win-default-height 5)
+  (unless ispell-program-name
+    (warn "No spell checker installed.")))
+
+(use-package flyspell
+  :init
+  (dolist (hook '(text-mode-hook message-mode-hook))
+    (add-hook hook 'turn-on-flyspell))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

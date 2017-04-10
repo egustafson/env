@@ -1,8 +1,7 @@
 #!/bin/sh
 
 if [ xx$DISPLAY = "xx" ]; then
-  echo "\$DISPLAY is not set";
-  exit 1;
+    exec emacs -nw $*
 fi
 
 echo "Starting emacs ..."
