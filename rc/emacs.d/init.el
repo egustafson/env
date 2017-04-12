@@ -185,34 +185,24 @@
   :init
   (load-theme 'solarized-dark t))
 
-
-(use-package auto-complete
-  :ensure t
-  :commands auto-complete-mode
-  :init
-  (progn
-    (auto-complete-mode t))
-  :config
-  (progn
-    (use-package go-autocomplete
-      ;; requires:  'apt-get install gocode'
-      :ensure t)
-    (use-package auto-complete-config)
-    (ac-set-trigger-key "TAB")
-    (ac-config-default)
-    (setq ac-delay 0.4)))
-
-(use-package yasnippet
-  :ensure t
-  :config
-  (yas-reload-all)
-  (use-package go-snippets
-    :ensure))
-
 (use-package smart-compile
   :ensure t
   :config
   (setq compilation-read-command nil))  ;; don't prompt before compile
+
+(use-package ispell
+  :ensure t
+  :defer t
+  :bind
+  ("M-$" . ispell-word)
+  :config
+  (validate-setq
+   ispell-program-name (executable-find "hunspell")
+   ispell-dictionary "en_US"
+   ispell-silently-savep t
+   ispell-choices-win-default-height 5)
+  (unless ispell-program-name
+    (warn "No spell checker installed.")))
 
 (use-package emacs-lisp-mode
   :mode "\\.el\\'")
@@ -228,7 +218,13 @@
   :config
   (add-to-list 'smart-compile-alist '("\\.go\\'" . "go build"))
   (add-to-list 'smart-compile-alist '("_test\\.go\\'" . "go test"))
-  (add-hook 'before-save-hook 'gofmt-before-save))
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+(use-package go-eldoc :ensure t)
+(use-package go-dlv :ensure t)
+;(use-package go-errcheck :ensure t)
+;(use-package golint :ensure t)
 
 (use-package rust-mode
   :ensure t
@@ -307,28 +303,45 @@
          "\\Makefile\\'"
          "\\GNUmakefile\\'"))
 
-(use-package go-dlv
-  :ensure t)
+;;
+;; Programming Mode(s) augmentation
+;;
 
-(use-package ispell
+(use-package auto-complete
   :ensure t
-  :defer t
-  :bind
-  ("M-$" . ispell-word)
+  :commands auto-complete-mode
+  :init
+  (progn
+    (auto-complete-mode t))
   :config
-  (validate-setq
-   ispell-program-name (executable-find "hunspell")
-   ispell-dictionary "en_US"
-   ispell-silently-savep t
-   ispell-choices-win-default-height 5)
-  (unless ispell-program-name
-    (warn "No spell checker installed.")))
+  (progn
+    (use-package go-autocomplete
+      ;; requires:  'apt-get install gocode'
+      :ensure t)
+    (use-package auto-complete-config)
+    (ac-set-trigger-key "TAB")
+    (ac-config-default)
+    (setq ac-delay 0.2)))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-reload-all)
+  (use-package go-snippets
+    :ensure))
+
+(use-package flycheck
+  :disabled t
+  :ensure t
+  :init
+  (global-flycheck-mode))
 
 (use-package flyspell
   :init
   (dolist (hook '(text-mode-hook message-mode-hook))
     (add-hook hook 'turn-on-flyspell))
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+;  (add-hook 'prog-mode-hook 'flyspell-prog-mode)   ;; flyspell in program modes
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
