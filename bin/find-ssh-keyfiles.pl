@@ -7,7 +7,7 @@ if ( -r $sshadd_inc ) {
     open(SSHADD_INC, $sshadd_inc);
     @filelist = <SSHADD_INC>;
 } else {
-    open(FIND,"find $ENV{'HOME'}/.ssh -name '*.pem' -print|");
+    open(FIND,"/usr/bin/find $ENV{'HOME'}/.ssh -name '*.pem' -print|");
     @filelist = <FIND>;
     if ( -r $sshadd_exc ) {
         open(SSHADD_EXC, $sshadd_exc);
