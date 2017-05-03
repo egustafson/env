@@ -2,7 +2,9 @@
 
 if [ xx$DISPLAY = "xx" ]; then
     exec emacs -nw $*
+elif [ xx$1 = "xx-nw" ]; then
+    exec emacs $*
+else
+    echo "Starting emacs on $DISPLAY"
+    exec emacs $* &
 fi
-
-echo "Starting emacs ..."
-exec emacs $* &
