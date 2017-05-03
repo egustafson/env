@@ -242,15 +242,20 @@
 (use-package web-mode
   :ensure t
   :mode ("\\.html\\'" "\\.htm\\'" "\\.css\\'"
-         "\\dtl\\'" "\\.djhtml\\'"              ;; django
-         "\\.php\\'"                            ;; php
-         "\\.rhtml\\'" "\\.erb\\'")             ;; ruby
+         "\\.gohtml\\'" "\\.gotmpl\\'"            ;; go
+         "\\dtl\\'" "\\.djhtml\\'" "\\.jinja\\'"  ;; django
+         "\\.php\\'"                              ;; php
+         "\\.rhtml\\'" "\\.erb\\'")               ;; ruby
   :init
   (setq web-mode-enable-auto-closing t)
-  (setq web-mode-enable-engine-detection t)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
+  (setq web-mode-code-indent-offset 2)
+  :config
+  (setq web-mode-engines-alist
+        '(("django" . "\\.jinja\\'")
+          ("go"     . "\\.gohtml\\'")
+          ("go"     . "\\.gotmpl\\'"))))
 
 (use-package js2-mode
   :ensure t
