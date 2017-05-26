@@ -128,7 +128,7 @@
 ;;
 (load "~/.emacs.d/comment.el")
 (load "~/.emacs.d/vi-find-matching-paren.el")
-(load "~/.emacs.d/plantuml.el")  ;; cygwin only
+;(load "~/.emacs.d/plantuml.el")  ;; cygwin only
 (autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
 
 
@@ -342,11 +342,7 @@
   (global-flycheck-mode))
 
 (use-package flyspell
-  :init
-  (dolist (hook '(text-mode-hook message-mode-hook))
-    (add-hook hook 'turn-on-flyspell))
-;  (add-hook 'prog-mode-hook 'flyspell-prog-mode)   ;; flyspell in program modes
-  )
+  :ensure t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
