@@ -191,6 +191,7 @@
   (setq compilation-read-command nil))  ;; don't prompt before compile
 
 (use-package ispell
+  :if (locate-file "hunspell" exec-path)
   :ensure t
   :defer t
   :bind
