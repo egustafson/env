@@ -214,8 +214,8 @@
   :bind (:map go-mode-map
               ([f8] . smart-compile)
               ("M-." . godef-jump))
-  :init
-  (add-hook 'go-mode-hook #'yas-minor-mode)
+;  :init
+;  (add-hook 'go-mode-hook #'yas-minor-mode)
   :config
   (add-to-list 'smart-compile-alist '("\\.go\\'" . "go build"))
   (add-to-list 'smart-compile-alist '("_test\\.go\\'" . "go test"))
@@ -329,13 +329,13 @@
     (ac-config-default)
     (setq ac-delay 0.2)))
 
-(use-package yasnippet
-  :ensure t
-  :defer t
-  :config
-  (yas-reload-all)
-  (use-package go-snippets
-    :ensure))
+;(use-package yasnippet
+;  :ensure t
+;  :defer t
+;  :config
+;  (yas-reload-all)
+;  (use-package go-snippets
+;    :ensure))
 
 (use-package flycheck
   :disabled t
