@@ -10,8 +10,6 @@ set filec
 set nobeep
 unset autologout
 setenv NAME "Eric Gustafson"
-setenv EDITOR "emacs"
-
 alias ls "ls -F"
 alias pwd 'echo $cwd'
 alias . exit
@@ -27,14 +25,13 @@ if (${OSTYPE} == 'cygwin') then
     setenv PATH `~/bin/cyg_fixpath.py`
     #
     alias netstat /cygdrive/c/Windows/System32/NETSTAT.EXE
-    alias emacs emacs-nox
     setenv DISPLAY localhost:0.0
     set cyghome = ~
     set winhome = "${USERPROFILE}\CygwinHome"
     setenv PATH "${cyghome}/bin:${PATH}"
 else
     #
-    # Unix   (aka non-Cygwin)
+    # Unix / Darwin   (aka non-Cygwin)
     #
     set prompt = "`whoami`@`hostname -s`> "
     umask 022
@@ -51,13 +48,15 @@ else
         .)
 endif
 
+## Editor set-up (Emacs preferred)
+##
+setenv EDITOR "emacs"
+alias emacs "emacs -nw"
+
 if (${OSTYPE} == 'darwin') then
     #
     # Mac OS X  (Darwin)
     #
-    if (-x /usr/local/go/bin/go) then;
-        set path = ( $path /usr/local/go/bin )
-    endif
     set em = "/Applications/Emacs.app/Contents/MacOS/Emacs"
     if (-x "${em}") then
         alias emacs "${em} -nw"
@@ -75,6 +74,13 @@ endif
 
 ## Go language configuration
 ##
+# put "locally installed go in the front"
+#
+if (-x /usr/local/go/bin/go) then;
+    set path = ( /usr/local/go/bin $path )
+endif
+# set-up GOPATH
+#
 if (${OSTYPE} == 'cygwin') then
     setenv GOPATH "${winhome}\go"
     if (-d $GOPATH) then
