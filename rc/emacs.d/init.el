@@ -180,7 +180,7 @@
   :ensure t)
 
 (use-package solarized-theme
-  :if window-system
+;  :if window-system                ;; always load theme because cygwin runs in server mode -- current thinking
   :ensure t
   :init
   (load-theme 'solarized-dark t))

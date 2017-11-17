@@ -63,6 +63,15 @@ if (${OSTYPE} == 'darwin') then
     endif
 endif
 
+if (${OSTYPE} == 'cygwin') then
+    #
+    # Cygwin
+    #
+    alias emacs   "cyg_emacs.sh"
+    alias em      "cyg_em.sh"
+    alias em-kill "cyg_emacs-kill.sh"
+endif
+
 ## Setup SSH agent forwarding.
 ##
 set kc = `which keychain`  # Gentoo 'keychain'
