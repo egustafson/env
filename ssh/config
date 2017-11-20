@@ -46,14 +46,6 @@ Host git.elfcloud
     ForwardX11 no
     User git
 
-Host *elfcloud 10.3.7.*
-    User gustafer
-    ForwardX11 yes
-    ForwardX11Trusted yes
-    ForwardAgent yes
-    UserKnownHostsFile /dev/null
-    StrictHostKeyChecking no
-
 
 ## GitHub
 ##
@@ -98,21 +90,9 @@ Host 10.3.*
     StrictHostKeyChecking no
 
 
-## Hewlett Packard Enterprise
-##
-Host github.hpe.com
+## Viasat
+Host git.viasat.com
     User git
-
-
-## HPE / Picasso Project
-##
-Host 16.71.81.*
-    User gustafer
-    ForwardAgent yes
-
-Host cgit-pro.austin.hpecorp.net
-    User gustafson
-    Port 29418
 
 
 ## Local Variables:
