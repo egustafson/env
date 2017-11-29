@@ -69,6 +69,7 @@
 ;; Turn off the menu bar in all environments, windowed or not.
 ;;
 (menu-bar-mode -1)
+(tool-bar-mode -1)
 
 ;; Window'ed Configuration - regardless of OS
 ;;
@@ -419,7 +420,6 @@
     (ediff file1 file2)))
 
 (add-to-list 'command-switch-alist '("diff" . command-line-diff))
-
 
 ;; Local Variables:
 ;; mode: emacs-lisp

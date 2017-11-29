@@ -1,0 +1,32 @@
+## .cshrc-local ########################################
+#
+# to be sourced by .cshrc
+#
+## Warning ########################################
+##
+##   DO NOT add code to this file, unguarded.
+##   this file is sourced multiple times by .cshrc
+
+## Early (pre) execution.
+##
+if ($?_cshrc_prehook) then
+    #
+    # insert early-run cshrc customization here.
+    #
+    echo "_cshrc_prehook"
+endif
+
+## ##############################
+## Late (post) execution.
+##
+if ($?_cshrc_posthook) then
+    #
+    # insert late-run cshrc customization here.
+    #
+    echo "_cshrc_posthook"
+endif
+
+## ##############################
+## Local Variables:
+## mode: shell-script
+## End:

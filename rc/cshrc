@@ -1,6 +1,16 @@
 # ########################################
 #
 #
+## pre-hooks #############################
+#
+if ( -e ~/.cshrc-local ) then
+    set _cshrc_prehook=true
+    source ~/.cshrc-local
+    unset _cshrc_prehook
+endif
+#
+## main cshrc ############################
+#
 set hostname = `hostname`
 set prompt = "${hostname}> "
 set shell = /bin/tcsh
@@ -63,13 +73,10 @@ if (${OSTYPE} == 'darwin') then
     endif
 endif
 
-if (${OSTYPE} == 'cygwin') then
-    #
-    # Cygwin
-    #
-    alias emacs   "cyg_emacs.sh"
-    alias em      "cyg_em.sh"
-    alias em-kill "cyg_emacs-kill.sh"
+if ($?_emacsclient) then
+    alias emacs   "client_emacs.sh"
+    alias em      "client_em.sh"
+    alias em-kill "client_emacs-kill.sh"
 endif
 
 ## Setup SSH agent forwarding.
@@ -102,14 +109,17 @@ else
     endif
 endif
 
-## Run any LOCAL rc initialization needed.
-##
+#
+## pre-hooks #############################
+#
 if ( -e ~/.cshrc-local ) then
+    set _cshrc_posthook=true
     source ~/.cshrc-local
+    unset _cshrc_posthook
 endif
-
+#
 ## Fix-up paths at the very end -- be defensive
-##
+#
 if (${OSTYPE} == 'cygwin') then
     setenv PATH `~/bin/cyg_fixpath.py`
 endif
