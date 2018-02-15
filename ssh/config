@@ -41,11 +41,6 @@ Host *.elfwerks.net
 Host thames-gw.ddns.net
     CheckHostIP no
 
-# elfcloud (HP dev on local LAN)
-Host git.elfcloud
-    ForwardX11 no
-    User git
-
 
 ## GitHub
 ##
@@ -91,8 +86,15 @@ Host 10.3.*
 
 
 ## Viasat
+##
+
 Host git.viasat.com
     User git
+
+Host 10.43.* 10.9*
+    User ubuntu
+    ForwardAgent yes
+    StrictHostKeyChecking no
 
 
 ## Local Variables:
