@@ -127,8 +127,8 @@
 ;;
 ;; Load personal Libraries
 ;;
-(load "~/.emacs.d/comment.el")
-(load "~/.emacs.d/vi-find-matching-paren.el")
+(load "~/.emacs.d/comment")
+(load "~/.emacs.d/vi-find-matching-paren")
 ;(load "~/.emacs.d/plantuml.el")  ;; cygwin only
 (autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
 
@@ -218,8 +218,8 @@
 ;  :init
 ;  (add-hook 'go-mode-hook #'yas-minor-mode)
   :config
-  (add-to-list 'smart-compile-alist '("\\.go\\'" . "go build"))
-  (add-to-list 'smart-compile-alist '("_test\\.go\\'" . "go test"))
+  (load "~/.emacs.d/go-smart-compile")
+  (add-to-list 'smart-compile-alist '("\\.go\\'" . (go-smart-compile)))
   (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook 'go-eldoc-setup))
 
