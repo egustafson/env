@@ -95,6 +95,7 @@ Host 10.43.* 10.9*
     User ubuntu
     ForwardAgent yes
     StrictHostKeyChecking no
+    ServerAliveInterval 60
 
 
 ## Local Variables:
