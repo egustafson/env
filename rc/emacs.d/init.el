@@ -38,6 +38,7 @@
 
 (setq-default background-mode 'dark)
 (set-face-attribute 'default nil :height 130)
+(setq visible-bell t)
 
 (autoload 'gnuserv-start "gnuserv-compat"
           "Allow this Emacs process to be a server for lient processes."
