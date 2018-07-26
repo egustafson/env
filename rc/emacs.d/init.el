@@ -161,7 +161,6 @@
                                 ("\\.m3\\'" . modula-3-mode)
                                 ("\\.pl\\'" . perl-mode)
                                 ("\\.pm\\'" . perl-mode)
-                                ("\\.py\\'" . python-mode)
                                 ("\\.sql\\'" . sql-mode)
                                 ("\\.rb\\'" . ruby-mode)
                                 ("\\.sh\\'" . sh-mode))))
@@ -208,7 +207,16 @@
     (warn "No spell checker installed.")))
 
 (use-package emacs-lisp-mode
-  :mode "\\.el\\'")
+  :mode "\\.el\\'"
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode))
+
+(use-package python-mode
+  :mode "\\.py\\'"
+  :config
+  (add-hook 'python-mode-hook 'turn-on-font-lock)
+  (add-hook 'python-mode-hook 'flycheck-mode))
+
 
 (use-package go-mode
   :ensure t
@@ -309,7 +317,9 @@
 (use-package makefile-mode
   :mode ("\\makefile\\'"
          "\\Makefile\\'"
-         "\\GNUmakefile\\'"))
+         "\\GNUmakefile\\'")
+  :config
+  (add-hook 'makefile-mode-hook 'turn-on-font-lock))
 
 ;;
 ;; Programming Mode(s) augmentation
@@ -340,10 +350,7 @@
 ;    :ensure))
 
 (use-package flycheck
-  :disabled t
-  :ensure t
-  :init
-  (global-flycheck-mode))
+  :ensure t)
 
 (use-package flyspell
   :ensure t)
@@ -367,8 +374,6 @@
              (setq c-basic-offset 4)
              (setq comment-column 50) )))
 
-(add-hook 'python-mode-hook '(lambda () (font-lock-mode 1)))
-
 ;(add-hook 'comint-output-filter-functions )
 ;          'comint-strip-ctrl-m)
 
@@ -381,15 +386,8 @@
 ;              ; this sets what the tab character displays as
 ;              (setq tab-width 4)
               ; this sets where hitting the [TAB] key will take the cursor
-              (setq tab-stop-list '(4 8 12 16 24 32))
-              ; this makes [TAB] be a tab character
-              (if (or
-                   (equal "Makefile" (buffer-name))
-                   (equal "makefile" (buffer-name)))
-                  (setq indent-tabs-mode "T")))))
+              (setq tab-stop-list '(4 8 12 16 24 32)))))
 
-(add-hook 'makefile-mode-hook 'turn-on-font-lock)
-(add-hook 'python-mode-hook 'turn-on-font-lock)
 (add-hook 'ruby-mode-hook 'turn-on-font-lock)
 
 (add-hook 'sh-mode-hook 'turn-on-font-lock)
