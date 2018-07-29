@@ -69,8 +69,10 @@
 
 ;; Turn off the menu bar in all environments, windowed or not.
 ;;
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+(cond ((fboundp 'menu-bar-mode)
+       (menu-bar-mode -1)))
+(cond ((fboundp 'tool-bar-mode)
+       (tool-bar-mode -1)))
 
 ;; Window'ed Configuration - regardless of OS
 ;;
