@@ -179,8 +179,10 @@
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
 
+
 (use-package validate
-  :ensure t)
+  :ensure t
+  :pin gnu)
 
 (use-package solarized-theme
 ;  :if window-system                ;; always load theme because cygwin runs in server mode -- current thinking
@@ -352,7 +354,8 @@
 ;    :ensure))
 
 (use-package flycheck
-  :ensure t)
+  :ensure t
+  :pin melpa)
 
 (use-package flyspell
   :ensure t)
