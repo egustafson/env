@@ -318,6 +318,10 @@
   :ensure t
   :mode "Dockerfile\\'")
 
+;(use-package systemd-mode
+;  :ensure t
+;  :mode "\\.service\\'")
+
 (use-package makefile-mode
   :mode ("\\makefile\\'"
          "\\Makefile\\'"
