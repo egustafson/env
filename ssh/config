@@ -31,7 +31,7 @@ Host *.elfwerks.org
     ForwardAgent yes
 
 Host *.elfwerks.net
-    User gustafer
+    User ericg
     ForwardX11 yes
     ForwardX11Trusted yes
     ForwardAgent yes
@@ -54,15 +54,6 @@ Host github.com
 # VirtualBox Internal Host Network
 Host 10.4.4.*
     User ericg
-    ForwardX11 yes
-    ForwardX11Trusted yes
-    ForwardAgent yes
-    UserKnownHostsFile /dev/null
-    StrictHostKeyChecking no
-
-# VirtualBox Internal Host Network (alternate)
-Host 10.4.5.*
-    User gustafer
     ForwardX11 yes
     ForwardX11Trusted yes
     ForwardAgent yes
@@ -97,6 +88,14 @@ Host 10.43.* 10.9*
     StrictHostKeyChecking no
     ServerAliveInterval 60
 
+# VirtualBox Internal Host Network (alternate)
+Host 10.4.5.*
+    User egustafson
+    ForwardX11 yes
+    ForwardX11Trusted yes
+    ForwardAgent yes
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
 
 ## Local Variables:
 ## comment-start: "# "
