@@ -17,11 +17,18 @@
 ;;
 (when (>= emacs-major-version 24)
   (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
+  (add-to-list 'package-archives '("melpa"          . "http://stable.melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa-unstable" . "http://melpa.packages/") t)
+  (add-to-list 'package-archives '("gnu"            . "http://elpa.gnu.org/packages") t)
   (package-initialize))
+
+;(when (>= emacs-major-version 24)
+;  (require 'package)
+;  (add-to-list
+;   'package-archives
+;   '("melpa" . "http://melpa.org/packages/")
+;   t)
+;  (package-initialize))
 
 ;; Bootstrap 'use-package'  (required by this init.el)
 ;;
@@ -33,6 +40,11 @@
 
 (unless (package-installed-p 'use-package)
   (warn "Package use-package is NOT loaded -- Danger Will Robinson"))
+
+;; Move 'customize file so it doesn't polute init.el (under vc)
+;;
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

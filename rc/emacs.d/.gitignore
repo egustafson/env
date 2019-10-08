@@ -6,3 +6,6 @@ elpa
 
 # autocomplete-mode artifact
 ac-comphist.dat
+
+# M-x customize -- customizations = ephemeral
+custom.el
