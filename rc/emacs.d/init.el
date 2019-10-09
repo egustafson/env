@@ -15,6 +15,12 @@
 ;;   help: http://ergoemacs.com/emacs/emacs_package_system.html
 ;;   install packages:  M-x list-packages
 ;;
+;
+; tmp bug fix - https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
+;             - https://emacs.stackexchange.com/questions/51721/failed-to-download-gnu-archive
+;
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list 'package-archives '("melpa"          . "http://stable.melpa.org/packages/") t)
