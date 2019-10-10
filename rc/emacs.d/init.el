@@ -19,13 +19,16 @@
 ; tmp bug fix - https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
 ;             - https://emacs.stackexchange.com/questions/51721/failed-to-download-gnu-archive
 ;
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;
+; GNU ELPA package signing key updated (delayed in packages)
+;  * https://stackoverflow.com/questions/26108655/error-updating-emacs-packages-failed-to-download-gnu-archive
 ;
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list 'package-archives '("melpa"          . "http://stable.melpa.org/packages/") t)
   (add-to-list 'package-archives '("melpa-unstable" . "http://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("gnu"            . "http://elpa.gnu.org/packages") t)
+  (add-to-list 'package-archives '("gnu"            . "https://elpa.gnu.org/packages") t)
   (package-initialize))
 
 ;; Bootstrap 'use-package'  (required by this init.el)
