@@ -15,21 +15,20 @@
 ;;   help: http://ergoemacs.com/emacs/emacs_package_system.html
 ;;   install packages:  M-x list-packages
 ;;
-;
-; tmp bug fix - https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
-;             - https://emacs.stackexchange.com/questions/51721/failed-to-download-gnu-archive
-;
-;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-;
-; GNU ELPA package signing key updated (delayed in packages)
-;  * https://stackoverflow.com/questions/26108655/error-updating-emacs-packages-failed-to-download-gnu-archive
-;
+;;   see also:  https://elpa.gnu.org/packages/gnu-elpa-keyring-update.html
+;;    (and env/initialize-emacs.el)
+;;
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list 'package-archives '("melpa"          . "http://stable.melpa.org/packages/") t)
   (add-to-list 'package-archives '("melpa-unstable" . "http://melpa.org/packages/") t)
   (add-to-list 'package-archives '("gnu"            . "https://elpa.gnu.org/packages") t)
   (package-initialize))
+
+;; Ensure gnu-elpa-keyring-update is loaded and in use (see above for URL)
+(unless (package-installed-p 'gnu-elpa-keyring-update)
+  (package-refresh-contents)
+  (package-install 'gnu-elpa-keyring-update))
 
 ;; Bootstrap 'use-package'  (required by this init.el)
 ;;
