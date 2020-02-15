@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import os 
+import os
 import os.path
 import shutil
 import sys
@@ -70,7 +70,7 @@ linkup("ssh", ".ssh")
 ## (pre)Fetch Emacs libraries
 ##
 import subprocess
-subprocess.call("emacs --batch --eval '(load-file \"~/.emacs.d/init.el\")'", shell=True)
+subprocess.call("emacs --batch -l ~/env/initialize-emacs.el", shell=True)
 
 ## Local Variables:
 ## mode: python-mode
