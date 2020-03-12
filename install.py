@@ -29,7 +29,7 @@ def linkup(dirname, targetdir=None):
             for line in ign:
                 ignfiles.add( line.strip() )
     if not os.path.exists(homepath):
-        os.mkdir(homepath, 0755)
+        os.mkdir(homepath, 0o755)
     for fn in filelist:
         if fn not in ignfiles:
             homelink = os.path.join( homepath, fn )
