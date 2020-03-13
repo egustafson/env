@@ -7,6 +7,10 @@ LogLevel ERROR
 
 ## Elfwerks
 ##
+Host vjump.elfwerks *.vialab 10.3.71.*
+     User egustafson
+     ForwardAgent yes
+
 Host git.elfwerks gitolite.elfwerks
      User git
 
