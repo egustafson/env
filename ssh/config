@@ -7,7 +7,7 @@ LogLevel ERROR
 
 ## Elfwerks
 ##
-Host vjump.elfwerks *.vialab 10.3.71.*
+Host vjump.elfwerks 10.3.4.3 *.vialab 10.3.71.*
      User egustafson
      ForwardAgent yes
 
