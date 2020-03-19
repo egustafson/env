@@ -7,10 +7,6 @@ LogLevel ERROR
 
 ## Elfwerks
 ##
-Host vjump.elfwerks 10.3.4.3 *.vialab 10.3.71.*
-     User egustafson
-     ForwardAgent yes
-
 Host git.elfwerks gitolite.elfwerks
      User git
 
@@ -85,6 +81,11 @@ Host 10.3.*
 
 Host git.viasat.com
     User git
+
+Host *.vialab 10.3.71.* vjump.* via-router.* 10.3.4.3 10.3.255.2
+    User egustafson
+    ForwardAgent yes
+    StrictHostKeyChecking no
 
 Host 10.43.* 10.9*
     User ubuntu
