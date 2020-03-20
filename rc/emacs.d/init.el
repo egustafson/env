@@ -330,6 +330,10 @@
   :ensure t
   :mode "Dockerfile\\'")
 
+(use-package terraform-mode
+  :ensure t
+  :mode "\\.tf$")
+
 ;(use-package systemd-mode
 ;  :ensure t
 ;  :mode "\\.service\\'")
