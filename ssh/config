@@ -5,18 +5,24 @@ HashKnownHosts no
 LogLevel ERROR
 # SendEnv LC_AUTH_*
 
+## Sepecial Overrides
+
+Host 10.3.4.3
+    User egustafson
+
+
 ## Elfwerks
 ##
 Host git.elfwerks gitolite.elfwerks
-     User git
+    User git
 
 Host portal.elfwerks.org
-     User ericg
-     Port 1022
+    User ericg
+    Port 1022
 
 Host git.elfwerks.org
-     User git
-     Port 1022
+    User git
+    Port 1022
 
 Host *.elfwerks 10.3.4.*
     User ericg
