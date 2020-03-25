@@ -1,5 +1,5 @@
 [alias]
-	lg = log --oneline --graph --decorate 
+	lg = log --oneline --graph --decorate
 [color]
 	ui = true
 [push]
