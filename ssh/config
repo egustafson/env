@@ -7,9 +7,8 @@ LogLevel ERROR
 
 ## Sepecial Overrides
 
-Host 10.3.4.3
+Host 10.3.4.3 vjump.elfwerks
     User egustafson
-
 
 ## Elfwerks
 ##
@@ -18,10 +17,6 @@ Host git.elfwerks gitolite.elfwerks
 
 Host portal.elfwerks.org
     User ericg
-    Port 1022
-
-Host git.elfwerks.org
-    User git
     Port 1022
 
 Host *.elfwerks 10.3.4.*
@@ -93,8 +88,8 @@ Host *.vialab 10.3.71.* vjump.* via-router.* 10.3.4.3 10.3.255.2
     ForwardAgent yes
     StrictHostKeyChecking no
 
-Host 10.43.* 10.9*
-    User ubuntu
+Host 10.* *.viasat.io
+    User egustafson
     ForwardAgent yes
     StrictHostKeyChecking no
     ServerAliveInterval 60

@@ -39,6 +39,7 @@ if (${OSTYPE} == 'cygwin') then
     set cyghome = ~
     set winhome = "${USERPROFILE}\CygwinHome"
     setenv PATH "${cyghome}/bin:${PATH}"
+    setenv PATH "${PATH}:${cyghome}/.local/bin"
 else
     #
     # Unix / Darwin   (aka non-Cygwin)
