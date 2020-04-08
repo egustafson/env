@@ -332,7 +332,8 @@
 
 (use-package terraform-mode
   :ensure t
-  :mode "\\.tf$")
+  :mode ("\\.tf$"
+         "\\.tfvars$"))
 
 ;(use-package systemd-mode
 ;  :ensure t
