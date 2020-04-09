@@ -4,6 +4,9 @@ auto-save-list
 # ELPA - Emacs Lisp Package Archive
 elpa
 
+## Elpy (python) IDE loads extras here
+elpy
+
 # autocomplete-mode artifact
 ac-comphist.dat
 

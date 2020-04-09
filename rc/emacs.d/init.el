@@ -1,6 +1,9 @@
-;;; .emacs.d/init.el
+;;; .emacs.d/init.el --- Emacs init file for Eric
+
+;;; Commentary:
+
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
+;;; Code:
 
 (cond ((file-exists-p "~/.emacs-local.d/pre-init.el")
        (load "~/.emacs-local.d/pre-init.el")))
@@ -55,29 +58,30 @@
 (autoload 'gnuserv-start "gnuserv-compat"
           "Allow this Emacs process to be a server for lient processes."
           t)
-(setq gnuserv-frame (selected-frame))
+(setq-default  gnuserv-frame (selected-frame))
 (or (getenv "GNU_SECURE")
     (setenv "GNU_SECURE" (concat (getenv "HOME") "/.gnusecure")))
 
 
-(setq default-major-mode 'text-mode)
-(setq make-backup-files nil)
+(setq-default major-mode 'text-mode)
+(setq-default  make-backup-files nil)
 ;(setq comint-process-echoes "T")        ;Default is nil
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default comment-column 50)
 (put 'eval-expression 'disabled nil)
-(line-number-mode 1)
 (setq-default show-trailing-whitespace t
               require-final-newline t)
+
+(setq-default linum-format "%4d \u2502 ")
 
 ;(setq-default compile-command "/usr/bin/make")
 ;;(setq-default compile-command "gmake")
 ;(setq-default compilation-read-command nil)    ;; do not prompt before compile
 
-(setq ediff-make-buffers-readonly-at-startup t)
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-merge-split-window-function 'split-window-horizontally)
+(setq-default ediff-make-buffers-readonly-at-startup t)
+(setq-default ediff-split-window-function 'split-window-horizontally)
+(setq-default ediff-merge-split-window-function 'split-window-horizontally)
 
 ;; Turn off the menu bar in all environments, windowed or not.
 ;;
@@ -137,6 +141,9 @@
 (global-set-key [f11] 'enlarge-window)
 (global-set-key [f12] 'enlarge-window-horizontally)
 
+(add-hook 'shell-mode-hook
+  (function (lambda ()
+              (define-key shell-mode-map (kbd "<f9>") 'compilation-shell-minor-mode))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -224,15 +231,23 @@
 
 (use-package emacs-lisp-mode
   :mode "\\.el\\'"
-  :config
+  :init
+  (add-hook 'emacs-lisp-mode-hook 'linum-mode)
   (add-hook 'emacs-lisp-mode-hook 'flycheck-mode))
 
 (use-package python-mode
   :mode "\\.py\\'"
+  :init
+  (add-hook 'python-mode-hook 'linum-mode)
+  (add-hook 'python-mode-hook 'flycheck-mode)
   :config
-  (add-hook 'python-mode-hook 'turn-on-font-lock)
-  (add-hook 'python-mode-hook 'flycheck-mode))
+  (add-hook 'python-mode-hook 'turn-on-font-lock))
 
+;(use-package elpy
+;  :ensure t
+;  :defer t
+;  :init
+;  (advice-add 'python-mode :before 'elpy-enable))
 
 (use-package go-mode
   :ensure t
@@ -303,7 +318,9 @@
 (use-package yaml-mode
   :ensure t
   :mode ("\\.yaml\\'"
-         "\\.yml\\'"))
+         "\\.yml\\'")
+  :config
+  (add-hook 'yaml-mode-hook 'turn-off-auto-fill))
 
 (use-package conf-mode
   :ensure t
@@ -449,3 +466,5 @@
 ;; Local Variables:
 ;; mode: emacs-lisp
 ;; End:
+
+;;; init.el ends here
