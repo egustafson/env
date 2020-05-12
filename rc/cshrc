@@ -112,12 +112,15 @@ else
 endif
 
 #
-## pre-hooks #############################
+## post-hooks #############################
 #
 if ( -e ~/.cshrc-local ) then
     set _cshrc_posthook=true
     source ~/.cshrc-local
     unset _cshrc_posthook
+endif
+if ( -e ~/.cshrc.local ) then
+    source ~/.cshrc.local
 endif
 #
 ## Fix-up paths at the very end -- be defensive
