@@ -232,13 +232,11 @@
 (use-package emacs-lisp-mode
   :mode "\\.el\\'"
   :init
-  (add-hook 'emacs-lisp-mode-hook 'linum-mode)
   (add-hook 'emacs-lisp-mode-hook 'flycheck-mode))
 
 (use-package python-mode
   :mode "\\.py\\'"
   :init
-  (add-hook 'python-mode-hook 'linum-mode)
   (add-hook 'python-mode-hook 'flycheck-mode)
   :config
   (add-hook 'python-mode-hook 'turn-on-font-lock))
@@ -421,7 +419,7 @@
 ;          'comint-strip-ctrl-m)
 
 
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 (setq fill-column 80)
 
 (add-hook 'text-mode-hook
