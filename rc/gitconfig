@@ -4,3 +4,5 @@
 	ui = true
 [push]
 	default = upstream
+[url "git@git.viasat.com:"]
+	insteadOf = https://git.viasat.com/
