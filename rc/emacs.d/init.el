@@ -214,6 +214,15 @@
   :config
   (setq compilation-read-command nil))  ;; don't prompt before compile
 
+(use-package company
+  :ensure t
+  :defer t
+  :config
+  (setq company-tooltip-limit 20)
+  (setq company-idle-delay .3)
+  (setq company-echo-delay 0)
+  (setq company-begin-commands '(self-insert-command)))
+
 (use-package ispell
   :if (locate-file "hunspell" exec-path)
   :ensure t
@@ -259,7 +268,15 @@
   (load "~/.emacs.d/go-smart-compile")
   (add-to-list 'smart-compile-alist '("\\.go\\'" . (go-smart-compile)))
   (add-hook 'before-save-hook 'gofmt-before-save)
-  (add-hook 'go-mode-hook 'go-eldoc-setup))
+  (add-hook 'go-mode-hook 'go-eldoc-setup)
+  (add-hook 'go-mode-hook (lambda()
+                            (use-package company-go
+                              :ensure t
+                              :config
+                              (set (make-local-variable 'company-backends) '(company-go))
+                              (company-mode)))))
+;; requires 'gocode' (apt install gocode || go get -u github.com/nsf/gocode)
+
 
 (use-package go-eldoc :ensure t)
 (use-package go-dlv :ensure t)
@@ -364,22 +381,6 @@
 ;;
 ;; Programming Mode(s) augmentation
 ;;
-
-(use-package auto-complete
-  :ensure t
-  :commands auto-complete-mode
-  :init
-  (progn
-    (auto-complete-mode t))
-  :config
-  (progn
-    (use-package go-autocomplete
-      ;; requires:  'apt-get install gocode'
-      :ensure t)
-    (use-package auto-complete-config)
-    (ac-set-trigger-key "TAB")
-    (ac-config-default)
-    (setq ac-delay 0.2)))
 
 ;(use-package yasnippet
 ;  :ensure t
