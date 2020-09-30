@@ -348,7 +348,9 @@
 (use-package markdown-mode
   :ensure t
   :mode ("\\.md\\'"
-         "\\.markdown\\'"))
+         "\\.markdown\\'")
+  :config (add-hook 'markdown-mode-hook 'turn-on-auto-fill))
+
 
 (use-package textile-mode
   :ensure t
@@ -366,6 +368,10 @@
   :ensure t
   :mode ("\\.tf$"
          "\\.tfvars$"))
+
+(use-package jenkinsfile-mode
+  :ensure t
+  :mode("\\Jenkinsfile\\'"))
 
 ;(use-package systemd-mode
 ;  :ensure t
