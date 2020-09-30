@@ -1,0 +1,57 @@
+---
+- hosts: all
+
+  tasks:
+
+  - name: install packages
+    become: yes
+    apt:
+      state: latest
+      name:
+        - emacs-nox
+        - tcsh
+        - traceroute
+        - net-tools
+        - iftop
+        - bmon
+        - htop
+        - atop
+    when:
+      - ansible_facts['distribution'] == 'Ubuntu' or ansible_facts['distribution'] == 'Debian'
+
+  - name: install packages for Ubuntu Bionic
+    become: yes
+    apt:
+      state: latest
+      name:
+        - python
+    when:
+      - ansible_facts['distribution'] == 'Ubuntu'
+      - ansible_facts['distribution_release'] == 'bionic'
+
+  - name: install packages for Focal-Fossa
+    become: yes
+    apt:
+      state: latest
+      name:
+        - python-is-python3
+    when:
+      - ansible_facts['distribution'] == 'Ubuntu'
+      - ansible_facts['distribution_release'] == 'focal'
+
+  - name: git pull env
+    git:
+      accept_hostkey: yes
+      repo: 'git@github.com:egustafson/env'
+      dest: "{{ ansible_env.HOME }}/env"
+
+  - name: install env
+    shell:
+      chdir: "{{ ansible_env.HOME }}"
+      cmd: "/usr/bin/python env/install.py"
+
+  - name: set shell to tcsh
+    become: yes
+    user:
+      name: "{{ ansible_user_id }}"
+      shell: "/bin/tcsh"
