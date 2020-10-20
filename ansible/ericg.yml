@@ -1,4 +1,6 @@
 ---
+# file: ~/env/ansible/ericg.yml  ## personal environment
+
 - hosts: all
 
   tasks:
@@ -9,8 +11,12 @@
       state: latest
       name:
         - emacs-nox
+        - hunspell
+        - hunspell-en-us
         - tcsh
+        - jq
         - traceroute
+        - tcpdump
         - net-tools
         - iftop
         - bmon
@@ -55,3 +61,5 @@
     user:
       name: "{{ ansible_user_id }}"
       shell: "/bin/tcsh"
+
+...

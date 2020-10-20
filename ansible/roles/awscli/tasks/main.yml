@@ -1,0 +1,25 @@
+---
+# file:  ~/env/ansible/roles/awscli/tasks/main.yml
+#
+# Install AWS CLI v2 (https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
+
+- name: download aws-cli (v2) installer
+  unarchive:
+    mode: '0755'
+    remote_src: yes
+    creates: /tmp/aws
+    src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+    dest: "/tmp"
+
+- name: run the installer
+  become: true
+  command:
+    cmd: "/tmp/aws/install"
+    creates: "/usr/local/bin/aws"
+  register: aws_install
+
+- name: show installer output
+  debug:
+    var: aws_install
+    verbosity: 2
+...

@@ -1,0 +1,27 @@
+---
+# file:  ~/env/ansible/roles/terraform/tasks/main.yml
+#
+# Install Terraform (https://learn.hashicorp.com/tutorials/terraform/install-cli)
+
+- name: add hashicorp repository key
+  become: yes
+  apt_key:
+    url: "https://apt.releases.hashicorp.com/gpg"
+    state: present
+
+- name: add hashicorp repository
+  become: yes
+  apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_facts.distribution_release }} main"
+    state: present
+    mode: '0644'
+
+- name: install terraform
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - terraform
+
+...

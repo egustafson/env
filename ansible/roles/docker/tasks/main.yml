@@ -1,0 +1,52 @@
+---
+# file:  ~/env/ansible/roles/docker/tasks/main.yml
+#
+# Install Docker from Docker's CE repo
+
+- name: install prequesite packages
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-setuptools
+      - python3-pip
+
+- name: add docker apt GPG key
+  become: yes
+  apt_key:
+    repo: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+
+- name: add docker apt repository
+  become: yes
+  apt_repository:
+    repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_facts.distribution_release }} stable"
+    state: present
+    mode: '0644'
+
+- name: install docker-ce
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - docker-ce
+
+- name: add this user to the docker group
+  become: yes
+  user:
+    append: yes
+    name: "{{ lookup('env', 'USER') }}"
+    group: "docker"
+
+- name: install python docker module
+  become: yes
+  pip:
+    name: docker
+
+...

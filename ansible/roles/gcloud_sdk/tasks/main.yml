@@ -1,0 +1,42 @@
+---
+# file:  ~/env/ansible/roles/gcloud_sdk/tasks/main.yml
+#
+# Install Google Cloud SDK (https://cloud.google.com/sdk/docs/install)
+
+- name: install prequesite packages
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg
+
+- name: add gcloud apt GPG key
+  become: yes
+  apt_key:
+    url: "https://packages.cloud.google.com/apt/dock/apt-key.gpg"
+    state: present
+
+- name: add gcloud apt repository
+  become: yes
+  apt_repository:
+    repo: "deb https://packages.cloud.google.com/apt cloud-sdk main"
+    state: present
+    mode: '0644'
+
+- name: install google-cloud-sdk
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - google-cloud-sdk
+
+- debug:
+    msg: >
+      https://cloud.google.com/sdk/docs/install for help.
+      run 'gcloud init' to initialize the SDK.
+
+...
