@@ -9,16 +9,14 @@
   register: stat_result
 
 - assert:
-    that: !stat_result.stat.exists
+    that: not stat_result.stat.exists
     fail_msg: "The directory /usr/local/go already exists"
 
 - name: download the Go tarball
   become: yes
-  var:
-    _golang_ver: "1.15.3"
   unarchive:
     remote_src: yes
-    src: "https://storage.googleapis.com/golang/go{{ _golang_ver }}.linux-amd64.tar.gz"
+    src: "https://storage.googleapis.com/golang/go{{ golang_ver }}.linux-amd64.tar.gz"
     dest: "/usr/local"
 
 ...

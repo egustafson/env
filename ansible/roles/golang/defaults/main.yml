@@ -1,0 +1,6 @@
+---
+# file:  ~/env/ansible/roles/golang/defaults/main.yml
+#
+# Golang Defaults
+
+golang_ver: "1.15.3"

@@ -3,6 +3,14 @@
 #
 # Install AWS CLI v2 (https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
 
+- name: install prequesite packages
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - unzip
+
 - name: download aws-cli (v2) installer
   unarchive:
     mode: '0755'

@@ -16,7 +16,7 @@
 - name: add gcloud apt GPG key
   become: yes
   apt_key:
-    url: "https://packages.cloud.google.com/apt/dock/apt-key.gpg"
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
     state: present
 
 - name: add gcloud apt repository

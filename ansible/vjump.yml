@@ -22,10 +22,10 @@
 
 - hosts: all
   roles:
-    - docker
-    - gcloud_sdk
-    - awscli
-    - terraform
-    - golang
+    - { role: docker }
+    - { role: gcloud_sdk }
+    - { role: awscli }
+    - { role: terraform }
+    - { role: golang, golang_ver: "1.15.3" }
 
 ...
