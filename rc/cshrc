@@ -48,16 +48,22 @@ else
     umask 022
     limit coredumpsize 0
 
-    set path = ( \
-        ~/bin \
-        /usr/local/bin \
-        /usr/bin \
-        /bin \
-        /usr/bin/X11 \
-        /sbin \
-        /usr/sbin \
-        ~/.local/bin \
-        .)
+    if (${shlvl} <= '1') then
+        ##
+        ## Test code -- prevent emacs *sub*-shell from having
+        ##   path (w/ python virtual_env) stomped on.
+        ##
+        set path = ( \
+            ~/bin \
+            /usr/local/bin \
+            /usr/bin \
+            /bin \
+            /usr/bin/X11 \
+            /sbin \
+            /usr/sbin \
+            ~/.local/bin \
+            .)
+    endif
 endif
 
 ## Editor set-up (Emacs preferred)
