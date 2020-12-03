@@ -66,6 +66,11 @@ else
     endif
 endif
 
+## Squash xterm-256color -> xterm  (for WSL on Windows)
+if (${term} == 'xterm-256color') then
+    set term = 'xterm'
+endif
+
 ## Editor set-up (Emacs preferred)
 ##
 setenv EDITOR "emacs"
@@ -88,9 +93,10 @@ if ($?_emacsclient) then
 endif
 
 ## Setup SSH agent forwarding.
+##  - don't run keychain if this isn't a login ($loginsh) shell.
 ##
 set kc = `which keychain`  # Gentoo 'keychain'
-if (-x "${kc}") then
+if ($?loginsh && -x "${kc}") then
     # timeout (720 min = 12h)
     ${kc} --timeout 720 -q `~/bin/find-ssh-keyfiles.pl`
     source ~/.keychain/${hostname}-csh
