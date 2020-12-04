@@ -4,4 +4,6 @@ BackgroundColour=0,43,54
 CursorColour=147,161,161
 CursorType=block
 FontHeight=10
-scrollbar=none
+Scrollbar=none
+RightClickAction=menu
+ThemeFile=solarized-dark
