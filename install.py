@@ -16,7 +16,11 @@ envdir = os.path.abspath(os.path.dirname(sys.argv[0]))
 # print "Home Dir:    " + home
 # exit()
 
-## TODO - this method has not been tested, should replace batchlink
+## linkup(<source>, <target>)
+##
+## Ensure <target> exists as a directory in $(HOME) and then
+## iteratively link each file/dir in <source> to <target>/file
+##
 def linkup(dirname, targetdir=None):
     if not targetdir:
         targetdir = dirname
@@ -45,8 +49,10 @@ rcfiles = os.listdir(envdir + "/rc")
 
 ignfiles = set(['README.md'])
 
-#batchlink(rcfiles, ignfiles, envdir+"/rc/", "", "/.")
-
+## Iterate over rcfiles and ensure that each <file/dir> has
+## a symlink in $(HOME) prepended with '.' pointing back to
+## the file/dir in rcfiles
+##
 for name in rcfiles:
     if name not in ignfiles:
         homelink = home + "/." + name
@@ -58,14 +64,17 @@ for name in rcfiles:
                 shutil.rmtree(homelink)
         os.symlink(linkpath, homelink)
 
+## link config into ~/.config  (XDG Base Dir Spec for config files)
+##
+linkup("config", ".config")
+
+## link ssh into ~/.ssh
+##
+linkup("ssh", ".ssh")
 
 ## link bin into ~/bin
 ##
 linkup("bin")
-
-## link ssh into ~/ssh
-##
-linkup("ssh", ".ssh")
 
 ## (pre)Fetch Emacs libraries
 ##
