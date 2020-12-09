@@ -21,11 +21,13 @@
       name: ansible
 
 - hosts: all
+  vars:
+    golang_ver: "1.15.3"
   roles:
-    - { role: docker }
-    - { role: gcloud_sdk }
-    - { role: awscli }
-    - { role: terraform }
-    - { role: golang, golang_ver: "1.15.3" }
+    - { role: docker,      tags: docker }
+    - { role: gcloud_sdk,  tags: gcloud }
+    - { role: awscli,      tags: awscli }
+    - { role: terraform,   tags: terraform }
+    - { role: golang,      tags: golang }
 
 ...
