@@ -1,0 +1,37 @@
+---
+# file:  ~/env/ansible/roles/vicecli/tasks/main.yml
+#
+# Install Viasat's vicecli
+# - https://git.viasat.com/vice/vicecli
+
+- name: install prequesite packages
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - python3-pip
+
+- name: create tmp directory for git clone + pip install
+  tempfile:
+    state: directory
+  register: vice_build_dir
+
+- name: git clone the vicecli repository
+  become: no   ## ssh-agent socket doesn't pass through become
+  git:
+    version: "production"
+    repo: "git+ssh://git@git.viasat.com/vice/vicecli.git"
+    dest: "{{ vice_build_dir.path }}"
+
+- name: install vice
+  become: yes
+  pip:
+    name: "file:///{{ vice_build_dir.path }}"
+    chdir: "{{ vice_build_dir.path }}"
+
+- name: rm (clean-up) vice_build_dir
+  file:
+    path: "{{ vice_build_dir.path }}"
+    state: absent
+...

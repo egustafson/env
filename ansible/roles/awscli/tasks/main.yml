@@ -30,4 +30,23 @@
   debug:
     var: aws_install
     verbosity: 2
+
+- name: create awscli config dir for user
+  file:
+    path: "{{ ansible_env.HOME }}/.aws"
+    state: directory
+    mode: "0700"
+
+- name: install awscli config for user
+  template:
+    src: config.ini
+    dest: "{{ ansible_env.HOME }}/.aws/config"
+    mode: "0600"
+
+- name: touch awscli credentials file for user
+  file:
+    path: "{{ ansible_env.HOME }}/.aws/credentials"
+    state: touch
+    mode: "0600"
+
 ...

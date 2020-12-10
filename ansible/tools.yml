@@ -1,5 +1,8 @@
 ---
-# file: ~/env/ansible/vjump.yml  ## work jump box
+# file:  ~/env/ansible/tools.yml
+#
+# roles to install various tools I use.
+#
 
 - hosts: all
   tasks:
@@ -25,9 +28,16 @@
     golang_ver: "1.15.3"
   roles:
     - { role: docker,      tags: docker }
+    - { role: vicecli,     tags: vicecli }
+
+    # Language tools (for dev)
+    # - { role: python,      tags: python }    ## TODO
+    - { role: golang,      tags: golang }
+
+    # Cloudy tools
     - { role: gcloud_sdk,  tags: gcloud }
     - { role: awscli,      tags: awscli }
     - { role: terraform,   tags: terraform }
-    - { role: golang,      tags: golang }
+    - { role: alohomora,   tags: alohomora }
 
 ...
