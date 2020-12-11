@@ -1,0 +1,21 @@
+---
+# file:  ~/env/ansible/roles/grip/tasks/main.yml
+#
+# Grip -- GitHub Readme Instant Preview
+# - https://github.com/joeyespo/grip
+#
+
+- name: install prequesite packages
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - python3-pip
+
+- name: install grip
+  become: yes
+  pip:
+    name: grip
+
+...

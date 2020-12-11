@@ -7,31 +7,27 @@
 - hosts: all
   tasks:
 
-  - name: install packages
+  - name: install pass package
+    # https://www.passwordstore.org/
     become: yes
+    tags: pass
     apt:
       state: latest
       name:
-        - build-essential
         - pass
-        - python3-venv
-        - python3-pip
         - sshpass
-
-  - name: install ansible
-    become: yes
-    pip:
-      name: ansible
 
 - hosts: all
   vars:
     golang_ver: "1.15.3"
   roles:
+    - { role: ansible,     tags: ansible }
     - { role: docker,      tags: docker }
     - { role: vicecli,     tags: vicecli }
+    - { role: grip,        tags: grip }        ## GitHub Previewer
 
     # Language tools (for dev)
-    # - { role: python,      tags: python }    ## TODO
+    - { role: python,      tags: python }    ## TODO
     - { role: golang,      tags: golang }
 
     # Cloudy tools

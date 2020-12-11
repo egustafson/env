@@ -1,0 +1,16 @@
+---
+# file: ~/env/ansible/roles/python/tasks/main.yml
+#
+
+- name: install requesite packages
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - build-essential
+      - python3-pip
+      - python3-venv
+      - python3-dev
+
+...

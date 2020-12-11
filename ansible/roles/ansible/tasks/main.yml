@@ -1,0 +1,13 @@
+---
+# file: ~/env/ansible/roles/ansible/tasks/main.yml
+#
+
+- name: install requesite packages
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - ansible
+
+...
