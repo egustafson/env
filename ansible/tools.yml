@@ -19,10 +19,12 @@
 
 - hosts: all
   vars:
+    etcd_ver:   "v3.4.14"
     golang_ver: "1.15.3"
   roles:
     - { role: ansible,     tags: ansible }
     - { role: docker,      tags: docker }
+    - { role: etcdctl,     tags: etcdctl }
     - { role: vicecli,     tags: vicecli }
     - { role: grip,        tags: grip }        ## GitHub Previewer
 

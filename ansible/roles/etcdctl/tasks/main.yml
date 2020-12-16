@@ -1,0 +1,29 @@
+---
+# file:  ~/env/ansible/roles/etcdctl/tasks/main.yml
+#
+# Install etcdctl from GitHub
+# - https://github.com/etcd-io
+
+- name: create a temp directory
+  tempfile:
+    state: directory
+  register: etcd_tmp_dir
+
+- name: pull and unarchive the etcd tarball
+  unarchive:
+    remote_src: yes
+    src:  "https://github.com/etcd-io/etcd/releases/download/{{ etcd_ver }}/etcd-{{ etcd_ver }}-linux-amd64.tar.gz"
+    dest: "{{ etcd_tmp_dir.path }}"
+
+- name: install etcdctl into users bin (~/bin)
+  copy:
+    remote_src: yes  ## the file is already on the ansible target host
+    src: "{{ etcd_tmp_dir.path }}/etcd-{{ etcd_ver }}-linux-amd64/etcdctl"
+    dest: "{{ ansible_env.HOME }}/bin/etcdctl"
+    mode: '0755'
+
+- name: clean-up the temp directory
+  file:
+    path: "{{ etcd_tmp_dir.path }}"
+    state: absent
+...
