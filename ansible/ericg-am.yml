@@ -1,0 +1,9 @@
+---
+# file: ~/env/ansible/ericg-am.yaml  ## automount home dir
+
+- hosts: all
+
+  roles:
+    - automount_ericg
+
+...

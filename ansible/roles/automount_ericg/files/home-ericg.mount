@@ -1,0 +1,10 @@
+[Unit]
+Description=home automount for ericg
+
+[Mount]
+What=mimir.elfwerks:/home/ericg
+Where=/home/ericg
+Type=nfs
+
+[Install]
+WantedBy=multi-user.target

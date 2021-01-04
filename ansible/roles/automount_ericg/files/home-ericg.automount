@@ -1,0 +1,8 @@
+[Unit]
+Description=home automount for ericg
+
+[Automount]
+Where=/home/ericg
+
+[Install]
+WantedBy=multi-user.target

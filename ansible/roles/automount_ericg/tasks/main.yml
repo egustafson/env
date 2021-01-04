@@ -1,0 +1,40 @@
+---
+# file:  ~/env/ansible/roles/automount_ericg/tasks/main.yml
+#
+# configure a host to automount /home/ericg through systemd
+
+- name: install nfs-common package
+  become: yes
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - nfs-common
+
+- name: install home-ericg.mount
+  become: yes
+  copy:
+    src: home-ericg.mount
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: install home-ericg.automount
+  become: yes
+  copy:
+    src: home-ericg.automount
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: enable automount in systemd
+  become: yes
+  systemd:
+    daemon_reload: yes
+    name: home-ericg.automount
+    enabled: yes
+    state: started
+
+...
