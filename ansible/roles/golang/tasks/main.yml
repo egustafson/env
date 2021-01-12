@@ -8,15 +8,29 @@
     path: "/usr/local/go"
   register: stat_result
 
-- assert:
-    that: not stat_result.stat.exists
-    fail_msg: "The directory /usr/local/go already exists"
-
 - name: download the Go tarball
   become: yes
   unarchive:
     remote_src: yes
     src: "https://storage.googleapis.com/golang/go{{ golang_ver }}.linux-amd64.tar.gz"
     dest: "/usr/local"
+  when: not stat_result.stat.exists
+
+- name: verify go works
+  command: go version
+  register: result
+
+- name: print go version
+  debug:
+    msg: "{{ result.stdout }}  Installed."
+
+- name: install godoc locally (in ~/go/bin)
+  command: "go get golang.org/x/tools/cmd/godoc"
+
+- name: install godef locally (in ~/go/bin)
+  command: "go get github.com/rogpeppe/godef"
+
+- name: install gocode locally (in ~/go/bin)
+  command: "go get github.com/nsf/gocode"
 
 ...

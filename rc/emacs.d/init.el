@@ -74,6 +74,7 @@
               require-final-newline t)
 
 (setq-default linum-format "%4d \u2502 ")
+(setq-default column-number-mode t)
 
 ;(setq-default compile-command "/usr/bin/make")
 ;;(setq-default compile-command "gmake")
@@ -245,8 +246,8 @@
 
 (use-package python-mode
   :mode "\\.py\\'"
-  :init
-  (add-hook 'python-mode-hook 'flycheck-mode)
+;  :init
+;  (add-hook 'python-mode-hook 'flycheck-mode)
   :config
   (add-hook 'python-mode-hook 'turn-on-font-lock))
 
@@ -261,14 +262,19 @@
   :mode "\\.go\\'"
   :bind (:map go-mode-map
               ([f8] . smart-compile)
-              ("M-." . godef-jump))
+              ("M-." . godef-jump)
+              ("M-*" . go-tag-mark))
 ;  :init
 ;  (add-hook 'go-mode-hook #'yas-minor-mode)
   :config
-  (load "~/.emacs.d/go-smart-compile")
+;  (load "~/.emacs.d/go-smart-compile")
   (add-to-list 'smart-compile-alist '("\\.go\\'" . (go-smart-compile)))
   (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook 'go-eldoc-setup)
+  (add-hook 'go-mode-hook (lambda()
+                            (if (not (string-match "go" compile-command))
+                                (set (make-local-variable 'compile-command)
+                                     "go build -v && go test -v && go vet"))))
   (add-hook 'go-mode-hook (lambda()
                             (use-package company-go
                               :ensure t
