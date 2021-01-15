@@ -379,9 +379,9 @@
   :ensure t
   :mode("\\Jenkinsfile\\'"))
 
-;(use-package systemd-mode
-;  :ensure t
-;  :mode "\\.service\\'")
+(use-package systemd
+  :ensure t
+  :mode "\\.service\\'")
 
 (use-package makefile-mode
   :mode ("\\makefile\\'"
