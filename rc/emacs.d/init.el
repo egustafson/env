@@ -39,10 +39,23 @@
 ;;
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
-  (package-install 'use-package))
+  (package-install 'use-package)
+  (eval-when-compile (require `use-package)))
 
 (unless (package-installed-p 'use-package)
   (warn "Package use-package is NOT loaded -- Danger Will Robinson"))
+
+;; Up garbage collector threshold during init, then put back
+;;  https://github.com/jamiecollinson/dotfiles/blob/master/config.org/
+;;
+(setq gc-cons-threshold 10000000)  ;; 10MB
+
+;; restore after startup
+(add-hook 'after-init-hook
+          (lambda ()
+            (setq gc-cons-threshold 1000000)
+            (message "gc-cons-threshold restored to %S"
+                     gc-cons-threshold)))
 
 ;; Move 'customize file so it doesn't polute init.el (under vc)
 ;;
@@ -105,19 +118,7 @@
                                    (width . 120)
                                    (height . 20)
                                    (top . (- 40))
-                                   (left . ,(frame-parameter (selected-frame) 'left))))))
-
-;       (add-to-list 'display-buffer-alist
-;                    `("*compilation*" .
-;                      ((display-buffer-pop-up-frame) .
-;                       ((inhibit-switch-frame . t)
-;                        (reusable-frames . visible)
-;                        (pop-up-frame-parameters .
-;                         ((height . 20)
-;                          (width . 120)
-;                          (left . ,(frame-parameter (selected-frame) 'left))
-;                          (top . (- -40))))))))
-       ))
+                                   (left . ,(frame-parameter (selected-frame) 'left))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
