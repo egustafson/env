@@ -4,3 +4,4 @@
 # Golang Defaults
 
 golang_ver: "1.15.3"
+protoc_ver: "3.14.0"

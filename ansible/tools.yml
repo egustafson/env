@@ -21,6 +21,7 @@
   vars:
     etcd_ver:   "v3.4.14"
     golang_ver: "1.15.3"
+    protoc_ver: "3.14.0"
   roles:
     - { role: ansible,     tags: ansible }
     - { role: docker,      tags: docker }

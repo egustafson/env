@@ -289,6 +289,10 @@
 ;(use-package go-errcheck :ensure t)
 ;(use-package golint :ensure t)
 
+(use-package protobuf-mode
+  :ensure t
+  :mode "\\.proto\\'")
+
 (use-package rust-mode
   :ensure t
   :mode "\\.rs\\'")
