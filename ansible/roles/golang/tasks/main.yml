@@ -24,32 +24,6 @@
   debug:
     msg: "{{ result.stdout }}  Installed."
 
-- name: create temp dir for protoc
-  tempfile:
-    state: directory
-  register: protoc_tmp_dir
-
-- name: download protoc zip file (gRPC)
-  unarchive:
-    remote_src: yes
-    src: "https://github.com/protocolbuffers/protobuf/releases/download/v{{ protoc_ver }}/protoc-{{ protoc_ver }}-linux-x86_64.zip"
-    dest: "{{ protoc_tmp_dir.path }}"
-
-- name: install protoc into users bin (~/bin)
-  copy:
-    remote_src: yes  ## the file is already on the ansible target host
-    src: "{{ protoc_tmp_dir.path }}/bin/protoc"
-    dest: "{{ ansible_env.HOME }}/bin/protoc"
-    mode: '0755'
-
-- name: clean-up the protoc temp directory
-  file:
-    path: "{{ protoc_tmp_dir.path }}"
-    state: absent
-
-- name: install golang plugin for protoc
-  command: "go get github.com/golang/protobuf/protoc-gen-go"
-
 - name: install godoc locally (in ~/go/bin)
   command: "go get golang.org/x/tools/cmd/godoc"
 
@@ -58,5 +32,50 @@
 
 - name: install gocode locally (in ~/go/bin)
   command: "go get github.com/nsf/gocode"
+
+##
+## -- protoc (gRPC) -- begin
+
+- name: install gRPC tools locally (in ~/bin and ~/go/bin)
+  ##                                                        --> DISABLED <--
+  when: False
+  block:
+    - name: create temp dir for protoc
+      tempfile:
+        state: directory
+        register: protoc_tmp_dir
+
+    - name: download protoc zip file (gRPC)
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/protocolbuffers/protobuf/releases/download/v{{ protoc_ver }}/protoc-{{ protoc_ver }}-linux-x86_64.zip"
+        dest: "{{ protoc_tmp_dir.path }}"
+
+    - name: install protoc into users bin (~/bin)
+      copy:
+        remote_src: yes  ## the file is already on the ansible target host
+        src: "{{ protoc_tmp_dir.path }}/bin/protoc"
+        dest: "{{ ansible_env.HOME }}/bin/protoc"
+        mode: '0755'
+
+    - name: clean-up the protoc temp directory
+      file:
+        path: "{{ protoc_tmp_dir.path }}"
+        state: absent
+
+    - name: install golang plugin for protoc
+      debug:
+        msg: -*- SKIP -*- manually install golang plugin or read this role for details.
+
+    # Note:  *for now* this task that installs the golang module for protoc is commented out.
+    #  A project I'm working on (kv-api) has version dependencies.  I should uncomment this
+    #  when the latest is suitable for dev.
+
+    # - name: install golang plugin for protoc
+    #   command: "go get github.com/golang/protobuf/protoc-gen-go"
+    #   #
+    #   # superceeded by google.golang.org/protobuf/cmd/protoc-gen-go
+##
+## -- protoc (gRPC) -- end
 
 ...
