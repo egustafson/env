@@ -275,7 +275,7 @@
   (add-hook 'go-mode-hook (lambda()
                             (if (not (string-match "go" compile-command))
                                 (set (make-local-variable 'compile-command)
-                                     "go build -v && go test -v && go vet"))))
+                                     "go build -v && go test && go vet"))))
   (add-hook 'go-mode-hook (lambda()
                             (use-package company-go
                               :ensure t
@@ -373,7 +373,7 @@
 
 (use-package dockerfile-mode
   :ensure t
-  :mode "Dockerfile\\'")
+  :mode "/Dockerfile[^/]*\\'") ;; any basename that starts with "Dockerfile"
 
 (use-package terraform-mode
   :ensure t
@@ -382,16 +382,17 @@
 
 (use-package jenkinsfile-mode
   :ensure t
-  :mode("\\Jenkinsfile\\'"))
+  :mode("/Jenkinsfile[^/]*\\'")) ;; any basename that starts with "Jenkinsfile"
 
 (use-package systemd
   :ensure t
   :mode "\\.service\\'")
 
 (use-package makefile-mode
-  :mode ("\\makefile\\'"
-         "\\Makefile\\'"
-         "\\GNUmakefile\\'")
+  ;; match any basename (i.e. /basename...) that starts with
+  :mode ("/makefile[^/]*\\'"
+         "/Makefile[^/]*\\'"
+         "/GNUmakefile[^/]*\\'")
   :config
   (add-hook 'makefile-mode-hook 'turn-on-font-lock))
 
