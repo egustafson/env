@@ -292,6 +292,10 @@
 
 (use-package protobuf-mode
   :ensure t
+  :config
+  (add-hook 'protobuf-mode-hook
+            (lambda()
+              (setq c-basic-offset 2)))  ;; set indent to 2
   :mode "\\.proto\\'")
 
 (use-package rust-mode
