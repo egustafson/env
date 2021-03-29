@@ -12,3 +12,6 @@ ac-comphist.dat
 
 # M-x customize -- customizations = ephemeral
 custom.el
+
+# Language Server Protocol turd - ignore
+.lsp*

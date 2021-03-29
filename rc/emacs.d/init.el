@@ -247,10 +247,13 @@
 
 (use-package python-mode
   :mode "\\.py\\'"
-;  :init
-;  (add-hook 'python-mode-hook 'flycheck-mode)
+  :init
+  ; flycheck uses pylint and flake8 IIF installed
+  (add-hook 'python-mode-hook 'flycheck-mode)
+  (add-hook 'python-mode-hook 'flyspell-prog-mode)
   :config
   (add-hook 'python-mode-hook 'turn-on-font-lock))
+
 
 ;(use-package elpy
 ;  :ensure t
@@ -272,6 +275,9 @@
   (add-to-list 'smart-compile-alist '("\\.go\\'" . (go-smart-compile)))
   (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook 'go-eldoc-setup)
+;;  (add-hook 'go-mode-hook 'flycheck-mode)
+  (add-hook 'go-mode-hook 'lsp)
+;;  (add-hook 'go-mode-hook 'flyspell-prog-mode)
   (add-hook 'go-mode-hook (lambda()
                             (if (not (string-match "go" compile-command))
                                 (set (make-local-variable 'compile-command)
@@ -284,11 +290,10 @@
                               (company-mode)))))
 ;; requires 'gocode' (apt install gocode || go get -u github.com/nsf/gocode)
 
-
 (use-package go-eldoc :ensure t)
-(use-package go-dlv :ensure t)
-;(use-package go-errcheck :ensure t)
-;(use-package golint :ensure t)
+;(use-package go-dlv :ensure t)
+(use-package go-errcheck :ensure t)
+(use-package golint :ensure t)
 
 (use-package protobuf-mode
   :ensure t
@@ -364,8 +369,9 @@
   :ensure t
   :mode ("\\.md\\'"
          "\\.markdown\\'")
-  :config (add-hook 'markdown-mode-hook 'turn-on-auto-fill))
-
+  :config
+  (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+  (add-hook 'markdown-mode-hook 'flyspell-mode))
 
 (use-package textile-mode
   :ensure t
@@ -415,6 +421,9 @@
 (use-package flycheck
   :ensure t
   :pin melpa)
+
+(use-package lsp-mode
+  :ensure t)
 
 (use-package flyspell
   :ensure t)
