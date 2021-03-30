@@ -40,6 +40,7 @@ if (${OSTYPE} == 'cygwin') then
     set winhome = "${USERPROFILE}\CygwinHome"
     setenv PATH "${cyghome}/bin:${PATH}"
     setenv PATH "${PATH}:${cyghome}/.local/bin"
+    setenv PATH "${PATH}:${cyghome}/env/git-subrepo/lib"
 else
     #
     # Unix / Darwin   (aka non-Cygwin)
@@ -62,6 +63,7 @@ else
             /sbin \
             /usr/sbin \
             ~/.local/bin \
+            ~/env/git-subrepo/lib \
             .)
     endif
 endif
