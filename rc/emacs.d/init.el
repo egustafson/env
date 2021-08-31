@@ -250,7 +250,7 @@
   :init
   ; flycheck uses pylint and flake8 IIF installed
   (add-hook 'python-mode-hook 'flycheck-mode)
-  (add-hook 'python-mode-hook 'flyspell-prog-mode)
+  ;(add-hook 'python-mode-hook 'flyspell-prog-mode)
   :config
   (add-hook 'python-mode-hook 'turn-on-font-lock))
 
@@ -275,7 +275,7 @@
   (add-to-list 'smart-compile-alist '("\\.go\\'" . (go-smart-compile)))
   (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook 'go-eldoc-setup)
-;;  (add-hook 'go-mode-hook 'flycheck-mode)
+  (add-hook 'go-mode-hook 'flycheck-mode)
   (add-hook 'go-mode-hook 'lsp)
 ;;  (add-hook 'go-mode-hook 'flyspell-prog-mode)
   (add-hook 'go-mode-hook (lambda()

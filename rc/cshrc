@@ -62,9 +62,9 @@ else
             /usr/bin/X11 \
             /sbin \
             /usr/sbin \
+            . \
             ~/.local/bin \
-            ~/env/git-subrepo/lib \
-            .)
+            ~/env/git-subrepo/lib )
     endif
 endif
 
