@@ -126,6 +126,13 @@ else
 endif
 
 #
+## .cshrc.d hooks #########################
+#
+foreach cshfile (~/.cshrc.d/*.csh)
+    source $cshfile
+end
+
+#
 ## post-hooks #############################
 #
 if ( -e ~/.cshrc-local ) then
