@@ -48,6 +48,7 @@ else
     set prompt = "`whoami`@`hostname -s`> "
     umask 022
     limit coredumpsize 0
+    setenv GPG_TTY `tty`
 
     if (${shlvl} <= '1') then
         ##

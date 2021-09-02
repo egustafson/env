@@ -10,7 +10,7 @@ if ( ${?VIALAP} ) then # short circuit && doesn't appear to work
     ## KV Stuff.
     setenv VIASATIO_CA_PATH ~/ca/viasatio.crt
 
-    if (! $?KVD_VICE_USER && -d ~/.password-store ) then
+    if ( $?loginsh && ! $?KVD_VICE_USER && -d ~/.password-store ) then
         ## --  Initialize Credentials in ENV VARS  -----------------
         setenv KVD_VICE_USER "egustafson"
         setenv KVD_VICE_PASS `pass viasatio/egustafson`
