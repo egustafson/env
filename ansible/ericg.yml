@@ -15,6 +15,7 @@
         - hunspell-en-us
         - tree
         - tcsh
+        - pass
         - jq
         - traceroute
         - tcpdump
@@ -62,5 +63,14 @@
     user:
       name: "{{ ansible_user_id }}"
       shell: "/bin/tcsh"
+
+  - name: install keybase
+    vars:
+      keybase_url: "https://prerelease.keybase.io/keybase_amd64.deb"
+    become: yes
+    apt:
+      deb: "{{ keybase_url }}"
+    tags:
+      - keybase
 
 ...
