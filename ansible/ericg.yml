@@ -70,7 +70,6 @@
     become: yes
     apt:
       deb: "{{ keybase_url }}"
-    tags:
-      - keybase
+    tags: [ "keybase", "never" ]  # only run whith explicit tag 'keybase'
 
 ...
