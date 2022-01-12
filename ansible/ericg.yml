@@ -47,6 +47,13 @@
       - ansible_facts['distribution'] == 'Ubuntu'
       - ansible_facts['distribution_release'] == 'focal'
 
+  - name: ensure python3 is python
+    become: yes
+    community.general.alternatives:
+      name: python
+      link: /usr/bin/python
+      path: /usr/bin/python3
+
   - name: git pull env
     git:
       accept_hostkey: yes

@@ -1,0 +1,17 @@
+---
+# file: ~/env/ansible/make-ericg.yaml
+#
+# Create an 'ericg' user w/ SU privledges
+
+- hosts: all
+
+  tasks:
+
+  - name: create user ericg
+    become: yes
+    user:
+      name: ericg
+      password: "*" ## disable login
+      comment: "Eric Gustafson"
+      groups:
+        - sudo

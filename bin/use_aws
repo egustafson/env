@@ -1,0 +1,6 @@
+#!/bin/tcsh
+
+## source this file to bring AWS credentials into your environment.
+
+setenv AWS_ACCESS_KEY_ID `pass aws/ericg/access-id`
+setenv AWS_SECRET_ACCESS_KEY `pass aws/ericg/access-secret`
