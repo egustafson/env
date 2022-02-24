@@ -7,3 +7,5 @@
 	default = upstream
 [url "git@git.viasat.com:"]
 	insteadOf = https://git.viasat.com/
+[pull]
+	ff = only
