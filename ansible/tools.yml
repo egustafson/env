@@ -25,6 +25,7 @@
   roles:
     - { role: ansible,     tags: ansible }
     - { role: docker,      tags: docker }
+    - { role: dockercli,   tags: dockercli }
     - { role: etcdctl,     tags: etcdctl }
     - { role: vicecli,     tags: vicecli }
     - { role: grip,        tags: grip }        ## GitHub Previewer
