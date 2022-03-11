@@ -25,13 +25,13 @@
     msg: "{{ result.stdout }}  Installed."
 
 - name: install godoc locally (in ~/go/bin)
-  command: "go get golang.org/x/tools/cmd/godoc"
+  command: "go install golang.org/x/tools/cmd/godoc@latest"
 
 - name: install godef locally (in ~/go/bin)
-  command: "go get github.com/rogpeppe/godef"
+  command: "go install github.com/rogpeppe/godef@latest"
 
 - name: install gocode locally (in ~/go/bin)
-  command: "go get github.com/nsf/gocode"
+  command: "go install github.com/nsf/gocode@latest"
 
 ##
 ## -- protoc (gRPC) -- begin

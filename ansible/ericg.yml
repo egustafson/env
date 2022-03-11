@@ -15,7 +15,9 @@
         - hunspell-en-us
         - tree
         - tcsh
+        - man-db
         - pass
+        - curl
         - jq
         - traceroute
         - tcpdump
