@@ -36,6 +36,7 @@
     state: latest
     name:
       - docker-ce-cli
+      - docker-compose
 
 - name: add this user to the docker group
   become: yes
