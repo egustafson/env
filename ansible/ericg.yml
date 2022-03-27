@@ -13,6 +13,14 @@
       state: present
       reload: yes
 
+  - name: enable ping
+    become: yes
+    sysctl:
+      name: net.ipv4.ping_group_range
+      value: "0 2147483647"
+      state: present
+      reload: yes
+
   - name: install packages
     become: yes
     apt:
