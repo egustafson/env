@@ -5,6 +5,14 @@
 
   tasks:
 
+  - name: enable dmesg
+    become: yes
+    sysctl:
+      name: kernel.dmesg_restrict
+      value: '0'
+      state: present
+      reload: yes
+
   - name: install packages
     become: yes
     apt:
