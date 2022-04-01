@@ -38,12 +38,20 @@
       - docker-ce-cli
       - docker-compose
 
+- name: create a docker group if not exists
+  become: yes
+  group:
+    name: "docker"
+    gid: 999
+    state: present
+    system: yes
+
 - name: add this user to the docker group
   become: yes
   user:
     append: yes
     name: "{{ lookup('env', 'USER') }}"
-    group: "docker"
+    groups: "docker"
 
 - name: install python docker module
   become: yes
