@@ -2,4 +2,4 @@
 
 # WSL targeted script, although, it's helpful on other environments
 
-find /tmp -maxdepth 1 -user ${USER} -mtime +2 -print | xargs -r rm -r
+find /tmp -maxdepth 1 -user ${USER} -mtime +1 -print | xargs -r rm -r

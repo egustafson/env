@@ -103,6 +103,9 @@ if ($?loginsh && -x "${kc}") then
     # timeout (720 min = 12h)
     ${kc} --timeout 720 -q `~/bin/find-ssh-keyfiles.pl`
     source ~/.keychain/${hostname}-csh
+    if ($?SSH_AUTH_SOCK) then
+        touch `dirname $SSH_AUTH_SOCK`
+    endif
 endif
 
 ## Go language configuration
