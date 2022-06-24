@@ -100,10 +100,15 @@ endif
 ##
 set kc = `which keychain`  # Gentoo 'keychain'
 if ($?loginsh && -x "${kc}") then
+    if ($?SSH_AUTH_SOCK) then
+        if !(-e $SSH_AUTH_SOCK) then
+           ssh-agent -k >& /dev/null
+        endif
+    endif
     # timeout (720 min = 12h)
     ${kc} --timeout 720 -q `~/bin/find-ssh-keyfiles.pl`
     source ~/.keychain/${hostname}-csh
-    if ($?SSH_AUTH_SOCK) then
+    if ($?SSH_AUTH_SOCK && -e $SSH_AUTH_SOCK) then
         touch `dirname $SSH_AUTH_SOCK`
     endif
 endif
