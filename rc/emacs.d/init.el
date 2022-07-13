@@ -89,6 +89,11 @@
 (setq-default linum-format "%4d \u2502 ")
 (setq-default column-number-mode t)
 
+;; Prefer windows to be split vertically
+(setq
+ split-width-threshold 160
+ split-height-threshold nil)
+
 ;(setq-default compile-command "/usr/bin/make")
 ;;(setq-default compile-command "gmake")
 ;(setq-default compilation-read-command nil)    ;; do not prompt before compile
@@ -423,7 +428,9 @@
   :pin melpa)
 
 (use-package lsp-mode
-  :ensure t)
+  :ensure t
+  :init
+  (setq lsp-lens-enable nil))
 
 (use-package flyspell
   :ensure t)
