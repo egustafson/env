@@ -91,8 +91,9 @@
 
 ;; Prefer windows to be split vertically
 (setq
- split-width-threshold 160
- split-height-threshold nil)
+ split-width-threshold 240
+ split-height-threshold 40
+ even-window-sizes 'width-only)
 
 ;(setq-default compile-command "/usr/bin/make")
 ;;(setq-default compile-command "gmake")
