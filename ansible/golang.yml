@@ -1,0 +1,70 @@
+---
+
+- hosts: all
+
+  vars:
+    dl_url: "https://go.dev/dl/{{ latest_golang_ver }}.linux-amd64.tar.gz"
+    dl_dir: /tmp
+    install_dir: /usr/local
+
+  tasks:
+
+  - name: installed golang version
+    shell:
+      cmd: "go version | cut -d ' ' -f 3"
+    register: result
+
+  - name: set installed golang version
+    set_fact:
+      inst_golang_ver: "{{ result.stdout }}"
+
+  - name: fetch go.dev version
+    uri:
+      url: "https://go.dev/dl/?mode=json"
+      method: GET
+      return_content: yes
+    register: go_dev_json
+
+  - name: set latest golang version
+    set_fact:
+      latest_golang_ver: "{{ go_dev_json | json_query('json[0].version') }}"
+
+  - name: print versions
+    debug:
+      verbosity: 1
+      msg:
+        - "installed: {{ inst_golang_ver }}"
+        - "latest:    {{ latest_golang_ver }}"
+
+  - name: "Install new golang version ({{ latest_golang_ver }})"
+    when: latest_golang_ver > inst_golang_ver
+    block:
+
+      - name: download and unarchive golang
+        unarchive:
+          remote_src: yes
+          src: "{{ dl_url }}"
+          dest: "{{ dl_dir }}"
+
+      - name: change ownership
+        become: yes
+        file:
+          path: "{{ dl_dir }}/go"
+          state: directory
+          recurse: yes
+          owner: root
+          group: root
+
+      - name: rename with version
+        become: yes
+        shell:
+          cmd: "mv {{ dl_dir }}/go {{ install_dir }}/{{ latest_golang_ver }}"
+
+      - name: re-symlink go dir
+        become: yes
+        file:
+          src: "{{ install_dir }}/{{ latest_golang_ver }}"
+          dest: "{{ install_dir }}/go"
+          force: yes
+          state: link
+...
