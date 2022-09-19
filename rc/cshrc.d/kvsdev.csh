@@ -8,7 +8,6 @@ if ( ${?VIALAP} ) then # short circuit && doesn't appear to work
     alias code '/mnt/c/Users/egustafson/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
 
     ## KV Stuff.
-    alias kvctl ~/bin/kvctl-v0.6.9
     setenv VIASATIO_CA_PATH ~/ca/viasatio.crt
 
     setenv KVCTL_CERT ~/pki/kvsapi-nonprod/kvs-client-chain.pem
