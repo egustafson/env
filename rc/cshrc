@@ -3,6 +3,10 @@
 #
 ## pre-hooks #############################
 #
+if (( $?WSL_DISTRO_NAME ) && (! $?WSLPATH )) then
+    setenv WSLPATH "$PATH"
+endif
+#
 if ( -e ~/.cshrc-local ) then
     set _cshrc_prehook=true
     source ~/.cshrc-local
