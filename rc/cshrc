@@ -138,6 +138,12 @@ else
     endif
 endif
 
+## Rust language configuration
+##
+if (-d ~/.cargo/bin) then;
+    set path = ( ~/.cargo/bin $path )
+endif
+
 #
 ## .cshrc.d hooks #########################
 #
