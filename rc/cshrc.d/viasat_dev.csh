@@ -2,6 +2,10 @@
 
 if ( ${?VIALAP} ) then # short circuit && doesn't appear to work
 
+    # reset Kubernetes configuration(s)
+    unalias kubectl
+    unsetenv KUBECONFIG
+
     # setenv GO111MODULE on
     setenv GOPRIVATE 'git.viasat.com/*'
 
@@ -10,8 +14,8 @@ if ( ${?VIALAP} ) then # short circuit && doesn't appear to work
     ## KV Stuff.
     setenv VIASATIO_CA_PATH ~/ca/viasatio.crt
 
-    setenv KVCTL_CERT ~/pki/kvsapi-nonprod/kvs-client-chain.pem
-    setenv KVCTL_KEY  ~/pki/kvsapi-nonprod/kvs-client-key.pem
+    setenv KVCTL_CERT ~/pki/kv-client-egg/kv-client-chain.pem
+    setenv KVCTL_KEY  ~/pki/kv-client-egg/kv-client-key.pem
 
     if ( $?loginsh && ! $?KVD_VICE_USER && -d ~/.password-store ) then
         ## --  Initialize Credentials in ENV VARS  -----------------

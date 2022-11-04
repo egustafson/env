@@ -141,7 +141,7 @@ endif
 ## Rust language configuration
 ##
 if (-d ~/.cargo/bin) then;
-    set path = ( ~/.cargo/bin $path )
+    set path = ( $path ~/.cargo/bin )
 endif
 
 #
