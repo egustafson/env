@@ -73,6 +73,10 @@ else
     endif
 endif
 
+if ( $?WSL_DISTRO_NAME ) then
+    set path = ( $path /usr/lib/wsl/lib )
+endif
+
 ## Squash xterm-256color -> xterm  (for WSL on Windows)
 if (${term} == 'xterm-256color') then
     set term = 'xterm'
