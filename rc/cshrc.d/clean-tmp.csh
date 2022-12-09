@@ -2,4 +2,11 @@
 
 # WSL targeted script, although, it's helpful on other environments
 
-find /tmp -maxdepth 1 -user ${USER} -mtime +1 -print | xargs -r rm -r
+if ($?SSH_AUTH_SOCK) then
+    find /tmp -maxdepth 1 \
+              -mindepth 1 \
+              -not -path ${SSH_AUTH_SOCK:h} \
+              -user ${USER} \
+              -mtime +2 \
+              -print | xargs -r rm -r
+endif
