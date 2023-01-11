@@ -25,6 +25,7 @@ set nobeep
 unset autologout
 setenv NAME "Eric Gustafson"
 alias ls "ls -F"
+alias df "df -x aufs -x squashfs -x tmpfs"
 alias pwd 'echo $cwd'
 alias . exit
 alias more less
