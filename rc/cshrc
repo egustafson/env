@@ -79,8 +79,10 @@ if ( $?WSL_DISTRO_NAME ) then
 endif
 
 ## Squash xterm-256color -> xterm  (for WSL on Windows)
-if (${term} == 'xterm-256color') then
-    set term = 'xterm'
+if ( $?term ) then
+    if (${term} == 'xterm-256color') then
+        set term = 'xterm'
+    endif
 endif
 
 ## Editor set-up (Emacs preferred)
