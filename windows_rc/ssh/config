@@ -1,0 +1,14 @@
+#
+# Example ssh_config file for use with VSCode.  Place this file, and
+# appropriate IdentityFile(s) in c:\Users\<username>\.ssh\config
+#
+
+Host 10.252.224.60
+  HostName 10.252.224.60
+  User egustafson
+  IdentityFile ~/.ssh/viasat.pem
+
+
+Host eggdev
+  User egustafson
+  IdentityFile ~/.ssh/viasat.pem
