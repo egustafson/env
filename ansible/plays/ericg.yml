@@ -21,20 +21,20 @@
       state: present
       reload: yes
 
-  - name: add Ubuntu Emacs Daily Snapshot PPA repository
-    become: yes
-    apt_repository:
-      repo: "ppa:ubuntu-elisp/ppa"
-      state: present
+#   - name: add Ubuntu Emacs Daily Snapshot PPA repository
+#     become: yes
+#     apt_repository:
+#       repo: "ppa:ubuntu-elisp/ppa"
+#       state: present
 
   - name: install packages
     become: yes
     apt:
       state: latest
       name:
-        - emacs-snapshot-nox
-        - emacs-snapshot-common
-        # - emacs-nox
+        # - emacs-snapshot-nox
+        # - emacs-snapshot-common
+        - emacs-nox
         - sshpass
         - hunspell
         - hunspell-en-us
