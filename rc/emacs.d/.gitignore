@@ -1,5 +1,6 @@
 *.elc
 auto-save-list
+/eln-cache
 
 # ELPA - Emacs Lisp Package Archive
 elpa

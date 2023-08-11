@@ -20,7 +20,7 @@
 - hosts: all
   vars:
     etcd_ver:   "v3.4.14"
-    golang_ver: "1.20.6"
+    golang_ver: "1.21.0"
     protoc_ver: "3.19.4"
     # protoc_ver: "3.14.0"
   roles:
