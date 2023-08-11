@@ -72,6 +72,9 @@ linkup("config", ".config")
 ##
 linkup("ssh", ".ssh")
 
+## link gnupg into ~/.gnupg
+linkup("gnupg", ".gnupg")
+
 ## link bin into ~/bin
 ##
 linkup("bin")
