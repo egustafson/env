@@ -1,6 +1,6 @@
 # I am a C-Shell -*- shell-script -*-
 
-if ( ${?VIALAP} ) then # short circuit && doesn't appear to work
+if ( ${?VIALAP} && $?loginsh ) then
 
     # reset Kubernetes configuration(s)
     unalias kubectl
@@ -20,7 +20,6 @@ if ( ${?VIALAP} ) then # short circuit && doesn't appear to work
     setenv KVCTL_CERT ~/pki/kv-client-egg/kv-client-chain.pem
     setenv KVCTL_KEY  ~/pki/kv-client-egg/kv-client-key.pem
 
-    #if ( ! $?KVD_VICE_USER && -d ~/.password-store ) then
     if ( -d ~/.password-store ) then
         ## --  Initialize Credentials in ENV VARS  -----------------
         setenv KVD_VICE_USER "egustafson"

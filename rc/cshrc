@@ -107,13 +107,14 @@ if ($?_emacsclient) then
 endif
 
 ## Setup SSH agent forwarding.
-##  - don't run keychain if this isn't a login ($loginsh) shell.
+#
+#    But, don't run this if we're not a login shell
 ##
 set kc = `which keychain`  # Gentoo 'keychain'
 if ($?loginsh && -x "${kc}") then
     if ($?SSH_AUTH_SOCK) then
         if !(-e $SSH_AUTH_SOCK) then
-           ssh-agent -k >& /dev/null
+            ssh-agent -k >& /dev/null
         endif
     endif
     # timeout (720 min = 12h)
