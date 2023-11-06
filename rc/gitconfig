@@ -9,3 +9,5 @@
 	insteadOf = https://git.viasat.com/
 [pull]
 	ff = only
+[init]
+	defaultBranch = main
