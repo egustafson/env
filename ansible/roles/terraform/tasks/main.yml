@@ -4,22 +4,22 @@
 # Install Terraform (https://learn.hashicorp.com/tutorials/terraform/install-cli)
 
 - name: add hashicorp repository key
-  become: yes
+  become: true
   apt_key:
     url: "https://apt.releases.hashicorp.com/gpg"
     state: present
 
 - name: add hashicorp repository
-  become: yes
+  become: true
   apt_repository:
     repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_facts.distribution_release }} main"
     state: present
     mode: '0644'
 
 - name: install terraform
-  become: yes
+  become: true
   apt:
-    update_cache: yes
+    update_cache: true
     state: latest
     name:
       - terraform

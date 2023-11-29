@@ -43,6 +43,7 @@
         - man-db
         - pass
         - curl
+        - wget
         - jq
         - traceroute
         - tcpdump
