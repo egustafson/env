@@ -22,11 +22,15 @@ if ( $#argv <= 0 ) then
 endif
 
 if ( "$argv" == "-l" || "$argv" == "--list" ) then
-    echo "# kube envs:"
-    set kconfigs = `(cd ~/.kube; /usr/bin/ls *.config | sed 's/\.config//')`
-    foreach config ( $kconfigs )
-        echo "  - $config"
-    end
+    set kconfigs = `(cd ~/.kube; /usr/bin/ls | grep '\.config$' | sed 's/\.config//')`
+    if ( $#kconfigs <= 0 ) then
+        echo "# kube envs:  <none>"
+    else
+        echo "# kube envs:"
+        foreach config ( $kconfigs )
+            echo "  - $config"
+        end
+    endif
     unset kconfigs
     exit 0
 endif
