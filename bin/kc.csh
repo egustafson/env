@@ -54,7 +54,7 @@ if ( ! ( -r $kconfig ) ) then
 endif
 
 setenv KUBECONFIG $kconfig
-set prompt = "{$argv[1]} $cleanprompt"
+set prompt = "{$argv[1]} $cleanprompt "
 unset kconfig
 unset cleanprompt
 
