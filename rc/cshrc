@@ -106,6 +106,9 @@ if ($?_emacsclient) then
     alias em-kill "client_emacs-kill.sh"
 endif
 
+## direct Keybase to NOT start the GUI
+setenv KEYBASE_NO_GUI 1
+
 ## Setup SSH agent forwarding.
 #
 #    But, don't run this if we're not a login shell
