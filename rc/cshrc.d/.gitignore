@@ -1,1 +1,6 @@
-/alohomora-ids.csh
+# .gitignore
+
+/*_local.csh
+
+
+# end: .gitignore
