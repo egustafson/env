@@ -13,12 +13,18 @@
       state: present
       reload: yes
 
+  - name: which ping
+    command: "which ping"
+    register: ping_path
+    ignore_errors: true
+
   - name: enable ping
     become: yes
     capabilities:
-      path: /usr/bin/ping
+      path: "{{ ping_path.stdout }}"
       capability: cap_net_raw+p
       state: present
+    when: ping_path.stdout | length > 0
 
 #   - name: add Ubuntu Emacs Daily Snapshot PPA repository
 #     become: yes
