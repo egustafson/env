@@ -9,5 +9,7 @@
 	insteadOf = https://git.viasat.com/
 [pull]
 	ff = only
+[safe]
+	directory = /srv/homeassistant/config
 [init]
 	defaultBranch = main
