@@ -74,6 +74,11 @@ else
     endif
 endif
 
+if (${OSTYPE} == 'FreeBSD') then
+    unalias df
+    set path = ( $path /usr/local/sbin )
+endif
+
 if ( $?WSL_DISTRO_NAME ) then
     set path = ( $path /usr/lib/wsl/lib )
 endif
