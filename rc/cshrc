@@ -25,12 +25,15 @@ set nobeep
 unset autologout
 setenv NAME "Eric Gustafson"
 alias ls "ls -F"
-alias df "df -x aufs -x squashfs -x tmpfs"
 alias pwd 'echo $cwd'
 alias . exit
 alias more less
 alias tb 'echo -n "\033]0;${HOST}\007"'
 unalias vi
+
+if (${OSTYPE} == 'linux') then
+    alias df "df -x aufs -x squashfs -x tmpfs -x devtmpfs -x overlay"
+endif
 
 if (${OSTYPE} == 'cygwin') then
     #
