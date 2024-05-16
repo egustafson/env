@@ -5,11 +5,6 @@ HashKnownHosts no
 LogLevel ERROR
 # SendEnv LC_AUTH_*
 
-## Sepecial Overrides
-
-Host 10.3.4.3 vjump.elfwerks
-    User egustafson
-
 ## Elfwerks
 ##
 Host git.elfwerks gitolite.elfwerks
@@ -19,7 +14,7 @@ Host portal.elfwerks.org
     User ericg
     Port 1022
 
-Host *.elfwerks 10.3.4.*
+Host *.elfwerks 10.3.*
     User ericg
     ForwardX11 yes
     ForwardX11Trusted yes
@@ -38,9 +33,6 @@ Host *.elfwerks.net
     ForwardAgent yes
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
-
-Host thames-gw.ddns.net
-    CheckHostIP no
 
 
 ## GitHub
@@ -69,13 +61,6 @@ Host localhost
     UserKnownHostsFile /dev/null
     StrictHostKeyChecking no
 
-Host 10.3.*
-    ForwardX11 yes
-    ForwardX11Trusted yes
-    ForwardAgent yes
-    UserKnownHostsFile /dev/null
-    StrictHostKeyChecking no
-
 
 ## Viasat
 ##
@@ -83,31 +68,12 @@ Host 10.3.*
 Host git.viasat.com
     User git
 
-Host *.vialab 10.3.71.* vjump.* via-router.* 10.3.4.3 10.3.255.2
-    User egustafson
-    ForwardAgent yes
-    StrictHostKeyChecking no
-
-Host eggdev
-    User egustafson
-    ForwardAgent yes
-    StrictHostKeyChecking no
-    ServerAliveInterval 60
-
 Host 10.* *.viasat.io
     User egustafson
     ForwardAgent yes
     StrictHostKeyChecking no
     ServerAliveInterval 60
 
-# VirtualBox Internal Host Network (alternate)
-Host 10.4.5.*
-    User egustafson
-    ForwardX11 yes
-    ForwardX11Trusted yes
-    ForwardAgent yes
-    UserKnownHostsFile /dev/null
-    StrictHostKeyChecking no
 
 ## Local Variables:
 ## comment-start: "# "
