@@ -21,15 +21,18 @@
 ;;   see also:  https://elpa.gnu.org/packages/gnu-elpa-keyring-update.html
 ;;    (and env/initialize-emacs.el)
 ;;
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list 'package-archives '("melpa"          . "http://stable.melpa.org/packages/") t)
-  (add-to-list 'package-archives '("melpa-unstable" . "http://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("gnu"            . "https://elpa.gnu.org/packages") t)
-  (package-initialize))
+  (progn
+    (require 'package)
+    (add-to-list 'package-archives '("melpa"          . "http://stable.melpa.org/packages/") t)
+    (add-to-list 'package-archives '("melpa-unstable" . "http://melpa.org/packages/") t)
+    (add-to-list 'package-archives '("gnu"            . "https://elpa.gnu.org/packages") t))
+  (when (< emacs-major-version 27)(package-initialize)))
 
 ;; Ensure gnu-elpa-keyring-update is loaded and in use (see above for URL)
 (unless (package-installed-p 'gnu-elpa-keyring-update)
+  (setq package-check-signature nil)
   (package-refresh-contents)
   (package-install 'gnu-elpa-keyring-update))
 
@@ -206,6 +209,11 @@
 (autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby scripts." t)
 
 
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+  :pin melpa)
 
 (use-package validate
   :ensure t
@@ -423,10 +431,6 @@
 ;  (yas-reload-all)
 ;  (use-package go-snippets
 ;    :ensure))
-
-(use-package flycheck
-  :ensure t
-  :pin melpa)
 
 (use-package lsp-mode
   :ensure t
