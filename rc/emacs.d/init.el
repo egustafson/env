@@ -348,6 +348,10 @@
           ("go"     . "\\.gohtml\\'")
           ("go"     . "\\.gotmpl\\'"))))
 
+(use-package nginx-mode
+  :defer t
+  :ensure t)
+
 (use-package js2-mode
   :ensure t
   :mode "\\.js\\'")
