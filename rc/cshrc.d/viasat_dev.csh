@@ -2,6 +2,9 @@
 
 if ( ${?VIALAP} && $?loginsh ) then
 
+    # Alohomora -> SAML Profile
+    setenv AWS_DEFAULT_PROFILE saml
+
     # reset Kubernetes configuration(s)
     unalias kubectl
     unsetenv KUBECONFIG
@@ -17,8 +20,8 @@ if ( ${?VIALAP} && $?loginsh ) then
     ## KV Stuff.
     setenv VIASATIO_CA_PATH ~/ca/viasatio.crt
 
-    setenv KVCTL_CERT ~/pki/egustafson-client/kv-client-chain.pem
-    setenv KVCTL_KEY  ~/pki/egustafson-client/kv-client-key.pem
+    setenv KVCTL_CERT ~/pki/egustafson-client/kvs-client-chain.pem
+    setenv KVCTL_KEY  ~/pki/egustafson-client/kvs-client-key.pem
 
     if ( -d ~/.password-store ) then
         ## --  Initialize Credentials in ENV VARS  -----------------
