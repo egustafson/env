@@ -162,7 +162,6 @@
 ;;
 (load "~/.emacs.d/comment")
 (load "~/.emacs.d/vi-find-matching-paren")
-;(load "~/.emacs.d/plantuml.el")  ;; cygwin only
 (autoload 'pgp-encrypt-buffer "pgp" "Encrypt current buffer with PGP." t)
 
 
@@ -366,7 +365,13 @@
 
 (use-package json-mode
   :ensure t
-  :mode "\\.json\\'")
+  :mode "\\.json\\'"
+  :config
+  (add-hook 'json-mode-hook
+            (lambda ()
+              (make-local-variable 'js-indent-level)
+              (setq tab-width 2)
+              (setq js-indent-level 2))))
 
 (use-package yaml-mode
   :ensure t
