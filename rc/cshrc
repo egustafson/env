@@ -190,4 +190,5 @@ endif
 
 ## Local Variables:
 ## mode: shell-script
+## sh-shell: tcsh
 ## End:
