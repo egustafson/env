@@ -18,10 +18,18 @@ if ( ${?VIALAP} && $?loginsh ) then
     endif
 
     ## KV Stuff.
+    setenv ETCDCTL_ENDPOINTS 'http://localhost:2379'
+
     setenv VIASATIO_CA_PATH ~/ca/viasatio.crt
 
     setenv KVCTL_CERT ~/pki/egustafson-client/kvs-client-chain.pem
     setenv KVCTL_KEY  ~/pki/egustafson-client/kvs-client-key.pem
+
+    ## KV Regression Testing
+    setenv KVREG_CERT $KVCTL_CERT
+    setenv KVREG_KEY $KVCTL_KEY
+    setenv KVREG_CA $VIASATIO_CA_PATH
+    setenv KVREG_TARGET internal
 
     if ( -d ~/.password-store ) then
         ## --  Initialize Credentials in ENV VARS  -----------------
@@ -34,18 +42,7 @@ if ( ${?VIALAP} && $?loginsh ) then
         setenv VICECLI_USER "egustafson"
         setenv VICECLI_PWD `pass viasatio/egustafson`
 
-        setenv ETCDCTL_ENDPOINTS 'http://localhost:2379'
-    endif
-
-    ## Orbit stuff.
-    #ssh-add -q ~/.ssh/orbitnp.key
-    #ssh-add -q ~/.ssh/orbitprod.key
-    #ssh-add -q ~/.ssh/orbit-jenkins-pp-slave.key
-
-    ## IDS Drone Stuff
-    if ( -d ~/.password-store) then
-        setenv DRONE_SERVER https://drone-dev.interactivedatastore.viasat.io/
-        setenv DRONE_TOKEN `pass ents/drone/token`
+        setenv KVREG_USER_egustafson `pass viasatio/egustafson`
     endif
 
 endif
