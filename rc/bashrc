@@ -1,5 +1,14 @@
 ##  ~/.bashrc  #######################################################
 
+if [[ -n "$WSL_DISTRO_NAME" && -z "$WSLPATH" ]]; then
+    export WSLPATH="$PATH"
+fi
+#
+if [ -e ~/.bashrc-local ]; then
+    _bashrc_prehook=true
+    . ~/.bashrc-local
+    unset _bashrc_prehook
+fi
 
 ## Local Variables:
 ## mode: shell-script
