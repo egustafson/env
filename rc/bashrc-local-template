@@ -1,0 +1,34 @@
+##  ~/.bashrc-local (Viasat)  ########################################
+#
+# to be sourced by .bashrc
+#
+## warning #################################################
+##
+##    DO NOT add code to this file, unguarded.
+##    this file is sourced multiple times by .bashrc
+
+## #####################################
+## Early (pre) execution
+##
+if [[ -n "${_bashrc_prehook}" ]]; then
+    #
+    # insert early-run bashrc customization here.
+    #
+    :  # <-- noop, remove this line when adding hook cmds
+    echo "_bashrc_prehook"  # <- REMOVE ME
+fi
+
+## #####################################
+## Late (post) execution
+if [[ -n "${_bashrc_posthook}" ]]; then
+    #
+    # insert late-run bashrc customization here.
+    #
+    :  # <-- noop, remove this line when adding hook cmds
+    echo "_bashrc_posthook"  # <- REMOVE ME
+fi
+
+## Local Variables:
+## mode: shell-script
+## sh-shell: bash
+## End:

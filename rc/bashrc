@@ -1,8 +1,13 @@
 ##  ~/.bashrc  #######################################################
+#
 
 if [[ -n "$WSL_DISTRO_NAME" && -z "$WSLPATH" ]]; then
     export WSLPATH="$PATH"
 fi
+
+##  import library functions
+#
+source ~/.bashrc.d/lib.bashrc
 
 ##  pre-hooks  ###################################
 #
@@ -12,15 +17,11 @@ if [[ -e ~/.bashrc-local ]]; then
     unset _bashrc_prehook
 fi
 
-##  import library functions
-#
-source ~/.bashrc.d/lib.bashrc
-
 #
 ## main bashrc #########################
 #
 #export HOSTNAME=`hostname`
-export PS1="\h$ "
+export PS1="\h\$> "
 set -o notify
 bind "set bell-style none"  # nobeep
 unset TMOUT          # disable auto-logout
@@ -51,13 +52,13 @@ else
     #
     # Unix / Darwin   (aka non-Cygwin)
     #
-    export PS1="\u@\h\$ "
+    export PS1="\u@\h\$> "
     umask 022
     ulimit -c 0  # limit coredump size
     export GPG_TTY=$(tty)
 
     if [[ "$SHLVL" -le 1 ]]; then
-        echo "setting path"
+        # echo "setting path"
         setpath \
             ~/bin \
             /usr/local/bin \
@@ -106,7 +107,7 @@ export KEYBASE_NO_GUI=1
 #
 #    but, don't run this if we're not a login shell
 ##
-kc=$(which keychain)   # Gentoo 'keychain'
+kc=$(command -v keychain)   # Gentoo 'keychain'
 if shopt -q login_shell && [[ -x "$kc"  ]]; then
     if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
         ssh-agent -k > /dev/null 2&>1
@@ -139,7 +140,8 @@ fi
 ##  .bashrc.d hooks  #############################
 #
 for BASHFILE in ~/.bashrc.d/[0-9]*.bashrc; do
-    echo "sourcing: $BASHFILE"
+    # echo "sourcing: $BASHFILE"
+    . "$BASHFILE"
 done
 
 ##  post-hooks  ##################################
