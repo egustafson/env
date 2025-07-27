@@ -110,7 +110,7 @@ export KEYBASE_NO_GUI=1
 kc=$(command -v keychain)   # Gentoo 'keychain'
 if shopt -q login_shell && [[ -x "$kc"  ]]; then
     if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
-        ssh-agent -k > /dev/null 2&>1
+        ssh-agent -k > /dev/null 2>&1
     fi
     # timeout (720 min = 12h)
     "$kc" --timeout 720 -q $(~/bin/find-ssh-keyfiles.pl)
