@@ -11,7 +11,7 @@ function setpath {
 
 ##  prpath - echo the $PATH \n delineated
 #
-function prpath {
+function lspath {
     echo "${PATH//:/$'\n'}"
 }
 

@@ -124,7 +124,7 @@ fi
 #
 local_go="/usr/local/go/bin/go"
 if [[ -x "$local_go" ]]; then
-    export PATH="$local_go:$PATH"  # put local go at the front
+    export PATH="${local_go%/*}:$PATH"  # put local go at the front
 fi
 export GOPATH=~/go
 if [[ -d "$GOPATH" ]]; then
