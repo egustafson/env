@@ -15,6 +15,11 @@ function lspath {
     echo "${PATH//:/$'\n'}"
 }
 
+##  reload - re-source the .bashrc
+function reload {
+    . ~/.bashrc
+}
+
 ## Local Variables:
 ## mode: shell-script
 ## sh-shell: bash
