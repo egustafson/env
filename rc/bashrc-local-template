@@ -10,7 +10,7 @@
 ## #####################################
 ## Early (pre) execution
 ##
-if [[ -n "${_bashrc_prehook}" ]]; then
+if [ -n "${_bashrc_prehook}" ]; then
     #
     # insert early-run bashrc customization here.
     #
@@ -20,7 +20,7 @@ fi
 
 ## #####################################
 ## Late (post) execution
-if [[ -n "${_bashrc_posthook}" ]]; then
+if [ -n "${_bashrc_posthook}" ]; then
     #
     # insert late-run bashrc customization here.
     #
