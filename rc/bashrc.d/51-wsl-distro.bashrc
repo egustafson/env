@@ -19,6 +19,9 @@ if [ -n "$WSL_DISTRO_NAME" ]; then
 
     export PS1="\h($distro)\$> "
     alias code="/mnt/c/Users/${USER}/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
+
+    export BROWSER="/mnt/c/Program\ Files/BraveSoftware/Brave-Browser/Application/brave.exe"
+    alias brave="$BROWSER"
 fi
 
 ## Local Variables:
