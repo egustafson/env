@@ -26,25 +26,17 @@
       state: present
     when: ping_path.stdout | length > 0
 
-#   - name: add Ubuntu Emacs Daily Snapshot PPA repository
-#     become: yes
-#     apt_repository:
-#       repo: "ppa:ubuntu-elisp/ppa"
-#       state: present
-
   - name: install packages
     become: yes
     apt:
       state: latest
       name:
-        # - emacs-snapshot-nox
-        # - emacs-snapshot-common
         - emacs-nox
         - sshpass
         - hunspell
         - hunspell-en-us
+        - tmux
         - tree
-        - tcsh
         - man-db
         - pass
         - curl
@@ -59,26 +51,6 @@
         - atop
     when:
       - ansible_facts['distribution'] == 'Ubuntu' or ansible_facts['distribution'] == 'Debian'
-
-  - name: install packages for Ubuntu Bionic
-    become: yes
-    apt:
-      state: latest
-      name:
-        - python
-    when:
-      - ansible_facts['distribution'] == 'Ubuntu'
-      - ansible_facts['distribution_release'] == 'bionic'
-
-  - name: install packages for Focal-Fossa
-    become: yes
-    apt:
-      state: latest
-      name:
-        - python-is-python3
-    when:
-      - ansible_facts['distribution'] == 'Ubuntu'
-      - ansible_facts['distribution_release'] == 'focal'
 
   - name: ensure python3 is python
     become: yes
@@ -97,12 +69,6 @@
     shell:
       chdir: "{{ ansible_env.HOME }}"
       cmd: "/usr/bin/python env/install.py"
-
-  - name: set shell to tcsh
-    become: yes
-    user:
-      name: "{{ ansible_user_id }}"
-      shell: "/bin/tcsh"
 
   - name: install keybase
     vars:
