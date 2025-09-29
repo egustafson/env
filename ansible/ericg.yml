@@ -12,6 +12,7 @@
       value: '0'
       state: present
       reload: yes
+    when: not ansible_virtualization_type == "lxc"
 
   - name: which ping
     command: "which ping"
