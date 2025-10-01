@@ -30,11 +30,11 @@ export NAME="Eric Gustafson"
 
 alias ls='ls -F'
 
-if [ "$OSTYPE" == "linux" ]; then
+if [[ "$OSTYPE" == "linux"* ]]; then
     alias df="df -x aufs -x squashfs -x tmpfs -x devtmpfs -x overlay"
 fi
 
-if [ "$OSTYPE" == "cygwin" ]; then
+if [[ "$OSTYPE" == "cygwin" ]]; then
     #
     # Cygwin
     #
@@ -73,7 +73,7 @@ else
     fi
 fi
 
-if [ "$OSTYPE" == "FreeBSD" ]; then
+if [[ "$OSTYPE" == "FreeBSD" ]]; then
     unalias df
     export PATH="$PATH:/usr/local/sbin"
 fi
@@ -91,7 +91,7 @@ fi
 export EDITOR="emacs"
 alias emacs="emacs -nw"
 
-if [ "$OSTYPE" == "darwin" ]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
     #
     # Mac OS X  (Darwin)
     em="/Applications/Emacs.app/Contents/MacOS/Emacs"
@@ -157,7 +157,7 @@ fi
 
 ##  Cygwin: fix-up paths  (last thing, be defensive)
 #
-if [ "$OSTYPE" == "cygwin" ]; then
+if [[ "$OSTYPE" == "cygwin" ]]; then
     export PATH=$(~/bin/cyg_fixpath.py)
 fi
 
