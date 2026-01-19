@@ -1,0 +1,57 @@
+---
+# file:  ~/env/ansible/roles/kube/tasks/main.yml
+#
+# Install Kuberenetes client applications
+# - https://kubernetes.io/docs/tasks/tools/
+
+- name: install kubectl
+  block:
+    - name: lookup latest kube release version
+      set_fact:
+        kube_ver: "{{ lookup('ansible.builtin.url', 'https://dl.k8s.io/release/stable.txt') }}"
+    - name: download kubectl
+      get_url:
+        url: "https://dl.k8s.io/release/{{ kube_ver }}/bin/linux/amd64/kubectl"
+        dest: "{{ ansible_user_dir }}/bin/kubectl-{{ kube_ver }}"
+        mode: '0555'
+    - name: (re)link short name
+      file:
+        path: "{{ ansible_user_dir }}/bin/kubectl"
+        src: "kubectl-{{ kube_ver }}"
+        state: link
+        force: yes
+
+- name: install kind
+  vars:
+    kind_ver_url: "https://api.github.com/repos/kubernetes-sigs/kind/releases/latest"
+  block:
+    - name: lookup latest kind release version
+      set_fact:
+        kind_ver: "{{ lookup('ansible.builtin.url', kind_ver_url) | from_json | json_query('tag_name') }}"
+    - name: download kind
+      get_url:
+        url: "https://github.com/kubernetes-sigs/kind/releases/download/{{ kind_ver }}/kind-linux-amd64"
+        dest: "{{ ansible_user_dir }}/bin/kind-{{ kind_ver }}-linux-amd64"
+        mode: '0555'
+    - name: (re)link short name
+      file:
+        path: "{{ ansible_user_dir }}/bin/kind"
+        src: "kind-{{ kind_ver }}-linux-amd64"
+        state: link
+        force: yes
+
+# - name: install helm
+#   vars:
+#     helm_ver_url: "https://api.github.com/repos/helm/helm/releases/latest"
+#   block:
+#     - name: lookup latest helm release version
+#       set_fact:
+#         helm_ver: "{{ lookup('ansible_builtin.url', helm_ver_url) | from_json | json_query('tag_name') }}"
+#     - debug:
+#         var: helm_ver
+#     - name: download helm
+#       get_url:
+#         url: "https://github.com/helm/helm/releases/download/{{ helm_ver }}/helm-{{ helm_ver }}-linux-amd64.tar.gz"
+#         dest: "{{ ansible_user_dir }}/bin/helm-{{ helm_ver }}-linux-amd64.tar.gz"
+#         mode: '0555'
+

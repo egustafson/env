@@ -27,6 +27,7 @@
     # protoc_ver: "3.14.0"
   roles:
     - { role: ansible,     tags: ansible }
+    - { role: kube,        tags: kube }        ## Kubernetes client tools
     - { role: docker,      tags: docker }
     - { role: dockercli,   tags: dockercli }
     - { role: etcdctl,     tags: etcdctl }
