@@ -55,3 +55,48 @@
 #         dest: "{{ ansible_user_dir }}/bin/helm-{{ helm_ver }}-linux-amd64.tar.gz"
 #         mode: '0555'
 
+- name: install stern
+  vars:
+    stern_ver_url: "https://api.github.com/repos/stern/stern/releases/latest"
+  block:
+    - name: lookup latest stern release version
+      set_fact:
+        stern_ver: "{{ lookup('ansible.builtin.url', stern_ver_url) | from_json | json_query('tag_name') }}"
+    - name: check if latest version is already present
+      stat:
+        path: "{{ ansible_user_dir }}/bin/stern_{{ stern_ver }}_linux_amd64"
+      register: stern_file_stat
+    - debug:
+        msg: "stern {{ stern_ver }} is already installed"
+      when: stern_file_stat.stat.exists
+    - name: "download and install stern {{ stern_ver }}"
+      when: not stern_file_stat.stat.exists
+      block:
+        - name: tmp file for zip file download
+          tempfile:
+            state: file
+            suffix: ".tar.gz"
+          register: stern_tmp_file
+        - name: download stern tgz file
+          get_url:
+            url: "https://github.com/stern/stern/releases/download/{{ stern_ver }}/stern_{{ stern_ver[1:] }}_linux_amd64.tar.gz"
+            dest: "{{ stern_tmp_file.path }}"
+            force: true
+        - name: unarchive stern zip file
+          unarchive:
+            src: "{{ stern_tmp_file.path }}"
+            dest: "{{ ansible_user_dir }}/bin/"
+            include:
+              - "stern"
+        - name: rename stern to versioned filename
+          command:
+            cmd: "mv {{ ansible_user_dir }}/bin/stern {{ ansible_user_dir }}/bin/stern_{{ stern_ver }}_linux_amd64"
+        - name: (re)link short name
+          file:
+            path: "{{ ansible_user_dir }}/bin/stern"
+            src: "stern_{{ stern_ver }}_linux_amd64"
+            state: link
+            force: yes
+        - name: clean up temporary download file
+          file:
+            path: "{{ stern_tmp_file.path }}"
