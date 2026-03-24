@@ -1,6 +1,6 @@
 ##  ~/.bashrc.d/ module  #############################################
 
-if [ "$SHLVL" -le "1" ] && [ -n "$VIALAP" ]; then
+if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
 
     # VICE
     export VICECLI_USER="egustafson"

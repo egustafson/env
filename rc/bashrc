@@ -108,7 +108,7 @@ export KEYBASE_NO_GUI=1
 #    but, don't run this if we're not a login shell
 ##
 kc=$(command -v keychain)   # Gentoo 'keychain'
-if [ "$SHLVL" -le "1" ] && [ -x "$kc"  ]; then
+if [ "$SHLVL" -le 1 ] && [ -x "$kc"  ]; then
     if [ ! -S "$SSH_AUTH_SOCK" ]; then
         ssh-agent -k > /dev/null 2>&1
     fi
@@ -135,6 +135,9 @@ fi
 #
 if [ -d ~/.cargo/bin ]; then
     export PATH="$PATH:$HOME/.cargo/bin"
+    if [ -f ~/.cargo/env ]; then
+        source "$HOME/.cargo/env"
+    fi
 fi
 
 ##  .bashrc.d hooks  #############################

@@ -16,6 +16,9 @@ if [ -n "${_bashrc_prehook}" ]; then
     #
     :  # <-- noop, remove this line when adding hook cmds
     echo "_bashrc_prehook"  # <- REMOVE ME
+
+    # enable bash verbose/debug output
+    #set -x
 fi
 
 ## #####################################
