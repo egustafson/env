@@ -3,7 +3,8 @@
 if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
 
     # VICE
-    export VICECLI_USER="egustafson"
+    export VICE_USERNAME="egustafson"
+    export VICECLI_USER="$VICE_USERNAME"
 
     # Alohomora -> SAML Profile
     export AWS_DEFAULT_PROFILE="saml"
@@ -18,7 +19,10 @@ if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
     export GOPRIVATE="git.viasat.com/*"
 
     if [ -d ~/.password-store ]; then
-        export VICECLI_PASS="$(pass viasatio/egustafson)"
+        export VICE_PASSWORD="$(pass viasatio/egustafson)"
+
+        export VICECLI_PASS="$VICE_PASSWORD"
+        export VICECLI_PWD="$VICE_PASSWORD"
         # Artifactory for KVS
         export ARTIFACTORY_USER="svc_ents-kvs-artifac"
         export ARTIFACTORY_PASS="$(pass ents/artifactory/svc_ents-kvs-artifac-password)"
@@ -35,21 +39,21 @@ if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
     export KVCTL_CERT=~/pki/egustafson-client/kvs-client-chain.pem
     export KVCTL_KEY=~/pki/egustafson-client/kvs-client-key.pem
 
-    export KVD_VICE_USER="$VICECLI_USER"
-    export KVD_VICE_PASS="$VICECLI_PASS"
+    export KVD_VICE_USER="$VICE_USERNAME"
+    export KVD_VICE_PASS="$VICE_PASSWORD"
 
-    export KVCTL_USER="$VICECLI_USER"
-    export KVCTL_PASS="$VICECLI_PASS"
+    export KVCTL_USER="$VICE_USERNAME"
+    export KVCTL_PASS="$VICE_PASSWORD"
 
     ## KV Regression Testing
     #
     export KVREG_CERT="$KVCTL_CERT"
     export KVREG_KEY="$KVCTL_KEY"
     export KVREG_CA="$VIASATIO_CA_PATH"
-    export KVREG_TARGET="local"
+    export KVREG_TARGET_ENV="internal"
 
     export KVREG_USERNAME="egustafson"
-    export KVREG_USER_egustafson="$VICECLI_PASS"
+    export KVREG_USER_egustafson="$VICE_PASSWORD"
 
 fi
 

@@ -13,3 +13,8 @@
 	directory = /srv/homeassistant/config
 [init]
 	defaultBranch = main
+[credential "https://git.viasat.com"]
+	helper = !/usr/bin/gh auth git-credential
+[user]
+    name = "Eric Gustafson"
+    useConfigOnly = true

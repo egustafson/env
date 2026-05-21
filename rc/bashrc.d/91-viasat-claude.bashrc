@@ -5,7 +5,12 @@
 if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
    if [ -d ~/.password-store ]; then
 
-      export VIASAT_MCP_JIRA_TOKEN="$(pass mcp/jira-claude)"
+       export JIRA_API_TOKEN="$(pass mcp/jira-claude)"
+       export CONFLUENCE_TOKEN="$(pass mcp/confluence-wiki)"
+       export GH_ENTERPRISE_TOKEN="$(pass viasat/github/personal_token_claude)"
+       export GH_HOST="git.viasat.com"
+
+
 
    else
      echo "WARN: no ~/.password-store, secrets not set in ~/.bashrc.d/91-viasat-claude.bashrc"
