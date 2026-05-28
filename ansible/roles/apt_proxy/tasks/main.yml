@@ -1,0 +1,14 @@
+---
+# file:  [ansible]/roles/apt_proxy/tasks/main.yml
+
+- name: install apt proxy config
+  become: yes
+  template:
+    src: 90proxy.j2
+    dest: /etc/apt/apt.conf.d/90proxy
+    owner: root
+    group: root
+    mode: '0444'
+  when:
+    - site_apt_proxy is defined
+    - site_apt_proxy | length > 0

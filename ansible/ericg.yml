@@ -5,27 +5,18 @@
 
   tasks:
 
-  - name: enable dmesg
-    become: yes
-    sysctl:
-      name: kernel.dmesg_restrict
-      value: '0'
-      state: present
-      reload: yes
-    when: not ansible_virtualization_type == "lxc"
+  - name: set site_apt_proxy if our dns name is "elfwerks"
+    set_fact:
+      site_apt_proxy: "{{ 'http://proxy.elfwerks:3142' if ansible_domain is match('.*\\.elfwerks$') else '' }}"
 
-  - name: which ping
-    command: "which ping"
-    register: ping_path
-    ignore_errors: true
-
-  - name: enable ping
-    become: yes
-    capabilities:
-      path: "{{ ping_path.stdout }}"
-      capability: cap_net_raw+p
-      state: present
-    when: ping_path.stdout | length > 0
+  - name: set up apt proxy
+    include_role:
+      name: apt_proxy
+    vars:
+      site_apt_proxy: "http://proxy.elfwerks:3142"
+    when:
+      - site_apt_proxy is defined
+      - site_apt_proxy | length > 0
 
   - name: install packages
     become: yes
@@ -59,6 +50,28 @@
       name: python
       link: /usr/bin/python
       path: /usr/bin/python3
+
+  - name: enable dmesg
+    become: yes
+    sysctl:
+      name: kernel.dmesg_restrict
+      value: '0'
+      state: present
+      reload: yes
+    when: not ansible_virtualization_type == "lxc"
+
+  - name: which ping
+    command: "which ping"
+    register: ping_path
+    ignore_errors: true
+
+  - name: enable ping
+    become: yes
+    capabilities:
+      path: "{{ ping_path.stdout }}"
+      capability: cap_net_raw+p
+      state: present
+    when: ping_path.stdout | length > 0
 
   - name: git pull env
     git:
