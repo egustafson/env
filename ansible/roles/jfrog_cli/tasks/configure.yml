@@ -1,0 +1,42 @@
+---
+- name: Validate required configuration variables
+  ansible.builtin.assert:
+    that:
+      - jfrog_cli_url | length > 0
+      - (jfrog_cli_access_token | length > 0) or
+        (jfrog_cli_user | length > 0 and jfrog_cli_password | length > 0)
+    fail_msg: >
+      jfrog_cli_url and either jfrog_cli_access_token or
+      (jfrog_cli_user + jfrog_cli_password) must be set when
+      jfrog_cli_configure is true.
+
+- name: Configure Artifactory server (access token)
+  ansible.builtin.command:
+    argv:
+      - jf
+      - c
+      - add
+      - "{{ jfrog_cli_server_id }}"
+      - "--url={{ jfrog_cli_url }}"
+      - "--access-token={{ jfrog_cli_access_token }}"
+      - "--interactive=false"
+      - "--overwrite=true"
+  when: jfrog_cli_access_token | length > 0
+  no_log: true
+
+- name: Configure Artifactory server (user/password)
+  ansible.builtin.command:
+    argv:
+      - jf
+      - c
+      - add
+      - "{{ jfrog_cli_server_id }}"
+      - "--url={{ jfrog_cli_url }}"
+      - "--user={{ jfrog_cli_user }}"
+      - "--password={{ jfrog_cli_password }}"
+      - "--interactive=false"
+      - "--overwrite=true"
+  when:
+    - jfrog_cli_access_token | length == 0
+    - jfrog_cli_user | length > 0
+  no_log: true

@@ -1,0 +1,36 @@
+---
+- name: Determine CPU architecture
+  ansible.builtin.set_fact:
+    _jfrog_arch: "{{ _arch_map[ansible_architecture] | default('amd64') }}"
+  vars:
+    _arch_map:
+      x86_64: amd64
+      aarch64: arm64
+      armv7l: arm
+
+- name: Resolve latest JFrog CLI version from GitHub
+  when: jfrog_cli_version == "latest"
+  block:
+    - name: Query GitHub releases API for latest version tag
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/jfrog/jfrog-cli/releases/latest
+        return_content: true
+        headers:
+          Accept: application/vnd.github+json
+      register: _jfrog_release_info
+
+    - name: Set resolved version fact
+      ansible.builtin.set_fact:
+        _jfrog_resolved_version: "{{ _jfrog_release_info.json.tag_name | regex_replace('^v', '') }}"
+
+- name: Use pinned version
+  when: jfrog_cli_version != "latest"
+  ansible.builtin.set_fact:
+    _jfrog_resolved_version: "{{ jfrog_cli_version }}"
+
+- name: Download JFrog CLI binary
+  ansible.builtin.get_url:
+    url: "https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/{{ _jfrog_resolved_version }}/jfrog-cli-linux-{{ _jfrog_arch }}/jf"
+    dest: "{{ jfrog_cli_install_dir }}/jf"
+    mode: "0755"
+    force: "{{ jfrog_cli_version == 'latest' }}"

@@ -25,6 +25,7 @@
     golang_ver: "1.21.0"
     protoc_ver: "3.19.4"
     # protoc_ver: "3.14.0"
+
   roles:
     - { role: ansible,     tags: ansible }
     - { role: kube,        tags: kube }        ## Kubernetes client tools
@@ -44,4 +45,21 @@
     - { role: terraform,   tags: terraform }
     - { role: alohomora,   tags: alohomora }
 
+- name: Install JFrog CLI for Artifactory
+  hosts: all
+  become: true
+
+  vars:
+    # Override any of these on the command line with -e or in group_vars/host_vars.
+    jfrog_cli_install_method: "package"  # "package" or "binary"
+
+    # Uncomment and fill in to configure an Artifactory server after install:
+    # jfrog_cli_configure: true
+    # jfrog_cli_url: "https://mycompany.jfrog.io/artifactory"
+    # jfrog_cli_access_token: "{{ lookup('env', 'JFROG_ACCESS_TOKEN') }}"
+    # jfrog_cli_server_id: "artifactory"
+
+  roles:
+    - role: jfrog_cli
+      tags: jfrog
 ...

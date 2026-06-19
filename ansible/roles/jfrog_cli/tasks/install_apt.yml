@@ -1,0 +1,37 @@
+---
+- name: Install prerequisite packages (apt)
+  ansible.builtin.apt:
+    name:
+      - curl
+      - gnupg
+      - apt-transport-https
+    state: present
+    update_cache: true
+
+- name: Download JFrog GPG signing key
+  ansible.builtin.get_url:
+    url: https://releases.jfrog.io/artifactory/api/v2/repositories/jfrog-debs/keyPairs/primary/public
+    dest: /usr/share/keyrings/jfrog-archive-keyring.asc
+    mode: "0644"
+
+- name: Dearmor GPG key to binary format
+  ansible.builtin.shell:
+    cmd: >
+      gpg --dearmor
+      < /usr/share/keyrings/jfrog-archive-keyring.asc
+      > /usr/share/keyrings/jfrog-archive-keyring.gpg
+    creates: /usr/share/keyrings/jfrog-archive-keyring.gpg
+
+- name: Add JFrog apt repository
+  ansible.builtin.apt_repository:
+    repo: >-
+      deb [signed-by=/usr/share/keyrings/jfrog-archive-keyring.gpg]
+      https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib
+    filename: jfrog
+    state: present
+
+- name: Install jfrog-cli-v2-jf package
+  ansible.builtin.apt:
+    name: jfrog-cli-v2-jf
+    state: present
+    update_cache: true

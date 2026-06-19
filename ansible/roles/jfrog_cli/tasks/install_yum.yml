@@ -1,0 +1,15 @@
+---
+- name: Add JFrog yum repository
+  ansible.builtin.yum_repository:
+    name: jfrog-cli
+    description: JFrog CLI
+    baseurl: https://releases.jfrog.io/artifactory/jfrog-rpms/
+    enabled: true
+    # JFrog does not publish a GPG key for the RPM repo; gpgcheck is intentionally off.
+    gpgcheck: false
+    state: present
+
+- name: Install jfrog-cli-v2-jf package
+  ansible.builtin.package:
+    name: jfrog-cli-v2-jf
+    state: present

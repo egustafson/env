@@ -1,0 +1,20 @@
+---
+# Installation method: "package" (apt/yum repo) or "binary" (direct download)
+jfrog_cli_install_method: "package"
+
+# Specific version to pin, or "latest" to always get the current release.
+# Used only when jfrog_cli_install_method == "binary".
+jfrog_cli_version: "latest"
+
+# Destination directory for the binary (binary install only).
+jfrog_cli_install_dir: "/usr/local/bin"
+
+# Set to true to run `jf c add` and configure an Artifactory server after install.
+jfrog_cli_configure: false
+
+# Artifactory server details (required when jfrog_cli_configure: true).
+jfrog_cli_server_id: "artifactory"
+jfrog_cli_url: ""          # e.g. https://mycompany.jfrog.io/artifactory
+jfrog_cli_user: ""         # leave blank if using access_token only
+jfrog_cli_password: ""
+jfrog_cli_access_token: "" # preferred over user/password

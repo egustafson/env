@@ -1,0 +1,31 @@
+---
+- name: Install JFrog CLI via package manager (Debian/Ubuntu)
+  ansible.builtin.include_tasks: install_apt.yml
+  when:
+    - ansible_os_family == "Debian"
+    - jfrog_cli_install_method == "package"
+
+- name: Install JFrog CLI via package manager (RedHat/CentOS/Fedora)
+  ansible.builtin.include_tasks: install_yum.yml
+  when:
+    - ansible_os_family == "RedHat"
+    - jfrog_cli_install_method == "package"
+
+- name: Install JFrog CLI via binary download
+  ansible.builtin.include_tasks: install_binary.yml
+  when: >
+    jfrog_cli_install_method == "binary" or
+    ansible_os_family not in ["Debian", "RedHat"]
+
+- name: Verify JFrog CLI is installed
+  ansible.builtin.command: jf --version
+  register: jfrog_cli_version_output
+  changed_when: false
+
+- name: Show installed JFrog CLI version
+  ansible.builtin.debug:
+    msg: "{{ jfrog_cli_version_output.stdout }}"
+
+- name: Configure Artifactory server connection
+  ansible.builtin.include_tasks: configure.yml
+  when: jfrog_cli_configure | bool
