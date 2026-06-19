@@ -45,16 +45,6 @@ if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
     export KVCTL_USER="$VICE_USERNAME"
     export KVCTL_PASS="$VICE_PASSWORD"
 
-    ## KV Regression Testing
-    #
-    export KVREG_CERT="$KVCTL_CERT"
-    export KVREG_KEY="$KVCTL_KEY"
-    export KVREG_CA="$VIASATIO_CA_PATH"
-    export KVREG_TARGET_ENV="internal"
-
-    export KVREG_USERNAME="egustafson"
-    export KVREG_USER_egustafson="$VICE_PASSWORD"
-
 fi
 
 ## Local Variables:
