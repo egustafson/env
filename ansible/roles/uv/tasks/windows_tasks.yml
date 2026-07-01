@@ -1,0 +1,10 @@
+---
+# file: ~/env/ansible/roles/uv/tasks/windows_tasks.yml
+#
+# uv installation tasks for Windows
+
+# NOTE:  this task (windows only) has not been debugged yet - may break
+
+- name: UV | exec PowerShell installation script
+  ansible.windows.powershell:
+      cmd: irm https://astral.sh/uv/install.ps1 | iex

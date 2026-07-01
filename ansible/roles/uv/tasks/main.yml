@@ -1,0 +1,35 @@
+---
+# file: ~/env/ansible/roles/uv/tasks/main.yml
+#
+# uv - An extremely fast Python package and project manager
+# - https://docs.astral.sh/uv/
+
+- name: UV | determine OS type
+  set_fact:
+      is_windows: "{{ ansible_os_family | lower == 'windows' }}"
+
+- name: UV | download and install uv (*nix/mac)
+  when: not is_windows
+  block:
+      - name: UV | curl is installed
+        become: true
+        package:
+            name: curl
+            state: present
+
+      - name: UV | dl + exec install script
+        shell: curl -LsSf https://astral.sh/uv/install.sh | sh
+        args:
+            creates: ~/.cargo/bin/uv
+
+- name: UV | downad and install uv (windoze)
+  when: is_windows
+  include_tasks: windows_tasks.yml
+
+- name: UV | (opt) symlink uv to /usr/local/bin
+  when: false
+  become: true
+  file:
+      src: ~/.cargo/bin/uv
+      dest: /usr/local/bin/uv
+      state: link

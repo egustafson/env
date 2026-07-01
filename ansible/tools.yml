@@ -7,59 +7,59 @@
 - name: Install pass
   hosts: all
   tasks:
-
-  - name: install pass package
-    # https://www.passwordstore.org/
-    become: yes
-    tags: pass
-    apt:
-      state: latest
-      name:
-        - pass
-        - sshpass
+      - name: install pass package
+        # https://www.passwordstore.org/
+        become: yes
+        tags: pass
+        apt:
+            state: latest
+            name:
+                - pass
+                - sshpass
 
 - name: Install selected dev tools
   hosts: all
   vars:
-    etcd_ver:   "v3.4.14"
-    golang_ver: "1.21.0"
-    protoc_ver: "3.19.4"
-    # protoc_ver: "3.14.0"
+      etcd_ver: "v3.4.14"
+      golang_ver: "1.21.0"
+      protoc_ver: "3.19.4"
+      # protoc_ver: "3.14.0"
 
   roles:
-    - { role: ansible,     tags: ansible }
-    - { role: kube,        tags: kube }        ## Kubernetes client tools
-    - { role: docker,      tags: docker }
-    - { role: dockercli,   tags: dockercli }
-    - { role: etcdctl,     tags: etcdctl }
-    - { role: vicecli,     tags: vicecli }
-    - { role: grip,        tags: grip }        ## GitHub Previewer
+      - { role: ansible, tags: ansible }
+      - { role: kube, tags: kube } ## Kubernetes client tools
+      - { role: docker, tags: docker }
+      - { role: dockercli, tags: dockercli }
+      - { role: etcdctl, tags: etcdctl }
+      - { role: vicecli, tags: vicecli }
+      - { role: grip, tags: grip } ## GitHub Previewer
 
-    # Language tools (for dev)
-    - { role: python,      tags: python }    ## TODO
-    - { role: golang,      tags: golang }
+      # Language tools (for dev)
+      - { role: uv, tags: uv } ## Python pkg/prj manager
+      # - { role: python, tags: python } ## TODO  *obsolete, use uv*
+      - { role: golang, tags: golang }
 
-    # Cloudy tools
-    - { role: gcloud_sdk,  tags: gcloud }
-    - { role: awscli,      tags: awscli }
-    - { role: terraform,   tags: terraform }
-    - { role: alohomora,   tags: alohomora }
+      # Cloudy tools
+      - { role: gcloud_sdk, tags: gcloud }
+      - { role: awscli, tags: awscli }
+      - { role: terraform, tags: terraform }
+      - { role: alohomora, tags: alohomora }
 
 - name: Install JFrog CLI for Artifactory
   hosts: all
   become: true
 
   vars:
-    # Override any of these on the command line with -e or in group_vars/host_vars.
-    jfrog_cli_install_method: "package"  # "package" or "binary"
+      # Override any of these on the command line with -e or in group_vars/host_vars.
+      jfrog_cli_install_method: "package" # "package" or "binary"
 
-    # Uncomment and fill in to configure an Artifactory server after install:
-    # jfrog_cli_configure: true
-    # jfrog_cli_url: "https://mycompany.jfrog.io/artifactory"
-    # jfrog_cli_access_token: "{{ lookup('env', 'JFROG_ACCESS_TOKEN') }}"
-    # jfrog_cli_server_id: "artifactory"
+      # Uncomment and fill in to configure an Artifactory server after install:
+      # jfrog_cli_configure: true
+      # jfrog_cli_url: "https://mycompany.jfrog.io/artifactory"
+      # jfrog_cli_access_token: "{{ lookup('env', 'JFROG_ACCESS_TOKEN') }}"
+      # jfrog_cli_server_id: "artifactory"
 
   roles:
-    - role: jfrog_cli
-      tags: jfrog
+      - role: jfrog_cli
+        tags: jfrog
 ...
