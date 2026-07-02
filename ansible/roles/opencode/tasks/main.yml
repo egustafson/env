@@ -1,0 +1,28 @@
+---
+# file: ~/env/ansible/roles/opencode/tasks/main.yml
+#
+# opencode - The open source AI coding agent
+# - https://opencode.ai/docs/
+
+- name: opencode | determine OS type
+  set_fact:
+      is_windows: "{{ ansible_os_family | lower == 'windows' }}"
+
+- name: opencode | download and install opencode (*nix/mac)
+  when: not is_windows
+  block:
+      - name: opencode | curl is installed
+        become: true
+        package:
+            name: curl
+            state: present
+
+      - name: opencode | dl + exec install script
+        shell: curl -fsSL https://opencode.ai/install | bash
+        args:
+            creates: ~/.opencode/bin/opencode
+
+- name: opencode | download and install opencode (windoze)
+  when: is_windows
+  debug:
+      msg: "Windows install of opencode not configured."

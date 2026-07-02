@@ -45,6 +45,11 @@
       - { role: terraform, tags: terraform }
       - { role: alohomora, tags: alohomora }
 
+      # AI tools
+      - { role: opencode, tags: opencode }
+      # aider
+      # cline
+
 - name: Install JFrog CLI for Artifactory
   hosts: all
   become: true
