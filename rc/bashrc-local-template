@@ -17,8 +17,19 @@ if [ -n "${_bashrc_prehook}" ]; then
     :  # <-- noop, remove this line when adding hook cmds
     echo "_bashrc_prehook"  # <- REMOVE ME
 
+    # export VIALAP="YES"
+    # export ENABLE_FLUTTER="YES"
+    # export ENABLE_ELFHOST="YES"
+    # export ENABLE_ELF_AWS="YES"
+
     # enable bash verbose/debug output
     #set -x
+
+    # bashrc debugging
+    unset debug_bashrc  ## comment out to enable
+    if [ -n "${debug_bashrc}" ]; then
+        echo "bashrc debug log <-- TBD"
+    fi
 fi
 
 ## #####################################
