@@ -6,7 +6,7 @@ if [ "$SHLVL" -le 1 ] && [ -n "${ENABLE_ELF_AWS}" ]; then
 
     if ! command -v pass &> /dev/null; then
         echo "'pass' command not found and ENABLE_ELF_AWS = true"
-    elif ! pass; then
+    elif ! pass &> /dev/null; then
         echo "ENABLE_ELF_AWS is enabled"
     else
 

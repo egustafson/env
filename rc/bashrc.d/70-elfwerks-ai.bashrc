@@ -8,7 +8,7 @@ if [ -n "${ENABLE_ELFHOST}" ] && [ -x ~/.opencode/bin/opencode ]; then
 
     if ! command -v pass &> /dev/null; then
         echo "'pass' command not found and opencode needs keys"
-    elif ! pass; then
+    elif ! pass &> /dev/null; then
         echo "no 'pass' database present, opencode needs keys"
     else
         export OPENAI_API_BASE=https://openrouter.ai/api/v1
