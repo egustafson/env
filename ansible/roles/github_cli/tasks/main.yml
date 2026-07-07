@@ -1,0 +1,46 @@
+---
+# file:  ~/env/ansible/roles/github_cli/tasks/main.yml
+#
+# GitHub CLI (gh) - the official GitHub command line tool
+# - https://cli.github.com
+
+- name: github_cli | install prerequisite packages
+  become: true
+  ansible.builtin.apt:
+      state: present
+      name:
+          - curl
+          - gpg
+
+- name: github_cli | install apt signing key
+  become: true
+  ansible.builtin.get_url:
+      url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+      dest: /usr/share/keyrings/githubcli-archive-keyring.gpg
+      mode: "0644"
+      force: false
+
+- name: github_cli | add apt repository
+  become: true
+  ansible.builtin.apt_repository:
+      repo: "deb [arch={{ ansible_facts.architecture | replace('x86_64', 'amd64') }} signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
+      filename: github-cli
+      state: present
+      mode: "0644"
+
+- name: github_cli | install gh package
+  become: true
+  ansible.builtin.apt:
+      update_cache: true
+      state: latest
+      name:
+          - gh
+
+- name: github_cli | verify installation
+  ansible.builtin.command: gh --version
+  register: _github_cli_version
+  changed_when: false
+
+- name: github_cli | show installed version
+  ansible.builtin.debug:
+      msg: "{{ _github_cli_version.stdout_lines[0] }}"

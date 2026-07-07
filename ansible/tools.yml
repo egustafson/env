@@ -32,7 +32,8 @@
       - { role: dockercli, tags: dockercli }
       - { role: etcdctl, tags: etcdctl }
       - { role: vicecli, tags: vicecli }
-      - { role: grip, tags: grip } ## GitHub Previewer
+      - { role: grip, tags: grip }         ## GitHub Previewer
+      - { role: github_cli, tags: github_cli } ## GitHub CLI (gh)
 
       # Language tools (for dev)
       - { role: uv, tags: uv } ## Python pkg/prj manager
