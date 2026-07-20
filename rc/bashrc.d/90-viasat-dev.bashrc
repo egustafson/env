@@ -24,9 +24,9 @@ if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
         export VICECLI_PASS="$VICE_PASSWORD"
         export VICECLI_PWD="$VICE_PASSWORD"
         # Artifactory for KVS
-        export ARTIFACTORY_USER="svc_ents-kvs-artifac"
-        export ARTIFACTORY_PASS="$(pass ents/artifactory/svc_ents-kvs-artifac-password)"
-        export ARTIFACTORY_TOKEN="$(pass ents/artifactory/svc_ents-kvs-artifac-token)"
+        #export ARTIFACTORY_USER="svc_ents-kvs-artifac"
+        #export ARTIFACTORY_PASS="$(pass ents/artifactory/svc_ents-kvs-artifac-password)"
+        #export ARTIFACTORY_TOKEN="$(pass ents/artifactory/svc_ents-kvs-artifac-token)"
     else
         echo "WARN: no ~/.password-store, secrets not set."
     fi
