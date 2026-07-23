@@ -1,0 +1,5 @@
+---
+# file:  ~/env/ansible/roles/golang/vars/main.yml
+
+download_url: "{{ go_dl_base_uri }}{{ golang_ver }}.linux-amd64.tar.gz"
+...

@@ -3,15 +3,18 @@
 #
 # Install Golang
 
+# - name: download golang inventory
+#   debug: "download golang inventory"
+
 - name: check to see if /usr/local/go exists
   stat:
     path: "/usr/local/go"
   register: stat_result
 
 - name: download the Go tarball
-  become: yes
+  become: True
   unarchive:
-    remote_src: yes
+    remote_src: True
     src: "https://storage.googleapis.com/golang/go{{ golang_ver }}.linux-amd64.tar.gz"
     dest: "/usr/local"
   when: not stat_result.stat.exists

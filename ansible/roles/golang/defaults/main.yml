@@ -5,3 +5,5 @@
 
 golang_ver: "1.15.3"
 protoc_ver: "3.14.0"
+
+go_dl_base_uri: "https://go.dev/dl/"
