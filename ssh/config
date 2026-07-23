@@ -18,6 +18,8 @@ Host *.elfwerks 10.3.* 10.8.2.*
     User ericg
     ForwardAgent yes
 
+#    RemoteForward /run/user/1000/gnupg/S.gpg-agent /home/ericg/.gnupg/S.gpg-agent.extra
+
 Host *.elfwerks.org
     User ericg
     ForwardAgent yes
