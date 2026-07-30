@@ -22,14 +22,6 @@ if [ "$VIALAP_AI_TOKENS_SET" != "true" ] && [ -n "$VIALAP" ]; then
     fi
 fi
 
-## Node to support Playwright
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-## Local Variables:
 ## mode: shell-script
 ## sh-shell: bash
 ## End:
