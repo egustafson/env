@@ -1,0 +1,29 @@
+---
+# file: ~/env/ansible/roles/node/tasks/main.yml
+#
+# node - Install: {node.js, npm, npx} via nvm
+# - [nvm](https://github.com/nvm-sh/nvm) [Node Version Manager]
+
+- name: Get latest NVM release version from GitHub
+  uri:
+    url: "https://api.github.com/repos/nvm-sh/nvm/releases/latest"
+    return_content: true
+  register: nvm_latest_release
+  check_mode: false
+
+- name: Set NVM version fact
+  set_fact:
+    nvm_version: "{{ nvm_latest_release.json.tag_name }}"
+
+- name: Download and install latest NVM release
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh | bash
+  args:
+    executable: /bin/bash
+    chdir: "{{ ansible_env.HOME }}"
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+# TODO:  use `nvm` to install node and npm
+# > `nvm install node`
+# note1: nvm's insall.sh drops a change to ~/.bashrc and those env vars must be sourced
+# note2: what is placed in .bashrc is already in ~/.bashrc.d/30-node-version-manager.bashrc

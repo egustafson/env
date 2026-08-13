@@ -39,6 +39,7 @@
       - { role: uv, tags: uv } ## Python pkg/prj manager
       # - { role: python, tags: python } ## TODO  *obsolete, use uv*
       - { role: golang, tags: golang }
+      - { role: node, tags: node }
 
       # Cloudy tools
       - { role: gcloud_sdk, tags: gcloud }
