@@ -1,9 +1,13 @@
 ##  ~/.bashrc.d/ module  #############################################
 
-## TODO: add a guard so below doesn't clober docker if it's also in use.
+if [ -n "${ENABLE_PODMAN}" ]; then
 
-if systemctl --user is-enabled podman.socket &>/dev/null; then
-    export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.socket
+    if systemctl --user is-enabled podman.socket &>/dev/null; then
+        export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.socket
+    fi
+
+    export PODMAN_COMPOSE_PROVIDER="podman"
+
 fi
 
 ## Local Variables:

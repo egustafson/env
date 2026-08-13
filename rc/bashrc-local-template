@@ -21,6 +21,7 @@ if [ -n "${_bashrc_prehook}" ]; then
     # export ENABLE_FLUTTER="YES"
     # export ENABLE_ELFHOST="YES"
     # export ENABLE_ELF_AWS="YES"
+    # export ENABLE_PODMAN="YES"
 
     # enable bash verbose/debug output
     #set -x
