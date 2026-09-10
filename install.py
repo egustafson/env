@@ -47,7 +47,7 @@ def linkup(dirname, targetdir=None):
 
 rcfiles = os.listdir(envdir + "/rc")
 
-ignfiles = set(['README.md'])
+ignfiles = set(['README.md', 'attic'])
 
 ## Iterate over rcfiles and ensure that each <file/dir> has
 ## a symlink in $(HOME) prepended with '.' pointing back to
