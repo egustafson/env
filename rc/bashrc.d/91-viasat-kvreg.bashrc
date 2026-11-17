@@ -2,9 +2,12 @@
 
 if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
 
+    # Disable by default
+    ENABLE_KVREG=0
+
     ## KV Regression Testing env vars
     #
-    if [ -d ~/.password-store ]; then
+    if [ -d ~/.password-store ] && [ "${ENABLE_KVREG:-0}" -ne 0 ] 2>/dev/null; then
 
         ## Credentials
         #
@@ -26,8 +29,10 @@ if [ "$SHLVL" -le 1 ] && [ -n "$VIALAP" ]; then
         export KVREG_KEY="$KVCTL_KEY"
         export KVREG_CA="$VIASATIO_CA_PATH"
 
-    else
+    elif [ -z "${ENABLE_KVREG+x}" ]; then
         echo "WARN: KVREG env not set."
+    elif [ ! -d ~/.password-store ]; then
+        echo "WARN: ~/.password-store does not exist"
     fi
 fi
 
